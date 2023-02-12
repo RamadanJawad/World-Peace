@@ -18,7 +18,6 @@ class MainScreen extends StatelessWidget {
           () => IndexedStack(
               index: controller.index.value, children: controller.screens),
         ),
-        backgroundColor: AppColor.backgroundColor,
         bottomNavigationBar: Obx(
           () => CustomNavigationBar(
               iconSize: 27,
@@ -42,7 +41,7 @@ class MainScreen extends StatelessWidget {
               ],
               selectedColor: AppColor.primaryColor,
               unSelectedColor: Colors.grey,
-              borderRadius: Radius.circular(15).r,
+              borderRadius: Radius.circular(10).r,
               currentIndex: controller.index.value,
               strokeColor: AppColor.primaryColor,
               onTap: (val) {

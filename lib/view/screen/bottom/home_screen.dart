@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:world_peace/view/screen/bottom/search_screen.dart';
 import 'package:world_peace/view/widget/bottom/body_home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/home_controller.dart';
@@ -19,14 +21,19 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         title: Text(
           "World Speace",
-          style: GoogleFonts.cairo(color: Colors.black),
+          style: GoogleFonts.cairo(color: Colors.black, fontSize: 20.sp),
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              CupertinoIcons.search,
-              color: Colors.black,
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                Get.to(() => SearchScreen(), transition: Transition.fade);
+              },
+              icon: const Icon(
+                CupertinoIcons.search,
+                color: Colors.black,
+              ),
             ),
           )
         ],

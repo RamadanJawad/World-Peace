@@ -23,7 +23,7 @@ class PostScreen extends StatelessWidget {
                     backgroundColor: AppColor.primaryColor),
                 child: Text(
                   "Post",
-                  style: GoogleFonts.cairo(fontSize: 18.sp),
+                  style: GoogleFonts.cairo(fontSize: 20.sp),
                 )),
           ),
         ],

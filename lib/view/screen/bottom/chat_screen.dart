@@ -20,7 +20,7 @@ class ChatScreen extends StatelessWidget {
         elevation: 0,
         title: Text(
           "Chats",
-          style: GoogleFonts.cairo(fontSize: 18.sp, color: Colors.black),
+          style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.black),
         ),
       ),
       body: Container(
