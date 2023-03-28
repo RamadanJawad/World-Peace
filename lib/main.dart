@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:world_peace/view/screen/auth/launchScreen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:world_peace/view/screen/auth/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: const Size(392.7, 856.7),
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return const GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            home: LaunchScreen(),
+            home: SplashScreen(),
           );
         });
   }
