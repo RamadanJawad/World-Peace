@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/view/screen/bottom/main_screen.dart';
-import '../../view/screen/auth/signIn.dart';
+import '../../view/screen/auth/login_screen.dart';
 import '../../view/screen/bottom/home_screen.dart';
 
 class SignUpController extends GetxController {
