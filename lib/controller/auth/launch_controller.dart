@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:world_peace/view/screen/auth/signIn.dart';
+import 'package:world_peace/view/screen/auth/login_screen.dart';
 
-import '../../view/screen/auth/signUp.dart';
+import '../../view/screen/auth/register_screen.dart';
 
 class LaunchController extends GetxController {
   void goToSignIn() {
