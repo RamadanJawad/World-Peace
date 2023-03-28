@@ -52,14 +52,10 @@ class BodySignIn extends StatelessWidget {
                         SizedBox(
                           height: 20.h,
                         ),
-                        CustomPassword(
-                          obscureText: controller.show_pass,
-                          controller: controller.password,
-                          function: () {
-                            controller.showPassword();
-                          },
-                          label: 'Password',
-                        ),
+                        CustomFiled(
+                            controller: controller.email,
+                            icon: Icons.email,
+                            label: 'Email'),
                         SizedBox(
                           height: 15.h,
                         ),
