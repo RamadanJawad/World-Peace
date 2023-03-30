@@ -5,10 +5,10 @@ import '../../view/screen/auth/register_screen.dart';
 
 class LaunchController extends GetxController {
   void goToSignIn() {
-    Get.to(() => const SignIn(), transition: Transition.fade);
+    Get.to(() => const LoginScreen(), transition: Transition.fade);
   }
 
   void goToSignUp() {
-    Get.to(() => const SignUp(), transition: Transition.fade);
+    Get.to(() => const RegisterScreen(), transition: Transition.fade);
   }
 }
