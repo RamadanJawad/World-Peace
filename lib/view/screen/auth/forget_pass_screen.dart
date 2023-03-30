@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:world_peace/controller/auth/ForgetPassController.dart';
-import 'package:world_peace/view/widget/auth/BodyForgetPassword.dart';
+import 'package:world_peace/view/widget/auth/body_forget_password.dart';
 
 import '../../../core/constant/color.dart';
 

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/editProfileController.dart';
 import 'package:world_peace/core/constant/color.dart';
-import 'package:world_peace/view/widget/auth/bodyEditProfile.dart';
+import 'package:world_peace/view/widget/auth/body_edit_profile.dart';
 
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});

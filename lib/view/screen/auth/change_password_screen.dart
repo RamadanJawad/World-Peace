@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/auth/changePasswordController.dart';
 import 'package:world_peace/core/constant/color.dart';
-import 'package:world_peace/view/widget/auth/bodyChangePassword.dart';
+import 'package:world_peace/view/widget/auth/body_change_password.dart';
 
 
 class ChangePassword extends StatelessWidget {
