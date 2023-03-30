@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.world_peace">
    <application
-        android:label="World Peace"
+        android:label="AqsaCommunity"
         android:name="${applicationName}"
         android:icon="@drawable/logo">
         <activity
