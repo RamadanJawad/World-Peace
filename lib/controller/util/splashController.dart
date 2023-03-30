@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/view/screen/auth/launch_screen.dart';
 import 'package:world_peace/view/screen/auth/login_screen.dart';
+import 'package:world_peace/view/screen/bottom/main_screen.dart';
 class SplashController extends GetxController
     with GetSingleTickerProviderStateMixin {
   late AnimationController controller = AnimationController(
@@ -18,7 +20,11 @@ class SplashController extends GetxController
     update();
     super.onInit();
     Future.delayed(Duration(seconds: 3), () {
-      Get.off(() =>  LaunchScreen(),transition: Transition.fade);
+      if(AppPreferences().loggedIn){
+        Get.off(() =>  MainScreen(),transition: Transition.fade);
+      }else{
+        Get.off(() =>  LaunchScreen(),transition: Transition.fade);
+      }
     });
   }
 
