@@ -22,7 +22,6 @@ class SignInController extends GetxController {
       Get.snackbar("Error of Login", "login failed , please try again");
     }
   }
-
   void goToForgetPassword() {
     Get.off(() => const ForgetPassScreen(), transition: Transition.fade);
   }
