@@ -1,7 +1,8 @@
-import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 import 'package:world_peace/controller/util/main_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/constant/image.dart';
@@ -12,43 +13,51 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MainController controller = Get.put(MainController());
-    return Scaffold(
-        body: Obx(
-          () => IndexedStack(
-              index: controller.index.value, children: controller.screens),
+    return PersistentTabView(
+      context,
+      controller: controller.persistentTabController,
+      backgroundColor: Colors.white, // Default is Colors.white.
+      navBarStyle: NavBarStyle.style16,
+      
+      confineInSafeArea: true,
+      screens: controller.screens,
+      items: [
+        PersistentBottomNavBarItem(
+          icon:const ImageIcon(AssetImage(ImageUrl.home)),
+          title: ("Home"),
+          textStyle: GoogleFonts.ubuntu(),
+          activeColorPrimary: AppColor.primaryColor,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
-        bottomNavigationBar: Obx(
-          () => CustomNavigationBar(
-              iconSize: 27,
-              items: [
-                CustomNavigationBarItem(
-                  icon: ImageIcon(AssetImage(ImageUrl.home)),
-                ),
-                CustomNavigationBarItem(
-                  icon: ImageIcon(AssetImage(ImageUrl.chat)),
-                ),
-                CustomNavigationBarItem(
-                    icon: ImageIcon(
-                  AssetImage(ImageUrl.add),
-                )),
-                CustomNavigationBarItem(
-                  icon: ImageIcon(AssetImage(ImageUrl.notification)),
-                ),
-                CustomNavigationBarItem(
-                  icon: ImageIcon(AssetImage(ImageUrl.profile)),
-                ),
-              ],
-              selectedColor: AppColor.primaryColor,
-              unSelectedColor: Colors.grey,
-              borderRadius: Radius.circular(10).r,
-              currentIndex: controller.index.value,
-              strokeColor: AppColor.primaryColor,
-              onTap: (val) {
-                controller.onTap(val);
-                // if (controller.index.value == 2) {
-                //   alertDialog();
-                // }
-              }),
-        ));
+        PersistentBottomNavBarItem(
+          icon:const ImageIcon(AssetImage(ImageUrl.chat)),
+          title: ("Chat"),
+          textStyle: GoogleFonts.ubuntu(),
+          activeColorPrimary: AppColor.primaryColor,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon:const Icon(Icons.add),
+          textStyle: GoogleFonts.ubuntu(),
+          activeColorSecondary: Colors.white,
+          activeColorPrimary: AppColor.primaryColor,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon: const ImageIcon(AssetImage(ImageUrl.notification)),
+          title: ("Notification"),
+          textStyle: GoogleFonts.ubuntu(),
+          activeColorPrimary: AppColor.primaryColor,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+        PersistentBottomNavBarItem(
+          icon:const ImageIcon(AssetImage(ImageUrl.profile)),
+          title: ("Profile"),
+          textStyle: GoogleFonts.ubuntu(),
+          activeColorPrimary: AppColor.primaryColor,
+          inactiveColorPrimary: CupertinoColors.systemGrey,
+        ),
+      ],
+    );
   }
 }
