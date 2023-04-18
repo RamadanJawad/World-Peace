@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/view/screen/auth/splash_screen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPreferences().initSharedPreferences();
   runApp(const MyApp());
@@ -13,7 +13,7 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override 
+  @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: const Size(392.7, 856.7),
