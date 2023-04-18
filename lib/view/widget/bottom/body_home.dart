@@ -11,17 +11,18 @@ class BodyHome extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       child: ListView.builder(
           itemCount: controller.data.length,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(5),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10).r,
-                  border: Border.all(color: Colors.grey, width: 1.w)),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10).r,
+                border: Border.all(color: const Color(0xffe9e9e9), width: 1.w),
+              ),
               child: Column(
                 children: [
                   Row(
@@ -56,26 +57,50 @@ class BodyHome extends StatelessWidget {
                   SizedBox(
                     height: 15.h,
                   ),
-                  Divider(),
+                  const Divider(),
                   Row(
                     children: [
-                      ImageIcon(AssetImage(controller.data[index]['icon1'])),
+                      ImageIcon(
+                        AssetImage(controller.data[index]['icon1']),
+                        color: const Color(0xffb5b5c4),
+                      ),
                       SizedBox(
                         width: 5.w,
                       ),
-                      Text(controller.data[index]['like']),
-                      Spacer(),
-                      ImageIcon(AssetImage(controller.data[index]['icon2'])),
+                      Text(
+                        controller.data[index]['like'],
+                        style: const TextStyle(
+                          color: Color(0xffb5b5c4),
+                        ),
+                      ),
+                      const Spacer(),
+                      ImageIcon(
+                        AssetImage(controller.data[index]['icon2']),
+                        color: const Color(0xffb5b5c4),
+                      ),
                       SizedBox(
                         width: 5.w,
                       ),
-                      Text(controller.data[index]['comment']),
-                      Spacer(),
-                      ImageIcon(AssetImage(controller.data[index]['icon3'])),
+                      Text(
+                        controller.data[index]['comment'],
+                        style: const TextStyle(
+                          color: Color(0xffb5b5c4),
+                        ),
+                      ),
+                      const Spacer(),
+                      ImageIcon(
+                        AssetImage(controller.data[index]['icon3']),
+                        color: const Color(0xffb5b5c4),
+                      ),
                       SizedBox(
                         width: 5.w,
                       ),
-                      Text(controller.data[index]['share'])
+                      Text(
+                        controller.data[index]['share'],
+                        style: const TextStyle(
+                          color: Color(0xffb5b5c4),
+                        ),
+                      )
                     ],
                   )
                 ],
