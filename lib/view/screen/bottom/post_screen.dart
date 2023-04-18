@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:world_peace/controller/util/post_controller.dart';
 import 'package:world_peace/core/constant/image.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
@@ -9,6 +11,7 @@ class PostScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller =Get.put(PostController());
     return Scaffold(
       backgroundColor: AppColor.primaryColor.withOpacity(0.1),
       appBar: AppBar(
@@ -18,7 +21,9 @@ class PostScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.createPost();
+                },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primaryColor),
                 child: Text(
@@ -57,6 +62,7 @@ class PostScreen extends StatelessWidget {
               height: 25.h,
             ),
             TextFormField(
+              controller: controller.descriptionController,
               style: GoogleFonts.cairo(fontSize: 18.sp),
               cursorColor: AppColor.primaryColor,
               decoration: InputDecoration.collapsed(
