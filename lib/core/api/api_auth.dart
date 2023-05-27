@@ -14,9 +14,9 @@ class ApiAuthController {
     });
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      if(jsonResponse['status'] == false){
+      if (jsonResponse['status'] == false) {
         Get.snackbar("Login failed!", "Login failed,please try again",
-          backgroundColor: Colors.red);
+            backgroundColor: Colors.red);
       }
       var jsonData = jsonResponse['data'];
       User user = User.fromJson(jsonData);
@@ -25,7 +25,7 @@ class ApiAuthController {
     return null;
   }
 
-  Future<User?> register({
+  Future<bool?> register({
     required String email,
     required String name,
     required String password,
@@ -39,13 +39,12 @@ class ApiAuthController {
     });
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      if(jsonResponse['status'] == false){
-        Get.snackbar("Entry error", "The data you entered already exists, please try again",
-          backgroundColor: Colors.red);
+      if (jsonResponse['status'] == false) {
+        Get.snackbar("Entry error",
+            "The data you entered already exists, please try again",
+            backgroundColor: Colors.red);
       }
-      var jsonData = jsonResponse['data'];
-      User user = User.fromJson(jsonData);
-      return user;
+      return true;
     }
     return null;
   }

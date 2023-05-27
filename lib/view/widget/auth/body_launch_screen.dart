@@ -13,78 +13,79 @@ class BodyLaunch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LaunchController>(builder: (controller) {
-      return Column(children: [
-        Container(
-          margin: EdgeInsets.only(
-            // left: 27.w,
-            top: 114.h,
-          ),
-          child: Center(
-            child: Image(
-              image: const AssetImage(ImageUrl.world),
-              width: 340.w,
-              height: 338.h,
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 40.h,
-        ),
-        Text("WORLD PEACE",
-            style: GoogleFonts.ubuntu(fontSize: 25.sp, height: 1.h)),
-        Text("Retrain the brain",
-            style: GoogleFonts.ubuntu(fontSize: 15.sp, height: 1.5.h)),
-        SizedBox(
-          height: 15.h,
-        ),
-        Text(
-          "Lorem ipsum dolor sit amet, consectetur \n adipiscing elit, sed do eiusmod Lorem\n ipsum dolor sit amet, consectetur",
-          style: GoogleFonts.ubuntu(
-              fontSize: 15.sp, color: Colors.grey, height: 1.5.h),
-          textAlign: TextAlign.center,
-        ),
-        Stack(children: [
+      return SingleChildScrollView(
+        child: Column(children: [
           Container(
-            margin: EdgeInsets.only(top: 60.h, right: 20.w, left: 20.w),
-            padding: EdgeInsets.only(left: 170.w),
-            width: double.infinity,
-            height: 65.h,
-            decoration: BoxDecoration(
-              color: AppColor.primaryColor.withOpacity(0.3),
-              borderRadius: BorderRadius.circular(40.r),
+            margin: EdgeInsets.only(
+              top: 114.h,
             ),
-            child: TextButton(
-              onPressed: () {
-                controller.goToSignUp();
-              },
-              child: Text(
-                "Sign up",
-                style: GoogleFonts.ubuntu(color: Colors.black,fontSize: 17.sp),
+            child: Center(
+              child: Image(
+                image: const AssetImage(ImageUrl.world),
+                width: 340.w,
+                height: 338.h,
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 60.h, right: 20.w, left: 20.w),
-            padding: EdgeInsets.only(left: 10.w),
-            width: 180.w,
-            height: 65.h,
-            decoration: BoxDecoration(
-              color: AppColor.primaryColor,
-              borderRadius: BorderRadius.circular(40.r),
-            ),
-            child: TextButton(
-              onPressed: () {
-                controller.goToSignIn();
-              },
-              child: Text(
-                "Sign in",
-                style: GoogleFonts.ubuntu(color: Colors.white,fontSize: 17.sp),
+          SizedBox(
+            height: 40.h,
+          ),
+          Text("WORLD PEACE",
+              style: GoogleFonts.ubuntu(fontSize: 25.sp, height: 1.h)),
+          Text("Retrain the brain",
+              style: GoogleFonts.ubuntu(fontSize: 15.sp, height: 1.5.h)),
+          SizedBox(
+            height: 15.h,
+          ),
+          Text(
+            "Lorem ipsum dolor sit amet, consectetur \n adipiscing elit, sed do eiusmod Lorem\n ipsum dolor sit amet, consectetur",
+            style: GoogleFonts.ubuntu(
+                fontSize: 15.sp, color: Colors.grey, height: 1.5.h),
+            textAlign: TextAlign.center,
+          ),
+          Stack(children: [
+            Container(
+              margin: EdgeInsets.only(top: 60.h, right: 20.w, left: 20.w),
+              padding: EdgeInsets.only(left: 170.w),
+              width: double.infinity,
+              height: 65.h,
+              decoration: BoxDecoration(
+                color: AppColor.primaryColor.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(40.r),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  controller.goToSignUp();
+                },
+                child: Text(
+                  "Sign up",
+                  style: GoogleFonts.ubuntu(color: Colors.black,fontSize: 17.sp),
+                ),
               ),
             ),
-          ),
+            Container(
+              margin: EdgeInsets.only(top: 60.h, right: 20.w, left: 20.w),
+              padding: EdgeInsets.only(left: 10.w),
+              width: 180.w,
+              height: 65.h,
+              decoration: BoxDecoration(
+                color: AppColor.primaryColor,
+                borderRadius: BorderRadius.circular(40.r),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  controller.goToSignIn();
+                },
+                child: Text(
+                  "Sign in",
+                  style: GoogleFonts.ubuntu(color: Colors.white,fontSize: 17.sp),
+                ),
+              ),
+            ),
+          ]),
         ]),
-      ]);
+      );
     });
   }
 }

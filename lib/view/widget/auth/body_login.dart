@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -48,7 +49,8 @@ class BodySignIn extends StatelessWidget {
                         CustomFiled(
                             controller: controller.email,
                             icon: Icons.email,
-                            validator: (value) =>FieldValidator().validateEmail(value!),
+                            validator: (value) =>
+                                FieldValidator().validateEmail(value!),
                             label: 'Email'),
                         SizedBox(
                           height: 20.h,
@@ -56,7 +58,8 @@ class BodySignIn extends StatelessWidget {
                         CustomPassword(
                           controller: controller.password,
                           label: "Password",
-                          validator:(value)=> FieldValidator().validatePassword(value!),
+                          validator: (value) =>
+                              FieldValidator().validatePassword(value!),
                           function: () {
                             controller.showPassword();
                           },
@@ -84,8 +87,15 @@ class BodySignIn extends StatelessWidget {
                             function: () async {
                               if (controller.globalKey.currentState!
                                   .validate()) {
-                                controller.login();
+                                Get.dialog(const Center(
+                                  child: CupertinoActivityIndicator(
+                                    radius: 20,
+                                    color: Colors.white,
+                                  ),
+                                ));
+                                await controller.login();
                               }
+                              Get.delete();
                             }),
                         SizedBox(
                           height: 120.h,

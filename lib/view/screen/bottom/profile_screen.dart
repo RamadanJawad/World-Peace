@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:world_peace/controller/util/editProfileController.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/constant/image.dart';
@@ -20,10 +21,10 @@ class ProfileScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding:const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.lock),
+              icon:const Icon(Icons.lock),
             ),
           )
         ],
@@ -41,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(ImageUrl.person2),
+                  backgroundImage:const AssetImage(ImageUrl.person2),
                   radius: 35.r,
                 ),
                 SizedBox(
@@ -59,26 +60,26 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("Edit Profile"),
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10).r),
                       backgroundColor: Colors.white,
                       foregroundColor: AppColor.primaryColor),
+                  child: const Text("Edit Profile"),
                 ),
               ],
             ),
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.all(5),
+              margin:const EdgeInsets.all(5),
               width: double.infinity,
               child: ListView.builder(
                   itemCount: controller.data.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.all(10),
+                      margin:const EdgeInsets.all(5),
+                      padding:const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10).r,
@@ -87,7 +88,7 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 backgroundImage: AssetImage(ImageUrl.person2),
                               ),
                               SizedBox(
@@ -117,7 +118,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: 15.h,
                           ),
-                          Divider(),
+                          const Divider(),
                           Row(
                             children: [
                               ImageIcon(
@@ -126,14 +127,14 @@ class ProfileScreen extends StatelessWidget {
                                 width: 5.w,
                               ),
                               Text(controller.data[index]['like']),
-                              Spacer(),
+                              const Spacer(),
                               ImageIcon(
                                   AssetImage(controller.data[index]['icon2'])),
                               SizedBox(
                                 width: 5.w,
                               ),
                               Text(controller.data[index]['comment']),
-                              Spacer(),
+                              const Spacer(),
                               ImageIcon(
                                   AssetImage(controller.data[index]['icon3'])),
                               SizedBox(

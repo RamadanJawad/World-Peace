@@ -16,14 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(392.7, 856.7),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return const GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
-          );
-        });
+      designSize: const Size(392.7, 856.7),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return const GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: SplashScreen(),
+        );
+      },
+    );
   }
 }

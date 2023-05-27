@@ -18,7 +18,6 @@ class MainScreen extends StatelessWidget {
       controller: controller.persistentTabController,
       backgroundColor: Colors.white, // Default is Colors.white.
       navBarStyle: NavBarStyle.style16,
-      
       confineInSafeArea: true,
       screens: controller.screens,
       items: [

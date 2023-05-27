@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_auth.dart';
@@ -12,16 +13,20 @@ class SignInController extends GetxController {
   late TextEditingController password;
   GlobalKey<FormState> globalKey = GlobalKey();
   bool show_pass = true;
-
-  Future login()async{
-    User? user=await ApiAuthController().login(email: email.text , password: password.text);
-    if(user !=null){
+  Future login() async {
+    User? user = await ApiAuthController()
+        .login(email: email.text, password: password.text);
+    if (user != null) {
       AppPreferences().save(user);
-      Get.off(()=>const MainScreen());
-    }else{
+      Future.delayed(const Duration(seconds: 3), () {
+        Get.off(() => const MainScreen());
+      });
+    } else {
       Get.snackbar("Error of Login", "login failed , please try again");
     }
+    Get.delete();
   }
+
   void goToForgetPassword() {
     Get.off(() => const ForgetPassScreen(), transition: Transition.fade);
   }

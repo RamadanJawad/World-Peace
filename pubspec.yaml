@@ -19,6 +19,7 @@ dependencies:
   flutter_screenutil: ^5.6.1
   persistent_bottom_nav_bar_v2: ^4.2.8  
   get: ^4.6.5
+  animated_custom_dropdown: ^1.2.2
   http: ^0.13.5
 
 dev_dependencies:

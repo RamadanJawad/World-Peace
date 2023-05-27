@@ -13,13 +13,13 @@ class SignUpController extends GetxController {
   GlobalKey<FormState> globalKey = GlobalKey();
 
   Future register() async {
-    User? user = await ApiAuthController().register(
+    bool? response = await ApiAuthController().register(
       name: username.text,
       email: email.text,
       password: password.text,
       mobile: mobile.text,
     );
-    if (user != null) {
+    if (response!) {
       Get.snackbar("Created Account!",
           "The account has been created successfully, login now",
           backgroundColor: Colors.green);

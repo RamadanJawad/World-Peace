@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.black,
               ),
             ),
-          )
+          ),
         ],
       ),
       body: BodyHome(),

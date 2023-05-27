@@ -1,7 +1,13 @@
 import 'package:get/get.dart';
+import 'package:world_peace/core/api/api_post.dart';
 import 'package:world_peace/core/constant/image.dart';
 
 class HomeController extends GetxController {
+  refreshData() async {
+    await ApiPostController().readPost(pageNumber: 1);
+    update();
+  }
+
   List<Map<String, dynamic>> data = [
     {
       "icon": ImageUrl.person1,
@@ -74,4 +80,10 @@ class HomeController extends GetxController {
           "Use all my words to open the path of goodness. You will not be able to. Our thoughts will not reach us."
     },
   ];
+
+  @override
+  void onInit() {
+    super.onInit();
+    refreshData();
+  }
 }
