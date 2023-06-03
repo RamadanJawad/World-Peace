@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:world_peace/core/api/api_post.dart';
-import 'package:world_peace/model/category.dart';
 
 class PostController extends GetxController {
   TextEditingController titleController = TextEditingController();
@@ -24,10 +23,22 @@ class PostController extends GetxController {
     update();
   }
 
-
   createPost() async {
-    var response = await ApiPostController().createPost(
-        titleController.text, descriptionController.text, "1", file!.path);
+    var response;
+    if (file != null) {
+      response = await ApiPostController().createPost(
+          title: titleController.text,
+          description: descriptionController.text,
+          category: "1",
+          imageFile: file!.path.toString());
+    } else {
+      response = await ApiPostController().createPost(
+        title: titleController.text,
+        description: descriptionController.text,
+        category: "1",
+        imageFile: "",
+      );
+    }
     if (response) {
       Get.snackbar("Success", "Create Post Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
@@ -45,9 +56,6 @@ class PostController extends GetxController {
     super.dispose();
     descriptionController.dispose();
     titleController.dispose();
-    if (file != null) {
-      File(file!.path).deleteSync();
-    }
   }
 
   @override

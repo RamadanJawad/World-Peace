@@ -163,16 +163,17 @@ class PostScreen extends StatelessWidget {
               GetBuilder<PostController>(builder: (controller) {
                 return SizedBox(
                   width: double.infinity,
-                  height: 300.h,
+                  height: controller.file == null ? 50 : 300.h,
                   child: ClipRRect(
                     child: controller.file != null
                         ? ClipRRect(
                             borderRadius: BorderRadius.circular(20).r,
-                            child: Image.file(
-                              File(controller.file!.path),
-                              fit: BoxFit.cover,
-                            ),
-                          )
+                            child: controller.file != null
+                                ? Image.file(
+                                    File(controller.file!.path),
+                                    fit: BoxFit.cover,
+                                  )
+                                : Icon(Icons.no_flash_rounded))
                         : null,
                   ),
                 );

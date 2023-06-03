@@ -8,6 +8,20 @@ class HomeController extends GetxController {
     update();
   }
 
+  bool isLiked = false;
+  int? selectIndex;
+  bool response = false;
+
+  void addLike(String postId, int index) async {
+    selectIndex = index;
+    response = await ApiPostController().sendLike(postId: postId);
+    if (response) {
+      isLiked = !isLiked;
+      update();
+    }
+    update();
+  }
+
   List<Map<String, dynamic>> data = [
     {
       "icon": ImageUrl.person1,
