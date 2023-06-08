@@ -7,6 +7,7 @@ import 'package:world_peace/view/screen/bottom/search_screen.dart';
 import 'package:world_peace/view/widget/bottom/body_home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
+import 'package:world_peace/view/widget/home/add_commnet.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Get.to(() => SearchScreen(), transition: Transition.fade);
+                Get.to(() =>const SearchScreen(), transition: Transition.fade);
               },
               icon: const Icon(
                 CupertinoIcons.search,

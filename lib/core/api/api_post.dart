@@ -46,6 +46,17 @@ class ApiPostController with ApiHelper {
       throw Exception('Failed to fetch data from the API');
     }
   }
+  
+  Future deletePost({required postId}) async {
+    final response = await http.delete(Uri.parse(ApiSetting.deletePost(postId)),
+        headers: headers);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   Future<List<Category>> readCategories() async {
     final response = await http.get(Uri.parse(ApiSetting.readCategories));

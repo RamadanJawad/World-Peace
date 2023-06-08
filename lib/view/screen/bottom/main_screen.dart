@@ -16,27 +16,28 @@ class MainScreen extends StatelessWidget {
     return PersistentTabView(
       context,
       controller: controller.persistentTabController,
-      backgroundColor: Colors.white, // Default is Colors.white.
+      backgroundColor: Colors.white,
       navBarStyle: NavBarStyle.style16,
       confineInSafeArea: true,
       screens: controller.screens,
+      hideNavigationBar: false,
       items: [
         PersistentBottomNavBarItem(
-          icon:const ImageIcon(AssetImage(ImageUrl.home)),
+          icon: const ImageIcon(AssetImage(ImageUrl.home)),
           title: ("Home"),
           textStyle: GoogleFonts.ubuntu(),
           activeColorPrimary: AppColor.primaryColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
-          icon:const ImageIcon(AssetImage(ImageUrl.chat)),
+          icon: const ImageIcon(AssetImage(ImageUrl.chat)),
           title: ("Chat"),
           textStyle: GoogleFonts.ubuntu(),
           activeColorPrimary: AppColor.primaryColor,
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
-          icon:const Icon(Icons.add),
+          icon: const Icon(Icons.add),
           textStyle: GoogleFonts.ubuntu(),
           activeColorSecondary: Colors.white,
           activeColorPrimary: AppColor.primaryColor,
@@ -50,7 +51,7 @@ class MainScreen extends StatelessWidget {
           inactiveColorPrimary: CupertinoColors.systemGrey,
         ),
         PersistentBottomNavBarItem(
-          icon:const ImageIcon(AssetImage(ImageUrl.profile)),
+          icon: const ImageIcon(AssetImage(ImageUrl.profile)),
           title: ("Profile"),
           textStyle: GoogleFonts.ubuntu(),
           activeColorPrimary: AppColor.primaryColor,

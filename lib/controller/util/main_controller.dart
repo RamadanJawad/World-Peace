@@ -10,19 +10,11 @@ import 'package:world_peace/view/screen/bottom/profile_screen.dart';
 class MainController extends GetxController {
   PersistentTabController persistentTabController=PersistentTabController(initialIndex: 0) ;
 
- 
-
   List<Widget> screens = [
-    HomeScreen(),
-    ChatScreen(),
-    PostScreen(),
-    NotificationScreen(),
-    ProfileScreen(),
+    const HomeScreen(),
+    const ChatScreen(),
+    const PostScreen(),
+    const NotificationScreen(),
+    const ProfileScreen(),
   ];
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 }
