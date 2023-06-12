@@ -14,13 +14,12 @@ class ApiAuthController {
     });
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      if (jsonResponse['status'] == false) {
-        Get.snackbar("Login failed!", "Login failed,please try again",
-            backgroundColor: Colors.red);
-      }
       var jsonData = jsonResponse['data'];
       User user = User.fromJson(jsonData);
       return user;
+    } else {
+      Get.snackbar("Login failed!", "Login failed,please try again",
+          backgroundColor: Colors.red);
     }
     return null;
   }

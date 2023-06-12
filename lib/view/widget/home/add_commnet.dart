@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:world_peace/controller/util/home_controller.dart';
+import 'package:world_peace/controller/util/comment_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 
 class AddComment extends StatelessWidget {
@@ -11,7 +11,7 @@ class AddComment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (controller) {
+    return GetBuilder<CommentController>(builder: (controller) {
       return Container(
         margin: const EdgeInsets.all(5),
         padding: const EdgeInsets.all(5),

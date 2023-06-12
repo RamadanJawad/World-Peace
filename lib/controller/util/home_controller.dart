@@ -16,6 +16,11 @@ class HomeController extends GetxController {
     update();
   }
 
+  refreshCommentData(int postId) async {
+    await ApiCommentController().readComments(postId: postId);
+    update();
+  }
+
   void onSelected(select, id) {
     switch (select) {
       case 0:
@@ -27,54 +32,9 @@ class HomeController extends GetxController {
         break;
     }
   }
-  void addComment(int postId) async {
-    response = await ApiCommentController()
-        .createComment(comment: comment.text, postId: postId);
-    if (response) {
-      Get.snackbar("Success", "Create comment Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
-      update();
-    } else {
-      Get.snackbar("Error", "Failed to comment, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
-    }
-    comment.text = "";
-    update();
-  }
 
-  void deleteComment({required int postId, required commentId}) async {
-    var response = await ApiCommentController()
-        .deleteComment(postId: postId, commentId: commentId);
-    if (response) {
-      Get.snackbar("Success", "delete comment Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
-      update();
-    } else {
-      Get.snackbar("Error", "Failed delete comment, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
-    }
-    update();
-  }
-
-  void updateComment({
-    required int commentId,
-    required int postId,
-  }) async {
-    response = await ApiCommentController().updateComment(
-        commentId: commentId,
-        postId: postId,
-        updateComment: updateComments.text);
-    update();
-
-    if (response) {
-      Get.snackbar("Success", "update commnet Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
-    } else {
-      Get.snackbar("Error", "Failed to update commnet, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
-    }
-    update();
-  }
+  
+  
 
   void deletePost({required int postId}) async {
     var response = await ApiPostController().deletePost(postId: postId);

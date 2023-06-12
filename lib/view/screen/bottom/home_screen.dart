@@ -7,14 +7,13 @@ import 'package:world_peace/view/screen/bottom/search_screen.dart';
 import 'package:world_peace/view/widget/bottom/body_home.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
-import 'package:world_peace/view/widget/home/add_commnet.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
+    Get.put(HomeController());
     return Scaffold(
       backgroundColor: AppColor.primaryColor.withOpacity(0.1),
       appBar: AppBar(
@@ -29,7 +28,7 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Get.to(() =>const SearchScreen(), transition: Transition.fade);
+                Get.to(() => const SearchScreen(), transition: Transition.fade);
               },
               icon: const Icon(
                 CupertinoIcons.search,
@@ -39,7 +38,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: BodyHome(),
+      body: const BodyHome(),
     );
   }
 }
