@@ -7,6 +7,7 @@ import 'package:world_peace/core/constant/image.dart';
 import 'package:world_peace/core/function/pop_menu.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/model/post.dart';
+import 'package:world_peace/view/screen/bottom/profile_screen.dart';
 
 class FeaturePost extends StatelessWidget {
   final int index;
@@ -32,9 +33,18 @@ class FeaturePost extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    snapshot.data!.data!.data![index].user!.name.toString(),
-                    style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+                  InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => ProfilePage(
+                          idUser: snapshot.data!.data!.data![index].userId!,
+                        ),
+                      );
+                    },
+                    child: Text(
+                      snapshot.data!.data!.data![index].user!.name.toString(),
+                      style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+                    ),
                   ),
                   Text(
                     snapshot.data!.data!.data![index].createdAtFormatted
