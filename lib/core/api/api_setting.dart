@@ -7,6 +7,8 @@ class ApiSetting {
   static const String createPost = '${baseUrl}posts/create';
   static const String readCategories = "${baseUrl}posts/all/categories";
   static const String sendLike = "${baseUrl}likes/action";
+  static const String notification = "${baseUrl}notifications/myNotification";
+  static const String logout = "${baseUrl}auth/logout";
 
   static String readPostByPage(int id) {
     return "${baseUrl}posts/all?page=$id";
@@ -34,5 +36,21 @@ class ApiSetting {
 
   static String profile(int idUser) {
     return "${baseUrl}profile/$idUser";
+  }
+
+  static String follow(String userId) {
+    return "${baseUrl}follows/follow";
+  }
+
+  static String unFollow(String userId) {
+    return "${baseUrl}follows/unFollow/$userId";
+  }
+
+  static String acceptFollow(String userId) {
+    return "${baseUrl}follows/acceptFollow";
+  }
+
+  static String rejectFollow(String userId) {
+    return "${baseUrl}follows/rejectFollow/$userId";
   }
 }

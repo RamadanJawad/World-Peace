@@ -3,17 +3,30 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
-import 'package:world_peace/core/constant/image.dart';
 import 'package:world_peace/core/function/pop_menu.dart';
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/model/post.dart';
 import 'package:world_peace/view/screen/bottom/profile_screen.dart';
 
 class FeaturePost extends StatelessWidget {
   final int index;
-  final AsyncSnapshot<ObjectPost> snapshot;
+  final int userId;
+  final String name;
+  final String createdAtFormatted;
+  final int postId;
+  final String title;
+  final String description;
+  final String image;
 
-  const FeaturePost({Key? key, required this.index, required this.snapshot})
+  const FeaturePost(
+      {Key? key,
+      required this.index,
+      required this.userId,
+      required this.name,
+      required this.createdAtFormatted,
+      required this.postId,
+      required this.description,
+      required this.title,
+      required this.image})
       : super(key: key);
 
   @override
@@ -24,8 +37,8 @@ class FeaturePost extends StatelessWidget {
         children: [
           Row(
             children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage(ImageUrl.person1),
+              CircleAvatar(
+                backgroundImage: NetworkImage(image),
               ),
               SizedBox(
                 width: 10.w,
@@ -37,29 +50,27 @@ class FeaturePost extends StatelessWidget {
                     onTap: () {
                       Get.to(
                         () => ProfilePage(
-                          idUser: snapshot.data!.data!.data![index].userId!,
+                          idUser: userId,
                         ),
                       );
                     },
                     child: Text(
-                      snapshot.data!.data!.data![index].user!.name.toString(),
+                      name.toString(),
                       style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Text(
-                    snapshot.data!.data!.data![index].createdAtFormatted
-                        .toString(),
+                    createdAtFormatted.toString(),
                     style: GoogleFonts.montserrat(color: Colors.grey),
                   )
                 ],
               ),
               const Spacer(),
               SizedBox(
-                child: AppPreferences().userId ==
-                        snapshot.data!.data!.data![index].userId
+                child: AppPreferences().userId == userId
                     ? showPopMenu(
-                        onSelected: (select) => controller.onSelected(
-                            select, snapshot.data!.data!.data![index].id))
+                        onSelected: (select) =>
+                            controller.onSelected(select, postId))
                     : null,
               )
             ],
@@ -68,7 +79,7 @@ class FeaturePost extends StatelessWidget {
             height: 5.h,
           ),
           Text(
-            snapshot.data!.data!.data![index].title!,
+            title,
             style:
                 GoogleFonts.cairo(fontWeight: FontWeight.bold, fontSize: 17.sp),
           ),
@@ -76,7 +87,7 @@ class FeaturePost extends StatelessWidget {
             height: 15.h,
           ),
           Text(
-            snapshot.data!.data!.data![index].description!,
+            description,
             style: GoogleFonts.cairo(fontSize: 17.sp),
           ),
           SizedBox(

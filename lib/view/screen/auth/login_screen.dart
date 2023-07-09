@@ -17,9 +17,9 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: AppColor.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon:const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.off(LaunchScreen(), transition: Transition.fade);
+            Get.off(const LaunchScreen(), transition: Transition.fade);
           },
         ),
         iconTheme: const IconThemeData.fallback(),

@@ -32,16 +32,12 @@ class SignUpController extends GetxController {
 
   bool show_pass = true;
   void goToSignIn() {
-    Get.off(() => LoginScreen(), transition: Transition.fade);
+    Get.off(() => const LoginScreen(), transition: Transition.fade);
   }
 
   showPassword() {
     show_pass = show_pass == true ? false : true;
     update();
-  }
-
-  void goToHome() {
-    Get.off(() => const MainScreen(), transition: Transition.fade);
   }
 
   @override

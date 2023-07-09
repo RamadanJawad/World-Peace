@@ -6,16 +6,32 @@ import 'package:world_peace/core/constant/color.dart';
 
 void showDeleteDialog({void Function()? onConfirm}) {
   Get.defaultDialog(
-    title: "Delete Comment !!",
+    title: "Delete Comment !",
     titleStyle: GoogleFonts.cairo(
         color: Colors.red, fontSize: 20.sp, fontWeight: FontWeight.w600),
     middleText: " Are You Sure Delete This Comment ? ",
-    textConfirm: "Yes, Delete",
     textCancel: "Cancel",
     cancelTextColor: Colors.black.withOpacity(0.7),
     confirmTextColor: Colors.white,
     buttonColor: AppColor.primaryColor,
-    onConfirm: onConfirm,
+    cancel: ElevatedButton(
+        onPressed: () => Get.back(),
+        style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            foregroundColor: AppColor.primaryColor),
+        child: Text(
+          "Cancel",
+          style: GoogleFonts.cairo(fontSize: 16.sp),
+        )),
+    confirm: ElevatedButton(
+        onPressed: onConfirm,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColor.primaryColor,
+        ),
+        child: Text(
+          "Yes,Delete",
+          style: GoogleFonts.cairo(fontSize: 16.sp),
+        )),
     barrierDismissible: false,
   );
 }

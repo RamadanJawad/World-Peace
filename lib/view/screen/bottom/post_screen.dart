@@ -9,6 +9,7 @@ import 'package:world_peace/core/api/api_post.dart';
 import 'package:world_peace/core/constant/image.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
+import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/model/category.dart';
 
 class PostScreen extends StatelessWidget {
@@ -66,7 +67,7 @@ class PostScreen extends StatelessWidget {
                     width: 5.w,
                   ),
                   Text(
-                    "Heather Clark",
+                    AppPreferences().name,
                     style: GoogleFonts.cairo(
                         fontSize: 18.sp, fontWeight: FontWeight.bold),
                   ),
@@ -173,7 +174,7 @@ class PostScreen extends StatelessWidget {
                                     File(controller.file!.path),
                                     fit: BoxFit.cover,
                                   )
-                                : Icon(Icons.no_flash_rounded))
+                                : const Icon(Icons.no_flash_rounded))
                         : null,
                   ),
                 );

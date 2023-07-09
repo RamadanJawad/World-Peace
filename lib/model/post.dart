@@ -64,6 +64,7 @@ class Post {
   String? createdAtFormatted;
   Category? category;
   User? user;
+  int? commentsCount;
   Null? admin;
   List<Likes>? likes;
 
@@ -78,16 +79,16 @@ class Post {
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    commentsCount = json['comments_count'];
     createdAtFormatted = json['created_at_formatted'];
-    category = json['category'] != null
-        ? new Category.fromJson(json['category'])
-        : null;
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    category =
+        json['category'] != null ? Category.fromJson(json['category']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     admin = json['admin'];
     if (json['likes'] != null) {
       likes = <Likes>[];
       json['likes'].forEach((v) {
-        likes!.add(new Likes.fromJson(v));
+        likes!.add(Likes.fromJson(v));
       });
     }
   }

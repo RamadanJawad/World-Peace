@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/comment_controller.dart';
-import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/constant/image.dart';
 import 'package:world_peace/core/function/delete_dialog.dart';
 import 'package:world_peace/core/function/update_dialog.dart';
@@ -11,15 +10,13 @@ import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/model/commentes.dart';
 
 class DetailsComment extends StatelessWidget {
-  final int index;
   final AsyncSnapshot<Comments> snapshot;
   final int postId;
 
   const DetailsComment({
     super.key,
-    required this.index,
-    required this.snapshot,
     required this.postId,
+    required this.snapshot,
   });
 
   @override
@@ -36,18 +33,18 @@ class DetailsComment extends StatelessWidget {
                   margin: const EdgeInsets.all(5),
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.circular(10).r,
-                    border: Border.all(
-                        color: const Color(0xffe9e9e9), width: 1.w),
+                    border:
+                        Border.all(color: const Color(0xffe9e9e9), width: 1.w),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          const CircleAvatar(
-                            backgroundImage: AssetImage(ImageUrl.person1),
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                snapshot.data!.data!.data![index].user!.image!),
                           ),
                           SizedBox(
                             width: 10.w,
@@ -55,8 +52,8 @@ class DetailsComment extends StatelessWidget {
                           Text(
                             snapshot.data!.data!.data![index].user!.name
                                 .toString(),
-                            style: GoogleFonts.cairo(
-                                fontWeight: FontWeight.bold),
+                            style:
+                                GoogleFonts.cairo(fontWeight: FontWeight.bold),
                           ),
                           const Spacer(),
                           SizedBox(
@@ -70,11 +67,8 @@ class DetailsComment extends StatelessWidget {
                                               controller.deleteComment(
                                                   postId: snapshot.data!.data!
                                                       .data![index].postId!,
-                                                  commentId: snapshot
-                                                      .data!
-                                                      .data!
-                                                      .data![index]
-                                                      .id!);
+                                                  commentId: snapshot.data!
+                                                      .data!.data![index].id!);
                                               Get.back();
                                             });
                                           },
@@ -87,16 +81,10 @@ class DetailsComment extends StatelessWidget {
                                                   controller.updateComments,
                                               onConfirm: () {
                                                 controller.updateComment(
-                                                    commentId: snapshot
-                                                        .data!
-                                                        .data!
-                                                        .data![index]
-                                                        .id!,
-                                                    postId: snapshot
-                                                        .data!
-                                                        .data!
-                                                        .data![index]
-                                                        .postId!);
+                                                    commentId: snapshot.data!
+                                                        .data!.data![index].id!,
+                                                    postId: snapshot.data!.data!
+                                                        .data![index].postId!);
                                                 Get.back();
                                               },
                                             );
@@ -115,8 +103,7 @@ class DetailsComment extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            snapshot
-                                .data!.data!.data![index].createdAtFormatted
+                            snapshot.data!.data!.data![index].createdAtFormatted
                                 .toString(),
                             style: GoogleFonts.montserrat(color: Colors.grey),
                           )

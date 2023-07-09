@@ -3,14 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/constant/image.dart';
-import 'package:world_peace/model/post.dart';
 
 class FeatureLike extends StatelessWidget {
-  final AsyncSnapshot<ObjectPost> snapshot;
+  final int postId;
+  final int likeCount;
   final int index;
 
-  const FeatureLike({Key? key, required this.snapshot, required this.index})
-      : super(key: key);
+  const FeatureLike({
+    Key? key,
+    required this.postId,
+    required this.likeCount,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +23,7 @@ class FeatureLike extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              controller.addLike(
-                  snapshot.data!.data!.data![index].id!.toString(), index);
+              controller.addLike(postId.toString(), index);
             },
             child: ImageIcon(const AssetImage(ImageUrl.like),
                 color: controller.selectIndex == index
@@ -33,7 +36,7 @@ class FeatureLike extends StatelessWidget {
             width: 5.w,
           ),
           Text(
-            snapshot.data!.data!.data![index].likes!.length.toString(),
+            likeCount.toString(),
             style: const TextStyle(
               color: Color(0xffb5b5c4),
             ),

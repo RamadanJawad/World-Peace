@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:world_peace/controller/util/comment_controller.dart';
 import 'package:world_peace/core/api/api_comment.dart';
 import 'package:world_peace/core/constant/image.dart';
-import '../../screen/utils/comment.dart';
+import '../../screen/utils/comment_screen.dart';
 
 class FeatureComment extends StatelessWidget {
   final int index;
@@ -31,7 +31,6 @@ class FeatureComment extends StatelessWidget {
                       Get.to(
                           () => CommentsScreen(
                                 postId: postId,
-                                snapshot2: snapshot2,
                                 index: index,
                               ),
                           transition: Transition.fade);

@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/api/api_post.dart';
-import 'package:world_peace/view/widget/home/feature_comment.dart';
+import 'package:world_peace/core/constant/image.dart';
+import 'package:world_peace/view/screen/utils/comment_screen.dart';
 import 'package:world_peace/view/widget/home/feature_like.dart';
 import 'package:world_peace/view/widget/home/feature_post.dart';
 
@@ -50,17 +51,61 @@ class BodyHome extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              FeaturePost(index: index, snapshot: snapshot),
+                              FeaturePost(
+                                index: index,
+                                userId:
+                                    snapshot.data!.data!.data![index].userId!,
+                                name: snapshot
+                                    .data!.data!.data![index].user!.name!,
+                                createdAtFormatted: snapshot.data!.data!
+                                    .data![index].createdAtFormatted!,
+                                postId: snapshot.data!.data!.data![index].id!,
+                                description: snapshot
+                                    .data!.data!.data![index].description!,
+                                title: snapshot.data!.data!.data![index].title!,
+                                image: snapshot
+                                    .data!.data!.data![index].user!.image!,
+                              ),
                               const Divider(),
                               Row(
                                 children: [
-                                  FeatureLike(snapshot: snapshot, index: index),
+                                  FeatureLike(
+                                      postId:
+                                          snapshot.data!.data!.data![index].id!,
+                                      likeCount: snapshot.data!.data!
+                                          .data![index].likes!.length,
+                                      index: index),
                                   const Spacer(),
-                                  FeatureComment(
-                                      index: index,
-                                      postId: snapshot
-                                          .data!.data!.data![index].id!
-                                          .toInt()),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(
+                                              () => CommentsScreen(
+                                                    postId: snapshot.data!.data!
+                                                        .data![index].id!,
+                                                    index: index,
+                                                  ),
+                                              transition: Transition.fade);
+                                        },
+                                        child: const ImageIcon(
+                                          AssetImage(ImageUrl.comment),
+                                          color: Color(0xffb5b5c4),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Text(
+                                        snapshot.data!.data!.data![index]
+                                            .commentsCount!
+                                            .toString(),
+                                        style: const TextStyle(
+                                          color: Color(0xffb5b5c4),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ],
