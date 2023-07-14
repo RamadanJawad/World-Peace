@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_auth.dart';
-import 'package:world_peace/model/user.dart';
-import 'package:world_peace/view/screen/bottom/main_screen.dart';
 import '../../view/screen/auth/login_screen.dart';
 
 class SignUpController extends GetxController {

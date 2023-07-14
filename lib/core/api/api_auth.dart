@@ -13,9 +13,8 @@ class ApiAuthController {
       "password": password,
     });
     if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body);
-      var jsonData = jsonResponse['data'];
-      User user = User.fromJson(jsonData);
+      var jsonResponse = jsonDecode(response.body)['data'];
+      User user = User.fromJson(jsonResponse);
       return user;
     } else {
       Get.snackbar("Login failed!", "Login failed,please try again",
@@ -37,14 +36,10 @@ class ApiAuthController {
       "mobile": mobile,
     });
     if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body);
-      if (jsonResponse['status'] == false) {
-        Get.snackbar("Entry error",
-            "The data you entered already exists, please try again",
-            backgroundColor: Colors.red);
-      }
+      print(response.statusCode);
       return true;
     }
-    return null;
+    print(response.statusCode);
+    return false;
   }
 }

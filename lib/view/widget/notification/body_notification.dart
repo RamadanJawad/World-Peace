@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/notification_controller.dart';
 import 'package:world_peace/core/api/api_notification.dart';
+import 'package:world_peace/core/constant/color.dart';
 
 class BodyNotification extends StatelessWidget {
   const BodyNotification({super.key});
@@ -28,6 +29,7 @@ class BodyNotification extends StatelessWidget {
                 );
               } else if (snapshot.hasData) {
                 return ListView.separated(
+                    scrollDirection: Axis.vertical,
                     separatorBuilder: (context, index) => const Divider(),
                     itemCount: snapshot.data!.objectData!.length,
                     itemBuilder: (context, index) {
@@ -37,7 +39,9 @@ class BodyNotification extends StatelessWidget {
                             width: 10.w,
                           ),
                           CircleAvatar(
-                            backgroundImage: NetworkImage(snapshot.data!.objectData![index].data!.image.toString()),
+                            backgroundImage: NetworkImage(snapshot
+                                .data!.objectData![index].data!.image
+                                .toString()),
                             radius: 26.r,
                           ),
                           SizedBox(
@@ -47,13 +51,44 @@ class BodyNotification extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                snapshot.data!.objectData![index].data!.body.toString(),
+                                snapshot.data!.objectData![index].data!.body
+                                    .toString(),
                                 style: GoogleFonts.cairo(fontSize: 17.sp),
                               ),
-                              Text(
-                                snapshot.data!.objectData![index].data!.title.toString(),
-                                style: GoogleFonts.cairo(
-                                    fontSize: 15.sp, color: Colors.grey),
+                              Row(
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      //  controller.acceptFollow(snapshot
+                                      //   .data!.);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppColor.primaryColor),
+                                    child: Text(
+                                      "accept",
+                                      style: GoogleFonts.cairo(
+                                          fontSize: 15.sp, color: Colors.white),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      //  controller.rejectFollow(snapshot
+                                      //   .data!.);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            AppColor.backgroundColor),
+                                    child: Text(
+                                      "reject",
+                                      style: GoogleFonts.cairo(
+                                          fontSize: 15.sp,
+                                          color: AppColor.primaryColor),
+                                    ),
+                                  )
+                                ],
                               )
                             ],
                           ),
