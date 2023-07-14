@@ -53,4 +53,8 @@ class ApiSetting {
   static String rejectFollow(String userId) {
     return "${baseUrl}follows/rejectFollow/$userId";
   }
+
+  static String removeFollow(String userId) {
+    return "${baseUrl}follows/removeFollow/$userId";
+  }
 }

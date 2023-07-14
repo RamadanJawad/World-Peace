@@ -51,4 +51,16 @@ class ApiFollowController with ApiHelper {
       return false;
     }
   }
+
+  Future<bool> removeFollow(String userId) async {
+    var response = await http.post(Uri.parse(ApiSetting.removeFollow(userId)),
+        headers: headers);
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      return true;
+    } else {
+      print(response.statusCode);
+      return false;
+    }
+  }
 }

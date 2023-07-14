@@ -12,17 +12,13 @@ class ProfileController extends GetxController {
     bool response = await ApiFollowController().follow(id);
     if (response) {
       update();
-      print("Follow");
-    }else{
-      print("error");
     }
   }
 
-  Future sendUnFollow(String id) async {
-    bool response = await ApiFollowController().unFollow(id);
+  Future removeFollow(String id) async {
+    bool response = await ApiFollowController().removeFollow(id);
     if (response) {
       update();
-      print("unFollow");
     }
   }
 }

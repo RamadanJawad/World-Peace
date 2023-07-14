@@ -28,7 +28,7 @@ class Data {
     if (json['data'] != null) {
       data = <Post>[];
       json['data'].forEach((v) {
-        data!.add(new Post.fromJson(v));
+        data!.add(Post.fromJson(v));
       });
     }
     firstPageUrl = json['first_page_url'];

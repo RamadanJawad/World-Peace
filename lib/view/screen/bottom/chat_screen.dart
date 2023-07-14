@@ -10,7 +10,6 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(HomeController());
     return Scaffold(
       backgroundColor: AppColor.primaryColor.withOpacity(0.1),
       appBar: AppBar(
@@ -20,40 +19,6 @@ class ChatScreen extends StatelessWidget {
           "Chats",
           style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.black),
         ),
-      ),
-      body: Container(
-        child: ListView.separated(
-            separatorBuilder: (context, index) => Divider(),
-            itemCount: controller.data.length,
-            itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  CircleAvatar(
-                    backgroundImage: AssetImage(controller.data[index]['icon']),
-                    radius: 26.r,
-                  ),
-                  SizedBox(
-                    width: 10.w,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.data[index]['name'],
-                        style: GoogleFonts.cairo(fontSize: 17.sp),
-                      ),
-                      Text(
-                        controller.data[index]['chat'],
-                        style: GoogleFonts.cairo(fontSize: 15.sp),
-                      )
-                    ],
-                  ),
-                ],
-              );
-            }),
       ),
     );
   }

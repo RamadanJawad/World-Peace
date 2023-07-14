@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/profile_controller.dart';
 import 'package:world_peace/core/api/api_profile.dart';
 import 'package:world_peace/core/constant/color.dart';
-import 'package:world_peace/core/constant/image.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import '../../widget/home/feature_comment.dart';
 import '../../widget/home/feature_like.dart';
@@ -84,19 +83,17 @@ class ProfilePage extends StatelessWidget {
                                     elevation: 0,
                                     backgroundColor: Colors.white,
                                     foregroundColor: AppColor.primaryColor),
-                                onPressed: snapshot.data!.isFriend!
+                                onPressed: snapshot.data!.friend == 2
                                     ? () async {
-                                        print("1");
                                         await controller
-                                            .sendUnFollow(idUser.toString());
+                                            .removeFollow(idUser.toString());
                                       }
                                     : () async {
-                                        print("2");
                                         await controller
                                             .sendFollow(idUser.toString());
                                       },
                                 child: Text(
-                                  snapshot.data!.isFriend!
+                                  snapshot.data!.friend == 2
                                       ? "unFollow"
                                       : "follow",
                                   style: GoogleFonts.cairo(fontSize: 17.sp),

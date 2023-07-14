@@ -19,7 +19,7 @@ class BodyHome extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.all(5),
           child: FutureBuilder(
-            future: ApiPostController().readPost(pageNumber: 1),
+            future: ApiPostController().readPost(pageNumber: controller.page),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.none) {
                 return const Center(
@@ -37,6 +37,7 @@ class BodyHome extends StatelessWidget {
                     controller.refreshData();
                   },
                   child: ListView.builder(
+                      controller: controller.scrollController,
                       itemCount: snapshot.data!.data!.data!.length,
                       itemBuilder: (context, index) {
                         return Container(
