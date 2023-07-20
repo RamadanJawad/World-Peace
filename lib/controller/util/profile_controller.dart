@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_follow.dart';
 import 'package:world_peace/core/api/api_profile.dart';
+import 'package:world_peace/core/shared/save_data.dart';
 
 class ProfileController extends GetxController {
   refreshData(int userId) async {
@@ -20,5 +21,11 @@ class ProfileController extends GetxController {
     if (response) {
       update();
     }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    print(AppPreferences().userId);
   }
 }

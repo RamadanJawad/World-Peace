@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,12 +9,14 @@ class FeatureLike extends StatelessWidget {
   final int postId;
   final int likeCount;
   final int index;
+  final int? likePost;
 
   const FeatureLike({
     Key? key,
     required this.postId,
     required this.likeCount,
     required this.index,
+    this.likePost,
   }) : super(key: key);
 
   @override
@@ -22,16 +25,15 @@ class FeatureLike extends StatelessWidget {
       return Row(
         children: [
           InkWell(
-            onTap: () {
-              controller.addLike(postId.toString(), index);
-            },
-            child: ImageIcon(const AssetImage(ImageUrl.like),
-                color: controller.selectIndex == index
-                    ? controller.isLiked
-                        ? Colors.red
-                        : Colors.grey
-                    : const Color(0xffb5b5c4)),
-          ),
+              onTap: () {
+                controller.addLike(postId.toString());
+              },
+              child: Icon(CupertinoIcons.heart_fill,
+                  color: index == postId
+                      ? likePost == 1
+                          ? Colors.red
+                          : Colors.grey
+                      : Colors.grey)),
           SizedBox(
             width: 5.w,
           ),

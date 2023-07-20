@@ -88,7 +88,7 @@ class MyProfileScreen extends StatelessWidget {
                           margin: const EdgeInsets.all(5),
                           width: double.infinity,
                           child: ListView.builder(
-                              itemCount: snapshot.data!.posts!.data!.length,
+                              itemCount: snapshot.data!.posts!.length,
                               itemBuilder: (context, index) {
                                 return Container(
                                   margin: const EdgeInsets.all(5),
@@ -110,30 +110,30 @@ class MyProfileScreen extends StatelessWidget {
                                           name: snapshot.data!.user!.name!,
                                           createdAtFormatted: snapshot
                                               .data!
-                                              .posts!
-                                              .data![index]
+                                              .posts![index]
                                               .createdAtFormatted!,
-                                          postId: snapshot
-                                              .data!.posts!.data![index].id!,
-                                          description: snapshot.data!.posts!
-                                              .data![index].description!,
+                                          postId:
+                                              snapshot.data!.posts![index].id!,
+                                          description: snapshot
+                                              .data!.posts![index].description!,
                                           title: snapshot
-                                              .data!.posts!.data![index].title!,
+                                              .data!.posts![index].title!,
                                           image: snapshot.data!.user!.image!),
                                       const Divider(),
                                       Row(
                                         children: [
                                           FeatureLike(
-                                              postId: snapshot.data!.posts!
-                                                  .data![index].id!,
-                                              likeCount: snapshot.data!.posts!
-                                                  .data![index].likesCount!,
-                                              index: index),
+                                              postId: snapshot
+                                                  .data!.posts![index].id!,
+                                              likeCount: snapshot.data!
+                                                  .posts![index].likesCount!,
+                                              index: snapshot
+                                                  .data!.posts![index].id!),
                                           const Spacer(),
                                           FeatureComment(
                                               index: index,
                                               postId: snapshot
-                                                  .data!.posts!.data![index].id!
+                                                  .data!.posts![index].id!
                                                   .toInt()),
                                         ],
                                       ),

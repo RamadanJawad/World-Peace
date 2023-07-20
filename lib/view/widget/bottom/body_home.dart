@@ -30,15 +30,14 @@ class BodyHome extends StatelessWidget {
                 return const Center(
                   child: CupertinoActivityIndicator(),
                 );
-              } else if (snapshot.hasData &&
-                  snapshot.data!.data!.data!.isNotEmpty) {
+              } else if (snapshot.hasData && snapshot.data!.posts!.isNotEmpty) {
                 return RefreshIndicator(
                   onRefresh: () async {
                     controller.refreshData();
                   },
                   child: ListView.builder(
                       controller: controller.scrollController,
-                      itemCount: snapshot.data!.data!.data!.length,
+                      itemCount: snapshot.data!.posts!.length,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: const EdgeInsets.all(5),
@@ -54,28 +53,28 @@ class BodyHome extends StatelessWidget {
                             children: [
                               FeaturePost(
                                 index: index,
-                                userId:
-                                    snapshot.data!.data!.data![index].userId!,
-                                name: snapshot
-                                    .data!.data!.data![index].user!.name!,
-                                createdAtFormatted: snapshot.data!.data!
-                                    .data![index].createdAtFormatted!,
-                                postId: snapshot.data!.data!.data![index].id!,
-                                description: snapshot
-                                    .data!.data!.data![index].description!,
-                                title: snapshot.data!.data!.data![index].title!,
-                                image: snapshot
-                                    .data!.data!.data![index].user!.image!,
+                                userId: snapshot.data!.posts![index].user!.id!,
+                                name: snapshot.data!.posts![index].user!.name!,
+                                createdAtFormatted: snapshot
+                                    .data!.posts![index].createdAtFormatted!,
+                                postId: snapshot.data!.posts![index].id!,
+                                description:
+                                    snapshot.data!.posts![index].description!,
+                                title: snapshot.data!.posts![index].title!,
+                                image:
+                                    snapshot.data!.posts![index].user!.image!,
                               ),
                               const Divider(),
                               Row(
                                 children: [
                                   FeatureLike(
-                                      postId:
-                                          snapshot.data!.data!.data![index].id!,
-                                      likeCount: snapshot.data!.data!
-                                          .data![index].likes!.length,
-                                      index: index),
+                                      postId: snapshot.data!.posts![index].id!,
+                                      likeCount: snapshot
+                                          .data!.posts![index].likesPost!,
+                                      likePost: snapshot
+                                          .data!.posts![index].likesPost!,
+                                      index: snapshot
+                                          .data!.posts![index].id!),
                                   const Spacer(),
                                   Row(
                                     children: [
@@ -83,8 +82,8 @@ class BodyHome extends StatelessWidget {
                                         onTap: () {
                                           Get.to(
                                               () => CommentsScreen(
-                                                    postId: snapshot.data!.data!
-                                                        .data![index].id!,
+                                                    postId: snapshot.data!
+                                                        .posts![index].id!,
                                                     index: index,
                                                   ),
                                               transition: Transition.fade);
@@ -98,8 +97,8 @@ class BodyHome extends StatelessWidget {
                                         width: 5.w,
                                       ),
                                       Text(
-                                        snapshot.data!.data!.data![index]
-                                            .commentsCount!
+                                        snapshot
+                                            .data!.posts![index].commentsCount!
                                             .toString(),
                                         style: const TextStyle(
                                           color: Color(0xffb5b5c4),

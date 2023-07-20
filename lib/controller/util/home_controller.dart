@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_comment.dart';
 import 'package:world_peace/core/api/api_post.dart';
-import 'package:world_peace/core/constant/image.dart';
 
 class HomeController extends GetxController {
   TextEditingController updateComments = TextEditingController();
   TextEditingController comment = TextEditingController();
   ScrollController scrollController = ScrollController();
-  bool isLiked = false;
-  int? selectIndex;
   bool response = false;
   int page = 1;
 
@@ -49,11 +46,9 @@ class HomeController extends GetxController {
     update();
   }
 
-  void addLike(String postId, int index) async {
-    selectIndex = index;
+  void addLike(String postId) async {
     response = await ApiPostController().sendLike(postId: postId);
     if (response) {
-      isLiked = !isLiked;
       update();
     }
     update();
@@ -63,6 +58,12 @@ class HomeController extends GetxController {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       page = page + 1;
+      await ApiPostController().readPost(pageNumber: page);
+      update();
+    }
+    if (scrollController.position.pixels ==
+        scrollController.position.minScrollExtent) {
+      page = page - 1;
       await ApiPostController().readPost(pageNumber: page);
       update();
     }
