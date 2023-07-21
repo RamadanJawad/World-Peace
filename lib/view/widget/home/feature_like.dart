@@ -29,6 +29,7 @@ class FeatureLike extends StatelessWidget {
                 controller.addLike(postId.toString());
               },
               child: Icon(CupertinoIcons.heart_fill,
+                  size: 28,
                   color: index == postId
                       ? likePost == 1
                           ? Colors.red

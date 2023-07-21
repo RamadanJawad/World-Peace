@@ -34,19 +34,21 @@ class ApiPostController with ApiHelper {
     }
   }
 
-  Future<ObjectPost> readPost({required int pageNumber}) async {
+  Future<ObjectPost> readPost(
+      {required int pageNumber, required List post}) async {
     final response = await http.get(
       Uri.parse(ApiSetting.readPostByPage(pageNumber)),
       headers: headers,
     );
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
+      post = jsonData["posts"] + post;
       return ObjectPost.fromJson(jsonData);
     } else {
       throw Exception('Failed to fetch data from the API');
     }
   }
-  
+
   Future deletePost({required postId}) async {
     final response = await http.delete(Uri.parse(ApiSetting.deletePost(postId)),
         headers: headers);

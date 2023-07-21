@@ -21,6 +21,7 @@ dependencies:
   get: ^4.6.5
   animated_custom_dropdown: ^1.2.2
   http: ^0.13.5
+  shimmer:
 
 dev_dependencies:
   flutter_test:
