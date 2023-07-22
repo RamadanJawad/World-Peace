@@ -1,16 +1,13 @@
 import 'dart:io';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/controller/util/post_controller.dart';
-import 'package:world_peace/core/api/api_post.dart';
 import 'package:world_peace/core/constant/image.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/model/category.dart';
 
 class PostScreen extends StatelessWidget {
   const PostScreen({super.key});

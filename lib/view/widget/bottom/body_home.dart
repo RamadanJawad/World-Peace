@@ -28,7 +28,9 @@ class BodyHome extends StatelessWidget {
                 child: controller.isLoading
                     ? ListView.builder(
                         controller: controller.scrollController,
-                        itemCount: controller.post.length + 1,
+                        itemCount: controller.isLoadingMore
+                            ? controller.post.length + 1
+                            : controller.post.length,
                         itemBuilder: (context, index) {
                           if (index < controller.post.length) {
                             return Container(
@@ -59,12 +61,18 @@ class BodyHome extends StatelessWidget {
                                   Row(
                                     children: [
                                       FeatureLike(
-                                          postId: controller.post[index].id!,
-                                          likeCount:
-                                              controller.post[index].likesPost!,
-                                          likePost:
-                                              controller.post[index].likesPost!,
-                                          index: controller.post[index].id!),
+                                        postId: controller.post[index].id!,
+                                        likeCount:
+                                            controller.post[index].likesPost!,
+                                        likePost:
+                                            controller.post[index].likesPost!,
+                                        index: controller.post[index].id!,
+                                        onTap: () {
+                                          controller.addLike(controller
+                                              .post[index].id
+                                              .toString());
+                                        },
+                                      ),
                                       const Spacer(),
                                       Row(
                                         children: [

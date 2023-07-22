@@ -17,6 +17,9 @@ class Posts {
   int? id;
   String? title;
   String? description;
+  List<String>? images;
+  int? categoryId;
+  int? userId;
   int? status;
   int? commentsCount;
   int? likesCount;
@@ -30,6 +33,9 @@ class Posts {
       {this.id,
       this.title,
       this.description,
+      this.images,
+      this.categoryId,
+      this.userId,
       this.status,
       this.commentsCount,
       this.likesCount,
@@ -43,6 +49,9 @@ class Posts {
     id = json['id'];
     title = json['title'];
     description = json['description'];
+    images = json['images'].cast<String>();
+    categoryId = json['category_id'];
+    userId = json['user_id'];
     status = json['status'];
     commentsCount = json['comments_count'];
     likesCount = json['likes_count'];
@@ -76,16 +85,14 @@ class User {
   int? id;
   String? name;
   String? email;
-  String? mobile;
   String? image;
 
-  User({this.id, this.name, this.email, this.mobile, this.image});
+  User({this.id, this.name, this.email, this.image});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    mobile = json['mobile'];
     image = json['image'];
   }
 }
@@ -94,16 +101,12 @@ class Likes {
   int? id;
   int? postId;
   int? userId;
-  String? createdAt;
-  String? updatedAt;
 
-  Likes({this.id, this.postId, this.userId, this.createdAt, this.updatedAt});
+  Likes({this.id, this.postId, this.userId});
 
   Likes.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     postId = json['post_id'];
     userId = json['user_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
   }
 }

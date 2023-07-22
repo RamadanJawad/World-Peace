@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/controller/util/editProfileController.dart';
+import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/view/widget/auth/custom_button.dart';
 import 'package:world_peace/view/widget/auth/custom_filed.dart';
 
@@ -24,24 +25,22 @@ class BodyEditProfile extends StatelessWidget {
                   SizedBox(
                     height: 15.h,
                   ),
-
-                  // ignore: prefer_const_constructors
                   Center(
-                    child: const CircleAvatar(
-                        backgroundColor: Colors.white,
-
-                        // ignore: sort_child_properties_last
-                        child: Icon(
-                          Icons.camera_alt,
-                          size: 40,
-                          color: Colors.black,
+                    child: InkWell(
+                      onTap: () {
+                        controller.getImage();
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          controller.imagePath,
                         ),
-                        radius: 60),
+                        maxRadius: 70.r,
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
-
                   Form(
                     key: controller.globalKey,
                     child: Column(children: [
@@ -59,10 +58,17 @@ class BodyEditProfile extends StatelessWidget {
                       SizedBox(
                         height: 30.h,
                       ),
+                      CustomFiled(
+                          controller: controller.mobile,
+                          icon: Icons.phone_android,
+                          label: 'Phone number'),
+                      SizedBox(
+                        height: 30.h,
+                      ),
                       CustomButton(
                           name: "Save",
                           function: () {
-                            controller.goToHome();
+                            controller.editProfiles();
                           }),
                     ]),
                   )

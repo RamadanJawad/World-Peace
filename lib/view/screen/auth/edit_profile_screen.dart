@@ -14,11 +14,11 @@ class EditProfile extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.backgroundColor,
       appBar: AppBar(
+        backgroundColor: AppColor.primaryColor.withOpacity(0.1),
         title: Text(
           "Edit Profile",
           style: GoogleFonts.cairo(color: Colors.black),
         ),
-        backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: const IconThemeData.fallback(),
         centerTitle: true,

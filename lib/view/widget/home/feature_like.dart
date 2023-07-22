@@ -10,6 +10,7 @@ class FeatureLike extends StatelessWidget {
   final int likeCount;
   final int index;
   final int? likePost;
+  final void Function()? onTap;
 
   const FeatureLike({
     Key? key,
@@ -17,6 +18,7 @@ class FeatureLike extends StatelessWidget {
     required this.likeCount,
     required this.index,
     this.likePost,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -25,9 +27,7 @@ class FeatureLike extends StatelessWidget {
       return Row(
         children: [
           InkWell(
-              onTap: () {
-                controller.addLike(postId.toString());
-              },
+              onTap: onTap,
               child: Icon(CupertinoIcons.heart_fill,
                   size: 28,
                   color: index == postId

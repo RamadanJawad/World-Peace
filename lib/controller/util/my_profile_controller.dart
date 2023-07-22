@@ -1,26 +1,27 @@
 import 'package:get/get.dart';
-import 'package:world_peace/controller/util/home_controller.dart';
-import 'package:world_peace/core/api/api_follow.dart';
 import 'package:world_peace/core/api/api_post.dart';
 import 'package:world_peace/core/api/api_profile.dart';
 import 'package:world_peace/core/cache/cache.dart';
+import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/model/profile.dart';
+import 'package:world_peace/controller/util/home_controller.dart';
 
-class ProfileController extends GetxController {
+class MyProfileController extends GetxController {
   Profile profile = Profile();
   List<Posts> posts = [];
   CacheData cacheData = CacheData();
   bool response = false;
   bool isLoading = false;
   HomeController homeController = Get.find();
-  refreshData(int userId) async {
-    await ApiProfileController().profilePage(idUser: userId);
+
+  refreshData() async {
+    await ApiProfileController().profilePage(idUser: AppPreferences().userId!);
     update();
   }
 
   Future readData() async {
-    profile =
-        await ApiProfileController().profilePage(idUser: cacheData.getUserId());
+    profile = await ApiProfileController()
+        .profilePage(idUser: AppPreferences().userId!);
     posts = profile.posts!;
     isLoading = true;
     update();
@@ -31,20 +32,6 @@ class ProfileController extends GetxController {
     await readData();
     homeController.refreshData();
     update();
-  }
-
-  Future sendFollow(String id) async {
-    bool response = await ApiFollowController().follow(id);
-    if (response) {
-      update();
-    }
-  }
-
-  Future removeFollow(String id) async {
-    bool response = await ApiFollowController().removeFollow(id);
-    if (response) {
-      update();
-    }
   }
 
   @override

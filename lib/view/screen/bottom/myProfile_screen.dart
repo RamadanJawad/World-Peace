@@ -1,11 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:world_peace/controller/util/my_profile_controller.dart';
+import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/constant/color.dart';
-import 'package:world_peace/core/shared/save_data.dart';
-import '../../../controller/util/profile_controller.dart';
+import 'package:world_peace/model/edit_profile.dart';
+import 'package:world_peace/view/screen/auth/edit_profile_screen.dart';
+import 'package:world_peace/view/widget/bottom/shimmer_home.dart';
 import '../../../core/api/api_profile.dart';
 import '../../widget/home/feature_comment.dart';
 import '../../widget/home/feature_like.dart';
@@ -16,8 +18,8 @@ class MyProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProfileController>(
-      init: ProfileController(),
+    return GetBuilder<MyProfileController>(
+      init: MyProfileController(),
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
@@ -36,59 +38,69 @@ class MyProfileScreen extends StatelessWidget {
               )
             ],
           ),
-          body: FutureBuilder(
-            future: ApiProfileController()
-                .profilePage(idUser: AppPreferences().userId),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.none) {
-                return const Center(
-                  child: Text("No Internet Connection !"),
-                );
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CupertinoActivityIndicator(),
-                );
-              } else if (snapshot.hasData) {
-                return RefreshIndicator(
-                  onRefresh: () async {
-                    controller.refreshData(AppPreferences().userId!);
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 180.h,
-                        color: AppColor.primaryColor,
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  snapshot.data!.user!.image!.toString()),
-                              radius: 35.r,
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                            Text(
-                              snapshot.data!.user!.name!.toString(),
-                              style: GoogleFonts.cairo(
-                                  fontSize: 18.sp, color: Colors.white),
-                            ),
-                            Text(
-                              snapshot.data!.user!.email!.toString(),
-                              style: GoogleFonts.cairo(
-                                  fontSize: 17.sp, color: Colors.white),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          margin: const EdgeInsets.all(5),
+          body: RefreshIndicator(
+              onRefresh: () async {
+                controller.refreshData();
+              },
+              child: controller.isLoading
+                  ? Column(
+                      children: [
+                        Container(
                           width: double.infinity,
-                          child: ListView.builder(
-                              itemCount: snapshot.data!.posts!.length,
+                          height: 220.h,
+                          color: AppColor.primaryColor,
+                          child: Column(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    controller.profile.user!.image!.toString()),
+                                radius: 35.r,
+                              ),
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                              Text(
+                                controller.profile.user!.name!.toString(),
+                                style: GoogleFonts.cairo(
+                                    fontSize: 18.sp, color: Colors.white),
+                              ),
+                              Text(
+                                controller.profile.user!.email!.toString(),
+                                style: GoogleFonts.cairo(
+                                    fontSize: 17.sp, color: Colors.white),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: AppColor.primaryColor),
+                                onPressed: () {
+                                  CacheData cacheData = CacheData();
+                                  cacheData.setEditProfileModel(
+                                      EditProfileModel(
+                                          mobile:
+                                              controller.profile.user!.mobile,
+                                          email:
+                                              controller.profile.user!.email!,
+                                          name: controller.profile.user!.name!,
+                                          imagePath:
+                                              controller.profile.user!.image!));
+                                  Get.to(() => const EditProfile());
+                                },
+                                child: Text(
+                                  "Edit Profile",
+                                  style: GoogleFonts.cairo(fontSize: 17.sp),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.all(5),
+                            width: double.infinity,
+                            child: ListView.builder(
+                              itemCount: controller.posts.length,
                               itemBuilder: (context, index) {
                                 return Container(
                                   margin: const EdgeInsets.all(5),
@@ -105,52 +117,52 @@ class MyProfileScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       FeaturePost(
-                                          index: index,
-                                          userId: snapshot.data!.user!.id!,
-                                          name: snapshot.data!.user!.name!,
-                                          createdAtFormatted: snapshot
-                                              .data!
-                                              .posts![index]
-                                              .createdAtFormatted!,
-                                          postId:
-                                              snapshot.data!.posts![index].id!,
-                                          description: snapshot
-                                              .data!.posts![index].description!,
-                                          title: snapshot
-                                              .data!.posts![index].title!,
-                                          image: snapshot.data!.user!.image!),
+                                        index: index,
+                                        userId: controller.profile.user!.id!,
+                                        name: controller.profile.user!.name!,
+                                        createdAtFormatted: controller
+                                            .posts[index].createdAtFormatted!,
+                                        postId: controller.posts[index].id!,
+                                        description: controller
+                                            .posts[index].description!,
+                                        title: controller.posts[index].title!,
+                                        image: controller.profile.user!.image!,
+                                      ),
                                       const Divider(),
                                       Row(
                                         children: [
                                           FeatureLike(
-                                              postId: snapshot
-                                                  .data!.posts![index].id!,
-                                              likeCount: snapshot.data!
-                                                  .posts![index].likesCount!,
-                                              index: snapshot
-                                                  .data!.posts![index].id!),
+                                            postId: controller
+                                                .profile.posts![index].id!,
+                                            likeCount: controller
+                                                .posts[index].likesPost!,
+                                            likePost: controller
+                                                .posts[index].likesPost!,
+                                            index: controller.posts[index].id!,
+                                            onTap: () {
+                                              controller.addLike(controller
+                                                  .posts[index].id
+                                                  .toString());
+                                            },
+                                          ),
                                           const Spacer(),
                                           FeatureComment(
                                               index: index,
-                                              postId: snapshot
-                                                  .data!.posts![index].id!
+                                              postId: controller
+                                                  .posts[index].id!
                                                   .toInt()),
                                         ],
                                       ),
                                     ],
                                   ),
                                 );
-                              }),
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              } else {
-                return const Center(child: Text("no data"));
-              }
-            },
-          ),
+                              },
+                            ),
+                          ),
+                        )
+                      ],
+                    )
+                  : getShimmerLoading()),
         );
       },
     );

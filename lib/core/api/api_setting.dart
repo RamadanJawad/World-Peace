@@ -9,6 +9,7 @@ class ApiSetting {
   static const String sendLike = "${baseUrl}likes/action";
   static const String notification = "${baseUrl}notifications/myNotification";
   static const String logout = "${baseUrl}auth/logout";
+  static const String editProfile = "${baseUrl}profile/update";
 
   static String readPostByPage(int id) {
     return "${baseUrl}posts/all?page=$id";

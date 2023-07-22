@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/api/api_post.dart';
 
 class PostController extends GetxController {
@@ -12,6 +13,7 @@ class PostController extends GetxController {
   List<String> categories = ["Mokawel"];
   final ImagePicker imagePicker = ImagePicker();
   final jobRoleDropdownCtrl = TextEditingController();
+  HomeController homeController = Get.find();
 
   getImage() async {
     file = await imagePicker.pickImage(source: ImageSource.gallery);
@@ -40,6 +42,7 @@ class PostController extends GetxController {
       );
     }
     if (response) {
+      homeController.refreshData();
       Get.snackbar("Success", "Create Post Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
     } else {

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/api/api_comment.dart';
 import 'package:world_peace/model/commentes.dart';
 
 class CommentController extends GetxController {
   List<Comment> comments = [];
+  HomeController homeController = Get.find();
   bool response = false;
   TextEditingController comment = TextEditingController();
   TextEditingController updateComments = TextEditingController();
@@ -18,6 +20,7 @@ class CommentController extends GetxController {
     var response = await ApiCommentController()
         .deleteComment(postId: postId, commentId: commentId);
     if (response) {
+      homeController.refreshData();
       Get.snackbar("Success", "delete comment Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
       update();
@@ -39,6 +42,7 @@ class CommentController extends GetxController {
     update();
 
     if (response) {
+      homeController.refreshData();
       Get.snackbar("Success", "update commnet Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
     } else {
@@ -52,6 +56,7 @@ class CommentController extends GetxController {
     response = await ApiCommentController()
         .createComment(comment: comment.text, postId: postId);
     if (response) {
+      homeController.refreshData();
       Get.snackbar("Success", "Create comment Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
       update();

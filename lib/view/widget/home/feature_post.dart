@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
+import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/function/pop_menu.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/view/screen/bottom/profile_screen.dart';
@@ -17,17 +18,17 @@ class FeaturePost extends StatelessWidget {
   final String description;
   final String image;
 
-  const FeaturePost(
-      {Key? key,
-      required this.index,
-      required this.userId,
-      required this.name,
-      required this.createdAtFormatted,
-      required this.postId,
-      required this.description,
-      required this.title,
-      required this.image})
-      : super(key: key);
+  const FeaturePost({
+    Key? key,
+    required this.index,
+    required this.userId,
+    required this.name,
+    required this.createdAtFormatted,
+    required this.postId,
+    required this.description,
+    required this.title,
+    required this.image,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,10 +49,10 @@ class FeaturePost extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
+                      CacheData cacheData = CacheData();
+                      cacheData.setUserId(userId);
                       Get.to(
-                        () => ProfilePage(
-                          idUser: userId,
-                        ),
+                        () => ProfilePage(),
                       );
                     },
                     child: Text(
@@ -62,7 +63,7 @@ class FeaturePost extends StatelessWidget {
                   Text(
                     createdAtFormatted.toString(),
                     style: GoogleFonts.montserrat(color: Colors.grey),
-                  )
+                  ),
                 ],
               ),
               const Spacer(),
@@ -91,7 +92,7 @@ class FeaturePost extends StatelessWidget {
             style: GoogleFonts.cairo(fontSize: 17.sp),
           ),
           SizedBox(
-            height: 15.h,
+            height: 5.h,
           ),
         ],
       );

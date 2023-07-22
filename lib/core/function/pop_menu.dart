@@ -13,21 +13,5 @@ Widget showPopMenu({void Function(int)? onSelected}) {
                 style: GoogleFonts.cairo(color: AppColor.primaryColor),
               ),
             ),
-            const PopupMenuDivider(),
-            PopupMenuItem<int>(
-              value: 1,
-              child: Text(
-                "update",
-                style: GoogleFonts.cairo(color: AppColor.primaryColor),
-              ),
-            ),
-            const PopupMenuDivider(),
-            PopupMenuItem<int>(
-              value: 2,
-              child: Text(
-                "cancel",
-                style: GoogleFonts.cairo(color: AppColor.primaryColor),
-              ),
-            ),
           ]);
 }
