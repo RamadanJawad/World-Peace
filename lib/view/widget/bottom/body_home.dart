@@ -64,7 +64,7 @@ class BodyHome extends StatelessWidget {
                                       FeatureLike(
                                         postId: controller.post[index].id!,
                                         likeCount:
-                                            controller.post[index].likesPost!,
+                                            controller.post[index].likesCount!,
                                         likePost:
                                             controller.post[index].likesPost!,
                                         index: controller.post[index].id!,

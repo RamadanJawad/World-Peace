@@ -31,7 +31,7 @@ class BodyNotification extends StatelessWidget {
                 return ListView.separated(
                     scrollDirection: Axis.vertical,
                     separatorBuilder: (context, index) => const Divider(),
-                    itemCount: snapshot.data!.objectData!.length,
+                    itemCount: snapshot.data!.data!.length,
                     itemBuilder: (context, index) {
                       return Row(
                         children: [
@@ -40,7 +40,7 @@ class BodyNotification extends StatelessWidget {
                           ),
                           CircleAvatar(
                             backgroundImage: NetworkImage(snapshot
-                                .data!.objectData![index].data!.image
+                                .data!.data![index].data!.image
                                 .toString()),
                             radius: 26.r,
                           ),
@@ -48,19 +48,22 @@ class BodyNotification extends StatelessWidget {
                             width: 10.w,
                           ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                snapshot.data!.objectData![index].data!.body
+                                snapshot.data!.data![index].data!.body
                                     .toString(),
                                 style: GoogleFonts.cairo(fontSize: 17.sp),
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
-                                      //  controller.acceptFollow(snapshot
-                                      //   .data!.);
+                                      controller.acceptFollow(snapshot
+                                          .data!.data![index].data!.userId
+                                          .toString());
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColor.primaryColor),
@@ -75,8 +78,9 @@ class BodyNotification extends StatelessWidget {
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
-                                      //  controller.rejectFollow(snapshot
-                                      //   .data!.);
+                                      controller.rejectFollow(snapshot
+                                          .data!.data![index].data!.userId
+                                          .toString());
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor:

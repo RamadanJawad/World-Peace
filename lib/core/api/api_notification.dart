@@ -5,13 +5,13 @@ import 'package:world_peace/core/api/api_setting.dart';
 import 'package:world_peace/model/notification.dart';
 
 class ApiNotificationController with ApiHelper {
-  Future<Notification> readNotification() async {
+  Future<Notifications> readNotification() async {
     var response =
         await http.get(Uri.parse(ApiSetting.notification), headers: headers);
     if (response.statusCode == 200) {
       var jsonObject = jsonDecode(response.body);
       var jsonArray=jsonObject['notifications'];
-      Notification notification = Notification.fromJson(jsonArray);
+      Notifications notification = Notifications.fromJson(jsonArray);
       return notification;
     } else {
       throw Exception('Failed to fetch data from the API');

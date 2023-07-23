@@ -44,8 +44,7 @@ class HomeController extends GetxController {
   void deletePost({required int postId}) async {
     var response = await ApiPostController().deletePost(postId: postId);
     if (response) {
-      post.clear();
-      await readPost();
+      await refreshData();
       Get.snackbar("Success", "delete post Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
       update();
@@ -67,13 +66,11 @@ class HomeController extends GetxController {
   scrollListener() async {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
-      if (post.length > 10) {
-        isLoadingMore = true;
-        page = page + 1;
-        readPost();
-        isLoadingMore = false;
-        update();
-      }
+      isLoadingMore = true;
+      page = page + 1;
+      readPost();
+      isLoadingMore = false;
+      update();
     }
   }
 

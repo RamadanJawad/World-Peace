@@ -132,7 +132,7 @@ class ProfilePage extends StatelessWidget {
                                             postId: controller
                                                 .profile.posts![index].id!,
                                             likeCount: controller
-                                                .posts[index].likesPost!,
+                                                .posts[index].likesCount!,
                                             likePost: controller
                                                 .posts[index].likesPost!,
                                             index: controller.posts[index].id!,

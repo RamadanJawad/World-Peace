@@ -6,6 +6,7 @@ class NotificationController extends GetxController{
   void acceptFollow(var userId)async{
     bool? response=await ApiFollowController().acceptFollow(userId);
     if(response){
+      print(true);
       update();
     }
   }
