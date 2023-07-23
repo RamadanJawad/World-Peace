@@ -33,6 +33,8 @@ class PostController extends GetxController {
           description: descriptionController.text,
           category: "1",
           imageFile: file!.path.toString());
+
+      update();
     } else {
       response = await ApiPostController().createPost(
         title: titleController.text,
@@ -45,12 +47,14 @@ class PostController extends GetxController {
       homeController.refreshData();
       Get.snackbar("Success", "Create Post Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+      
     } else {
       Get.snackbar("Error", "Failed to create post, try again",
           backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
     }
     descriptionController.text = "";
     titleController.text = "";
+    file = null;
     update();
   }
 

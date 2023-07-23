@@ -36,6 +36,7 @@ class ProfileController extends GetxController {
   Future sendFollow(String id) async {
     bool response = await ApiFollowController().follow(id);
     if (response) {
+      readData();
       update();
     }
   }
@@ -43,6 +44,7 @@ class ProfileController extends GetxController {
   Future removeFollow(String id) async {
     bool response = await ApiFollowController().removeFollow(id);
     if (response) {
+      readData();
       update();
     }
   }

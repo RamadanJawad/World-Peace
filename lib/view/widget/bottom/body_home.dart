@@ -46,6 +46,7 @@ class BodyHome extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   FeaturePost(
+                                    images: controller.post[index].images!,
                                     index: index,
                                     userId: controller.post[index].user!.id!,
                                     name: controller.post[index].user!.name!,

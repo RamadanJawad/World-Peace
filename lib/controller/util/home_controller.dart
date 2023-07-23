@@ -13,6 +13,7 @@ class HomeController extends GetxController {
   List<Posts> post = [];
   bool isLoading = false;
   bool isLoadingMore = false;
+  int item = 0;
 
   refreshData() async {
     post.clear();

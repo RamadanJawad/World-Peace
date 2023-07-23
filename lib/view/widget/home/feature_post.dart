@@ -17,6 +17,8 @@ class FeaturePost extends StatelessWidget {
   final String title;
   final String description;
   final String image;
+  final String? imageUrl;
+  final List? images;
 
   const FeaturePost({
     Key? key,
@@ -28,74 +30,103 @@ class FeaturePost extends StatelessWidget {
     required this.description,
     required this.title,
     required this.image,
+    this.imageUrl,
+    this.images,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeController>(builder: (controller) {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(image),
-              ),
-              SizedBox(
-                width: 10.w,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      CacheData cacheData = CacheData();
-                      cacheData.setUserId(userId);
-                      Get.to(
-                        () => ProfilePage(),
-                      );
-                    },
-                    child: Text(
-                      name.toString(),
-                      style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+    return GetBuilder<HomeController>(
+      builder: (controller) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: NetworkImage(image),
+                ),
+                SizedBox(
+                  width: 10.w,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        CacheData cacheData = CacheData();
+                        cacheData.setUserId(userId);
+                        Get.to(
+                          () => const ProfilePage(),
+                        );
+                      },
+                      child: Text(
+                        name.toString(),
+                        style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  Text(
-                    createdAtFormatted.toString(),
-                    style: GoogleFonts.montserrat(color: Colors.grey),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              SizedBox(
-                child: AppPreferences().userId == userId
-                    ? showPopMenu(
-                        onSelected: (select) =>
-                            controller.onSelected(select, postId))
-                    : null,
-              )
-            ],
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Text(
-            title,
-            style:
-                GoogleFonts.cairo(fontWeight: FontWeight.bold, fontSize: 17.sp),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Text(
-            description,
-            style: GoogleFonts.cairo(fontSize: 17.sp),
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-        ],
-      );
-    });
+                    Text(
+                      createdAtFormatted.toString(),
+                      style: GoogleFonts.montserrat(color: Colors.grey),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                SizedBox(
+                  child: AppPreferences().userId == userId
+                      ? showPopMenu(
+                          onSelected: (select) =>
+                              controller.onSelected(select, postId))
+                      : null,
+                )
+              ],
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Text(
+              title,
+              style: GoogleFonts.cairo(
+                  fontWeight: FontWeight.bold, fontSize: 17.sp),
+            ),
+            SizedBox(
+              height: 15.h,
+            ),
+            Text(
+              description,
+              style: GoogleFonts.cairo(fontSize: 17.sp),
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: images!.isEmpty ? 0 : 260,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection:
+                      images!.length > 1 ? Axis.horizontal : Axis.vertical,
+                  itemCount: images!.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            images![index],
+                            width: images!.length > 1 ? 250.w : 400.w,
+                            fit: BoxFit.cover,
+                            height: images!.isNotEmpty ? 240.h : 0,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+            )
+          ],
+        );
+      },
+    );
   }
 }

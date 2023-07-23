@@ -64,10 +64,35 @@ class MyProfileScreen extends StatelessWidget {
                                 style: GoogleFonts.cairo(
                                     fontSize: 18.sp, color: Colors.white),
                               ),
-                              Text(
-                                controller.profile.user!.email!.toString(),
-                                style: GoogleFonts.cairo(
-                                    fontSize: 17.sp, color: Colors.white),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Following:",
+                                    style: GoogleFonts.cairo(
+                                        fontSize: 17.sp, color: Colors.white),
+                                  ),
+                                  Text(
+                                    controller.profile.followingCount
+                                        .toString(),
+                                    style: GoogleFonts.cairo(
+                                        fontSize: 17.sp, color: Colors.white),
+                                  ),
+                                  SizedBox(
+                                    width: 15.w,
+                                  ),
+                                  Text(
+                                    "Followers:",
+                                    style: GoogleFonts.cairo(
+                                        fontSize: 17.sp, color: Colors.white),
+                                  ),
+                                  Text(
+                                    controller.profile.followerCount
+                                        .toString(),
+                                    style: GoogleFonts.cairo(
+                                        fontSize: 17.sp, color: Colors.white),
+                                  ),
+                                ],
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -117,6 +142,7 @@ class MyProfileScreen extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       FeaturePost(
+                                        images: controller.posts[index].images!,
                                         index: index,
                                         userId: controller.profile.user!.id!,
                                         name: controller.profile.user!.name!,

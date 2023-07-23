@@ -113,6 +113,7 @@ class ProfilePage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       FeaturePost(
+                                        images: controller.posts[index].images!,
                                         index: index,
                                         userId: controller.profile.user!.id!,
                                         name: controller.profile.user!.name!,
