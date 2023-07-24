@@ -87,8 +87,7 @@ class MyProfileScreen extends StatelessWidget {
                                         fontSize: 17.sp, color: Colors.white),
                                   ),
                                   Text(
-                                    controller.profile.followerCount
-                                        .toString(),
+                                    controller.profile.followerCount.toString(),
                                     style: GoogleFonts.cairo(
                                         fontSize: 17.sp, color: Colors.white),
                                   ),

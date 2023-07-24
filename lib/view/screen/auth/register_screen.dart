@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:world_peace/view/screen/auth/launch_screen.dart';
-
 import '../../../controller/auth/register_controller.dart';
 import '../../../core/constant/color.dart';
 import '../../widget/auth/body_register.dart';
@@ -12,8 +10,7 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SignUpController controller = Get.put(SignUpController());
-
+    Get.put(SignUpController());
     return Scaffold(
         backgroundColor: AppColor.backgroundColor,
         appBar: AppBar(

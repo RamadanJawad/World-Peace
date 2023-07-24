@@ -53,7 +53,7 @@ class BodyNotification extends StatelessWidget {
                               Text(
                                 snapshot.data!.data![index].data!.body
                                     .toString(),
-                                style: GoogleFonts.cairo(fontSize: 17.sp),
+                                style: GoogleFonts.cairo(fontSize: 16.sp),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,

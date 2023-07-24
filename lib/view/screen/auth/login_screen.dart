@@ -10,14 +10,14 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SignInController controller = Get.put(SignInController());
+    Get.put(SignInController());
     return Scaffold(
       backgroundColor: AppColor.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColor.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon:const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Get.off(const LaunchScreen(), transition: Transition.fade);
           },

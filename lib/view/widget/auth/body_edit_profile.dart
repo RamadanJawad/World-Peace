@@ -1,8 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/controller/util/editProfileController.dart';
-import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/view/widget/auth/custom_button.dart';
 import 'package:world_peace/view/widget/auth/custom_filed.dart';
 
@@ -29,13 +29,24 @@ class BodyEditProfile extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         controller.getImage();
+                        controller.isTabbed = true;
                       },
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          controller.imagePath,
-                        ),
-                        maxRadius: 70.r,
-                      ),
+                      child: controller.isTabbed && controller.file != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Image.file(
+                                File(controller.file!.path),
+                                width: 200,
+                                height: 200,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                controller.imagePath,
+                              ),
+                              maxRadius: 70.r,
+                            ),
                     ),
                   ),
                   SizedBox(

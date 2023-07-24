@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_helper.dart';
@@ -24,24 +25,30 @@ class ApiProfileController with ApiHelper {
     }
   }
 
-  Future<EditProfileResponse> editProfile({
-    required String name,
-    required String email,
-    required String mobile,
-  }) async {
-    final response = await http
-        .post(Uri.parse(ApiSetting.editProfile), headers: headers, body: {
-      "name": name,
-      "mobile": mobile,
-      "email": email,
-    });
-    if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      Get.snackbar("Success", "The data has been modified successfully",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
-      return EditProfileResponse.fromJson(jsonData);
+  Future<bool> editProfile(
+      {required String name,
+      required String email,
+      required String mobile,
+      dynamic image}) async {
+    final url = Uri.parse(ApiSetting.editProfile);
+    final request = http.MultipartRequest('POST', url);
+    request.headers[HttpHeaders.acceptHeader] = 'application/json';
+    request.headers[HttpHeaders.authorizationHeader] = AppPreferences().token;
+    if (image != null && image.isNotEmpty) {
+      var file = await http.MultipartFile.fromPath('image', image);
+      request.files.add(file);
+    }
+
+    request.fields['name'] = name;
+    request.fields['mobile'] = mobile;
+    request.fields['email'] = email;
+    request.fields["image"] = image;
+    final response = await request.send();
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return true;
     } else {
-      throw Exception('Failed to fetch data from the API');
+      return false;
     }
   }
 

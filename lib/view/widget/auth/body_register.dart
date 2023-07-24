@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -82,6 +83,12 @@ class BodySignUp extends StatelessWidget {
                             function: () {
                               if (controller.globalKey.currentState!
                                   .validate()) {
+                                Get.dialog(const Center(
+                                  child: CupertinoActivityIndicator(
+                                    radius: 20,
+                                    color: Colors.white,
+                                  ),
+                                ));
                                 controller.register();
                               }
                             }),

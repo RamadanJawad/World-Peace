@@ -17,7 +17,6 @@ class FeaturePost extends StatelessWidget {
   final String title;
   final String description;
   final String image;
-  final String? imageUrl;
   final List? images;
 
   const FeaturePost({
@@ -30,7 +29,6 @@ class FeaturePost extends StatelessWidget {
     required this.description,
     required this.title,
     required this.image,
-    this.imageUrl,
     this.images,
   }) : super(key: key);
 
@@ -102,27 +100,37 @@ class FeaturePost extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: images!.isEmpty ? 0 : 260,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection:
-                      images!.length > 1 ? Axis.horizontal : Axis.vertical,
-                  itemCount: images!.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
+              child: images!.isNotEmpty && images!.length == 1
+                  ? Padding(
                       padding: const EdgeInsets.all(5),
                       child: Center(
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            images![index],
-                            width: images!.length > 1 ? 250.w : 400.w,
-                            fit: BoxFit.cover,
-                            height: images!.isNotEmpty ? 240.h : 0,
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              images![0],
+                              width: 400.w,
+                              fit: BoxFit.cover,
+                            )),
+                      ))
+                  : ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: images!.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Center(
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  images![index],
+                                  width: 250.w,
+                                  fit: BoxFit.cover,
+                                  height: images!.isNotEmpty ? 240.h : 0,
+                                )),
                           ),
-                        ),
-                      ),
-                    );
-                  }),
+                        );
+                      }),
             )
           ],
         );

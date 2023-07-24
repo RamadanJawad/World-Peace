@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -20,19 +21,44 @@ class EditProfileController extends GetxController {
   EditProfileResponse profileResponse = EditProfileResponse();
   MyProfileController profileController = Get.find();
   HomeController homeController = Get.find();
+  bool isTabbed = false;
 
   getImage() async {
     file = await imagePicker.pickImage(source: ImageSource.gallery);
-    imagePath = file!.path;
+    imagePath = file!.path.toString();
     update();
   }
 
-  Future<void> editProfiles() async {
-    profileResponse = await ApiProfileController().editProfile(
-      name: name.text.toString(),
-      email: email.text.toString(),
-      mobile: mobile.text.toString(),
-    );
+  editProfiles() async {
+    Get.dialog(const Center(
+      child: CupertinoActivityIndicator(
+        radius: 20,
+        color: Colors.white,
+      ),
+    ));
+    bool profileResponse;
+    if (file != null) {
+      profileResponse = await ApiProfileController().editProfile(
+          name: name.text.toString(),
+          email: email.text.toString(),
+          mobile: mobile.text.toString(),
+          image: file!.path.toString());
+      update();
+    } else {
+      profileResponse = await ApiProfileController().editProfile(
+          name: name.text.toString(),
+          email: email.text.toString(),
+          mobile: mobile.text.toString(),
+          image: "");
+      update();
+    }
+    if (profileResponse) {
+      Get.snackbar("Success", "The data has been modified successfully",
+          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+    } else {
+      Get.snackbar("faild", "The data has not been modified ",
+          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+    }
     profileController.readData();
     homeController.refreshData();
     update();
@@ -55,6 +81,7 @@ class EditProfileController extends GetxController {
     email = TextEditingController();
     name = TextEditingController();
     mobile = TextEditingController();
+
     showData();
   }
 
