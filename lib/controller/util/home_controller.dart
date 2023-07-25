@@ -17,7 +17,8 @@ class HomeController extends GetxController {
 
   refreshData() async {
     post.clear();
-    await readPost();
+    objectPost = await ApiPostController().readPost(pageNumber: 1, post: post);
+    post.addAll(objectPost.posts!);
     update();
   }
 

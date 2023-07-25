@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
 import 'package:world_peace/core/shared/save_data.dart';
+import 'package:world_peace/model/category.dart';
 import 'package:world_peace/model/post.dart';
 
 class ApiPostController with ApiHelper {
@@ -60,12 +61,13 @@ class ApiPostController with ApiHelper {
     }
   }
 
-  Future<List<Category>> readCategories() async {
-    final response = await http.get(Uri.parse(ApiSetting.readCategories));
+  Future<List<Categories>> readCategories() async {
+    final response =
+        await http.get(Uri.parse(ApiSetting.readCategories), headers: headers);
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       final jsonArray = jsonData["data"] as List;
-      return jsonArray.map((e) => Category.fromJson(e)).toList();
+      return jsonArray.map((e) => Categories.fromJson(e)).toList();
     }
     return [];
   }

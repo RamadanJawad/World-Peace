@@ -53,9 +53,13 @@ class EditProfileController extends GetxController {
       update();
     }
     if (profileResponse) {
+      Get.back();
+      update();
       Get.snackbar("Success", "The data has been modified successfully",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
     } else {
+      Get.back();
+      update();
       Get.snackbar("faild", "The data has not been modified ",
           backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
     }

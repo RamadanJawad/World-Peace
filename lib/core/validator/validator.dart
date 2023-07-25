@@ -10,17 +10,8 @@ class FieldValidator {
   }
 
   String? validatePassword(String password) {
-    RegExp hasLower = RegExp(r'[a-z]');
-    RegExp hasDigit = RegExp(r'\d');
-
     if (!RegExp(r'.{8,}').hasMatch(password)) {
       return "Passwords must have at least 8 characters";
-    }
-    if (!hasLower.hasMatch(password)) {
-      return "Passwords must have at least one lowercase character";
-    }
-    if (!hasDigit.hasMatch(password)) {
-      return "Passwords must have at least one number";
     }
     return null;
   }

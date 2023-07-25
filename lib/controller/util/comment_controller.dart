@@ -40,9 +40,10 @@ class CommentController extends GetxController {
         postId: postId,
         updateComment: updateComments.text);
     update();
-
     if (response) {
       homeController.refreshData();
+      Get.back();
+      update();
       Get.snackbar("Success", "update commnet Success",
           backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
     } else {

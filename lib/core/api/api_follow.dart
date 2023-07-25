@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:world_peace/core/api/api_setting.dart';
+import 'package:world_peace/model/follower.dart';
 
 class ApiFollowController with ApiHelper {
   Future<bool> follow(String userId) async {
@@ -56,11 +58,33 @@ class ApiFollowController with ApiHelper {
     var response = await http.post(Uri.parse(ApiSetting.removeFollow(userId)),
         headers: headers);
     if (response.statusCode == 200) {
-      print(response.statusCode);
       return true;
     } else {
-      print(response.statusCode);
       return false;
+    }
+  }
+
+  Future<List<Follower>> allFollower() async {
+    var response =
+        await http.post(Uri.parse(ApiSetting.allFollower), headers: headers);
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body);
+      final jsonArray = jsonData["followers"] as List;
+      return jsonArray.map((e) => Follower.fromJson(e)).toList();
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<Follower>> allFollowing() async {
+    var response =
+        await http.post(Uri.parse(ApiSetting.allFollowing), headers: headers);
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body);
+      final jsonArray = jsonData["following"] as List;
+      return jsonArray.map((e) => Follower.fromJson(e)).toList();
+    } else {
+      return [];
     }
   }
 }

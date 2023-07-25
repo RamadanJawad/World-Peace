@@ -9,15 +9,16 @@ void showUpdateDialog(
   Get.defaultDialog(
     title: "Update comment",
     barrierDismissible: true,
-    
     content: TextFormField(
       keyboardType: TextInputType.text,
+      maxLines: 4,
       controller: controller,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 5),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         labelText: "new comment",
         floatingLabelStyle: GoogleFonts.ubuntu(color: AppColor.primaryColor),
-        labelStyle: GoogleFonts.cairo(),
+        labelStyle: GoogleFonts.tajawal(),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20).r,
           borderSide: BorderSide(

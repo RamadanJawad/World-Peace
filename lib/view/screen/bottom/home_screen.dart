@@ -17,11 +17,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.primaryColor.withOpacity(0.1),
       appBar: AppBar(
-        backgroundColor: AppColor.primaryColor.withOpacity(0.1),
+        backgroundColor: AppColor.primaryColor,
         elevation: 0,
         title: Text(
           "World Speace",
-          style: GoogleFonts.cairo(color: Colors.black, fontSize: 20.sp),
+          style: GoogleFonts.cairo(color: Colors.white, fontSize: 20.sp),
         ),
         actions: [
           Padding(
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
               },
               icon: const Icon(
                 CupertinoIcons.search,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
           ),

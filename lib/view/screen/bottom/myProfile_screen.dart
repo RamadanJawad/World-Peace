@@ -7,6 +7,7 @@ import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/model/edit_profile.dart';
 import 'package:world_peace/view/screen/auth/edit_profile_screen.dart';
+import 'package:world_peace/view/widget/bottom/custom_dialog.dart';
 import 'package:world_peace/view/widget/bottom/shimmer_home.dart';
 import '../../../core/api/api_profile.dart';
 import '../../widget/home/feature_comment.dart';
@@ -67,29 +68,30 @@ class MyProfileScreen extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    "Following:",
-                                    style: GoogleFonts.cairo(
-                                        fontSize: 17.sp, color: Colors.white),
-                                  ),
-                                  Text(
-                                    controller.profile.followingCount
-                                        .toString(),
-                                    style: GoogleFonts.cairo(
-                                        fontSize: 17.sp, color: Colors.white),
+                                  InkWell(
+                                    onTap: () {
+                                      showCustomDialog(
+                                          "Following", controller.allFollowing);
+                                    },
+                                    child: Text(
+                                      "Following:${controller.profile.followingCount}",
+                                      style: GoogleFonts.cairo(
+                                          fontSize: 17.sp, color: Colors.white),
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 15.w,
                                   ),
-                                  Text(
-                                    "Followers:",
-                                    style: GoogleFonts.cairo(
-                                        fontSize: 17.sp, color: Colors.white),
-                                  ),
-                                  Text(
-                                    controller.profile.followerCount.toString(),
-                                    style: GoogleFonts.cairo(
-                                        fontSize: 17.sp, color: Colors.white),
+                                  InkWell(
+                                    onTap: () {
+                                      showCustomDialog(
+                                          "Follower", controller.allFollower);
+                                    },
+                                    child: Text(
+                                      "Followers:${controller.profile.followerCount.toString()}",
+                                      style: GoogleFonts.cairo(
+                                          fontSize: 17.sp, color: Colors.white),
+                                    ),
                                   ),
                                 ],
                               ),

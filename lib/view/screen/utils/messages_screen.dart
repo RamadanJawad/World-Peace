@@ -13,13 +13,13 @@ class MessagesScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.primaryColor,
         elevation: 0,
-        leading: Icon(Icons.arrow_back),
+        leading: const Icon(Icons.arrow_back),
         actions: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.more_vert_outlined),
+              icon: const Icon(Icons.more_vert_outlined),
             ),
           )
         ],

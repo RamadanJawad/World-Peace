@@ -10,9 +10,15 @@ class ApiSetting {
   static const String notification = "${baseUrl}notifications/myNotification";
   static const String logout = "${baseUrl}auth/logout";
   static const String editProfile = "${baseUrl}profile/update";
+  static const String allFollowing = "${baseUrl}follows/all/following";
+  static const String allFollower = "${baseUrl}follows/all/follower";
 
   static String readPostByPage(int id) {
     return "${baseUrl}posts/all?page=$id";
+  }
+
+  static String searchUser(String username) {
+    return "${baseUrl}users/all?name_user_search=$username";
   }
 
   static String readComments(int idPost) {

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/comment_controller.dart';
-import 'package:world_peace/core/constant/image.dart';
 import 'package:world_peace/core/function/delete_dialog.dart';
 import 'package:world_peace/core/function/update_dialog.dart';
 import 'package:world_peace/core/shared/save_data.dart';
@@ -72,10 +71,16 @@ class DetailsComment extends StatelessWidget {
                                               Get.back();
                                             });
                                           },
-                                          icon: const Icon(Icons.delete),
+                                          icon: const Icon(
+                                            Icons.delete,
+                                            color: Colors.red,
+                                          ),
                                         ),
                                         IconButton(
                                           onPressed: () {
+                                            controller.updateComments.text =
+                                                snapshot.data!.data!
+                                                    .data![index].description!;
                                             showUpdateDialog(
                                               controller:
                                                   controller.updateComments,
@@ -85,19 +90,21 @@ class DetailsComment extends StatelessWidget {
                                                         .data!.data![index].id!,
                                                     postId: snapshot.data!.data!
                                                         .data![index].postId!);
-                                                Get.back();
                                               },
                                             );
                                           },
-                                          icon: const Icon(Icons.mode_edit),
+                                          icon: const Icon(
+                                            Icons.mode_edit,
+                                            color: Colors.grey,
+                                          ),
                                         ),
                                       ],
                                     )
                                   : null)
                         ],
                       ),
-                      const SizedBox(
-                        height: 7,
+                      SizedBox(
+                        height: 7.h,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

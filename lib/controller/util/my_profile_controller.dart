@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
+import 'package:world_peace/core/api/api_follow.dart';
 import 'package:world_peace/core/api/api_post.dart';
 import 'package:world_peace/core/api/api_profile.dart';
 import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/shared/save_data.dart';
+import 'package:world_peace/model/follower.dart';
 import 'package:world_peace/model/profile.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
 
@@ -13,6 +15,18 @@ class MyProfileController extends GetxController {
   bool response = false;
   bool isLoading = false;
   HomeController homeController = Get.find();
+  List<Follower> allFollower = [];
+  List<Follower> allFollowing = [];
+
+  getAllFollower() async {
+    allFollower = await ApiFollowController().allFollower();
+    update();
+  }
+
+  getAllFollowing() async {
+    allFollowing = await ApiFollowController().allFollowing();
+    update();
+  }
 
   refreshData() async {
     await ApiProfileController().profilePage(idUser: AppPreferences().userId!);
@@ -38,5 +52,7 @@ class MyProfileController extends GetxController {
   void onInit() {
     super.onInit();
     readData();
+    getAllFollower();
+    getAllFollowing();
   }
 }
