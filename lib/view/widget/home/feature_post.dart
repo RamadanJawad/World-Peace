@@ -87,9 +87,6 @@ class FeaturePost extends StatelessWidget {
               style: GoogleFonts.cairo(
                   fontWeight: FontWeight.bold, fontSize: 17.sp),
             ),
-            SizedBox(
-              height: 15.h,
-            ),
             Text(
               description,
               style: GoogleFonts.cairo(fontSize: 17.sp),

@@ -7,38 +7,39 @@ import 'package:world_peace/view/widget/comment/body_comment.dart';
 import '../../../core/constant/color.dart';
 
 class CommentsScreen extends StatelessWidget {
-  final int postId;
-  final int index;
+  final int? postId;
+  final int? index;
 
-  const CommentsScreen({super.key, required this.postId, required this.index});
+  const CommentsScreen({super.key, this.postId, this.index});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CommentController());
     return RefreshIndicator(
       onRefresh: () async {
-        controller.refreshData(postId);
+        controller.refreshData(postId!);
       },
       child: Scaffold(
-          backgroundColor: AppColor.backgroundColor,
-          appBar: AppBar(
-            backgroundColor: AppColor.primaryColor,
-            elevation: 0,
-            centerTitle: true,
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            title: Text(
-              "Comments",
-              style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.white),
-            ),
+        backgroundColor: AppColor.backgroundColor,
+        appBar: AppBar(
+          backgroundColor: AppColor.primaryColor,
+          elevation: 0,
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Get.back();
+            },
           ),
-          body: BodyComment(
-            postId: postId,
-          )),
+          title: Text(
+            "Comments",
+            style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.white),
+          ),
+        ),
+        body: BodyComment(
+          postId: postId!,
+        ),
+      ),
     );
   }
 }

@@ -31,15 +31,13 @@ class BodyLaunch extends StatelessWidget {
           SizedBox(
             height: 40.h,
           ),
-          Text("WORLD PEACE",
+          Text("AqsaCommunity",
               style: GoogleFonts.ubuntu(fontSize: 25.sp, height: 1.h)),
-          Text("Retrain the brain",
-              style: GoogleFonts.ubuntu(fontSize: 15.sp, height: 1.5.h)),
           SizedBox(
-            height: 15.h,
+            height: 20.h,
           ),
           Text(
-            "Lorem ipsum dolor sit amet, consectetur \n adipiscing elit, sed do eiusmod Lorem\n ipsum dolor sit amet, consectetur",
+            "Post what you want, talk to friends,\n message them,  create new relationships,\n and more in this community",
             style: GoogleFonts.ubuntu(
                 fontSize: 15.sp, color: Colors.grey, height: 1.5.h),
             textAlign: TextAlign.center,
@@ -60,7 +58,8 @@ class BodyLaunch extends StatelessWidget {
                 },
                 child: Text(
                   "Sign up",
-                  style: GoogleFonts.ubuntu(color: Colors.black,fontSize: 17.sp),
+                  style:
+                      GoogleFonts.ubuntu(color: Colors.black, fontSize: 17.sp),
                 ),
               ),
             ),
@@ -79,7 +78,8 @@ class BodyLaunch extends StatelessWidget {
                 },
                 child: Text(
                   "Sign in",
-                  style: GoogleFonts.ubuntu(color: Colors.white,fontSize: 17.sp),
+                  style:
+                      GoogleFonts.ubuntu(color: Colors.white, fontSize: 17.sp),
                 ),
               ),
             ),

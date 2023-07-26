@@ -17,6 +17,7 @@ class AppPreferences {
   Future save(User user) async {
     await sharedPreferences.setBool("isLogged", true);
     await sharedPreferences.setString("name", user.name!);
+    await sharedPreferences.setString("image", user.image!);
     await sharedPreferences.setString("email", user.email!);
     await sharedPreferences.setInt("user_id", user.id!);
     await sharedPreferences.setString("token", "Bearer ${user.token}");
@@ -25,6 +26,8 @@ class AppPreferences {
   int? get userId => sharedPreferences.getInt("user_id");
 
   String get name => sharedPreferences.getString("name") ?? "";
+
+  String get userImage => sharedPreferences.getString("image") ?? "";
 
   bool get loggedIn => sharedPreferences.getBool("isLogged") ?? false;
 

@@ -17,22 +17,24 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.primaryColor.withOpacity(0.1),
       appBar: AppBar(
-        backgroundColor: AppColor.primaryColor,
+        backgroundColor: AppColor.primaryColor.withOpacity(0.1),
         elevation: 0,
         title: Text(
           "World Speace",
-          style: GoogleFonts.cairo(color: Colors.white, fontSize: 20.sp),
+          style: GoogleFonts.cairo(color: Colors.black, fontSize: 20.sp),
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Get.to(() => const SearchScreen(), transition: Transition.fade);
+                Get.to(
+                  () => const SearchScreen(),
+                );
               },
               icon: const Icon(
                 CupertinoIcons.search,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),

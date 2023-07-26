@@ -1,11 +1,9 @@
 import 'dart:io';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/controller/util/post_controller.dart';
-import 'package:world_peace/core/constant/image.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/shared/save_data.dart';
@@ -57,8 +55,9 @@ class PostScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage(ImageUrl.person1),
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        AppPreferences().userImage),
                     radius: 25,
                   ),
                   SizedBox(
@@ -95,6 +94,7 @@ class PostScreen extends StatelessWidget {
               TextFormField(
                 controller: controller.titleController,
                 style: GoogleFonts.cairo(fontSize: 18.sp),
+                
                 cursorColor: AppColor.primaryColor,
                 decoration: InputDecoration.collapsed(
                     hintText: "Title of the Post ?",
@@ -106,35 +106,18 @@ class PostScreen extends StatelessWidget {
               TextFormField(
                 controller: controller.descriptionController,
                 style: GoogleFonts.cairo(fontSize: 18.sp),
+                maxLines: 3,
                 cursorColor: AppColor.primaryColor,
                 decoration: InputDecoration.collapsed(
                     hintText: "What's on your mind?",
                     hintStyle: GoogleFonts.cairo(fontSize: 18.sp)),
               ),
               SizedBox(
-                height: 30.h,
+                height: 10.h,
               ),
               Row(
                 children: [
-                  InkWell(
-                    child: Container(
-                      width: 80.w,
-                      height: 80.h,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                              width: 1, color: Colors.grey.withOpacity(0.5)),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Icon(
-                        Icons.add,
-                        size: 30,
-                        color: AppColor.primaryColor,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
+                  
                   InkWell(
                     onTap: () {
                       controller.getImage();

@@ -21,18 +21,14 @@ class FeatureComment extends StatelessWidget {
           future: ApiCommentController().readComments(postId: postId),
           builder: (context, snapshot2) {
             return RefreshIndicator(
-              onRefresh: () async{
+              onRefresh: () async {
                 await controller.refreshData(postId);
               },
               child: Row(
                 children: [
                   InkWell(
                     onTap: () {
-                      Get.to(
-                          () => CommentsScreen(
-                                postId: postId,
-                                index: index,
-                              ),
+                      Get.to(() => const CommentsScreen(),
                           transition: Transition.fade);
                     },
                     child: const ImageIcon(

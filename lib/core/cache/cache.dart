@@ -3,6 +3,7 @@ import 'package:world_peace/model/edit_profile.dart';
 class CacheData {
   static int userId = 0;
   static EditProfileModel editProfileModel = EditProfileModel();
+
   void setUserId(int id) {
     userId = id;
   }

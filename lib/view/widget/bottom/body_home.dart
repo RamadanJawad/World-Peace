@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/constant/image.dart';
+import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/view/screen/utils/comment_screen.dart';
 import 'package:world_peace/view/widget/bottom/shimmer_home.dart';
 import 'package:world_peace/view/widget/home/feature_like.dart';
@@ -59,53 +60,62 @@ class BodyHome extends StatelessWidget {
                                     image: controller.post[index].user!.image!,
                                   ),
                                   const Divider(),
-                                  Row(
-                                    children: [
-                                      FeatureLike(
-                                        postId: controller.post[index].id!,
-                                        likeCount:
-                                            controller.post[index].likesCount!,
-                                        likePost:
-                                            controller.post[index].likesPost!,
-                                        index: controller.post[index].id!,
-                                        onTap: () {
-                                          controller.addLike(controller
-                                              .post[index].id
-                                              .toString());
-                                        },
-                                      ),
-                                      const Spacer(),
-                                      Row(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              Get.to(
-                                                  () => CommentsScreen(
-                                                        postId: controller
-                                                            .post[index].id!,
-                                                        index: index,
-                                                      ),
-                                                  transition: Transition.fade);
-                                            },
-                                            child: const ImageIcon(
-                                              AssetImage(ImageUrl.comment),
-                                              color: Color(0xffb5b5c4),
+                                  IntrinsicHeight(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        FeatureLike(
+                                          postId: controller.post[index].id!,
+                                          likeCount: controller
+                                              .post[index].likesCount!,
+                                          likePost:
+                                              controller.post[index].likesPost!,
+                                          index: controller.post[index].id!,
+                                          onTap: () {
+                                            controller.addLike(controller
+                                                .post[index].id
+                                                .toString());
+                                          },
+                                        ),
+                                        const VerticalDivider(
+                                          color: Colors.grey,
+                                          width: 1,
+                                          thickness: 1,
+                                        ),
+                                        Row(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                Get.to(
+                                                    () => CommentsScreen(
+                                                          postId: controller
+                                                              .post[index].id!,
+                                                          index: index,
+                                                        ),
+                                                    transition:
+                                                        Transition.fade);
+                                              },
+                                              child: const ImageIcon(
+                                                AssetImage(ImageUrl.comment),
+                                                color: Color(0xffb5b5c4),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            width: 5.w,
-                                          ),
-                                          Text(
-                                            controller
-                                                .post[index].commentsCount!
-                                                .toString(),
-                                            style: const TextStyle(
-                                              color: Color(0xffb5b5c4),
+                                            SizedBox(
+                                              width: 5.w,
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                            Text(
+                                              controller
+                                                  .post[index].commentsCount!
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                color: Color(0xffb5b5c4),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

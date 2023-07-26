@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/api/api_post.dart';
+import 'package:world_peace/core/api/api_profile.dart';
+import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/model/post.dart';
 
 class HomeController extends GetxController {
@@ -26,6 +29,7 @@ class HomeController extends GetxController {
     objectPost =
         await ApiPostController().readPost(pageNumber: page, post: post);
     post.addAll(objectPost.posts!);
+
     isLoading = true;
     update();
   }
@@ -33,7 +37,32 @@ class HomeController extends GetxController {
   void onSelected(select, id) {
     switch (select) {
       case 0:
-        deletePost(postId: id);
+        Get.defaultDialog(
+          title: "Delete Post!",
+          middleText: "Are You Sure Delete This Post ?",
+          cancel: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey, foregroundColor: Colors.white),
+            onPressed: () {
+              Get.back();
+            },
+            child: Text(
+              "Cancel",
+              style: GoogleFonts.cairo(),
+            ),
+          ),
+          confirm: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, foregroundColor: Colors.white),
+            onPressed: () async {
+              await deletePost(postId: id);
+            },
+            child: Text(
+              "Yes,Turn",
+              style: GoogleFonts.cairo(),
+            ),
+          ),
+        );
         break;
       case 1:
         break;
@@ -42,12 +71,17 @@ class HomeController extends GetxController {
     }
   }
 
-  void deletePost({required int postId}) async {
+  Future deletePost({required int postId}) async {
     var response = await ApiPostController().deletePost(postId: postId);
     if (response) {
+      Get.back();
       await refreshData();
-      Get.snackbar("Success", "delete post Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+      Get.snackbar(
+        "Success",
+        "delete post Success",
+        backgroundColor: Colors.green,
+        margin: const EdgeInsets.all(10),
+      );
       update();
     } else {
       Get.snackbar("Error", "Failed delete post, try again",

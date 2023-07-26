@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
+import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/constant/image.dart';
 
 class FeatureLike extends StatelessWidget {
@@ -32,7 +33,7 @@ class FeatureLike extends StatelessWidget {
                   size: 28,
                   color: index == postId
                       ? likePost == 1
-                          ? Colors.red
+                          ? AppColor.primaryColor
                           : Colors.grey
                       : Colors.grey)),
           SizedBox(
