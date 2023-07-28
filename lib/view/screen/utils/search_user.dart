@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/search_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/view/widget/utils/custom_field.dart';
+import '../../../core/cache/cache.dart';
+import '../bottom/profile_screen.dart';
 
 class SearchUser extends StatelessWidget {
   const SearchUser({super.key});
@@ -22,8 +24,8 @@ class SearchUser extends StatelessWidget {
             style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.white),
           ),
         ),
-        body: GetBuilder<SearchUserController>(
-          init: SearchUserController(),
+        body: GetBuilder<SearchCategoryController>(
+          init: SearchCategoryController(),
           builder: (controller) {
             return Column(
               children: [
@@ -36,13 +38,43 @@ class SearchUser extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     child: controller.searchUser.isNotEmpty
-                        ? ListView.builder(
+                        ? ListView.separated(
                             itemCount: controller.searchUser.length,
+                            separatorBuilder: (context, index) =>
+                                const Divider(),
                             itemBuilder: (context, index) {
-                              return Text(
-                                controller.searchUser[index].name!,
-                                style: GoogleFonts.cairo(
-                                    fontSize: 20.sp, color: Colors.black),
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      CircleAvatar(
+                                        backgroundImage: NetworkImage(controller
+                                            .searchUser[index].image!
+                                            .toString()),
+                                        radius: 26.r,
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          CacheData cacheData = CacheData();
+                                          cacheData.setUserId(
+                                              controller.searchUser[index].id!);
+                                          Get.to(() => const ProfilePage(),
+                                              transition: Transition.fade);
+                                        },
+                                        child: Text(
+                                          controller.searchUser[index].name!,
+                                          style: GoogleFonts.cairo(
+                                              fontSize: 20.sp,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               );
                             })
                         : Center(

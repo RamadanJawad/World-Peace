@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/api/api_post.dart';
-import 'package:world_peace/core/api/api_profile.dart';
-import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/model/post.dart';
 
 class HomeController extends GetxController {

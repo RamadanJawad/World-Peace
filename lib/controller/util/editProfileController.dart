@@ -25,7 +25,7 @@ class EditProfileController extends GetxController {
 
   getImage() async {
     file = await imagePicker.pickImage(source: ImageSource.gallery);
-    imagePath = file!.path.toString();
+    // imagePath = file!.path.toString();
     update();
   }
 

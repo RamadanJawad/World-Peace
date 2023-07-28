@@ -74,7 +74,7 @@ class MyProfileScreen extends StatelessWidget {
                                           "Following", controller.allFollowing);
                                     },
                                     child: Text(
-                                      "Following:${controller.profile.followingCount}",
+                                      "Following:${controller.profile.followingCount.toString()}",
                                       style: GoogleFonts.cairo(
                                           fontSize: 17.sp, color: Colors.white),
                                     ),
@@ -144,6 +144,7 @@ class MyProfileScreen extends StatelessWidget {
                                     children: [
                                       FeaturePost(
                                         images: controller.posts[index].images!,
+                                        category: controller.posts[index].category!.name!,
                                         index: index,
                                         userId: controller.profile.user!.id!,
                                         name: controller.profile.user!.name!,

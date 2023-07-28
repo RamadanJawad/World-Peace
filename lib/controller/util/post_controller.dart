@@ -12,7 +12,7 @@ class PostController extends GetxController {
   TextEditingController descriptionController = TextEditingController();
   XFile? file;
   String selectedItem = '';
-  List<String> categories = ["Mokawel"];
+  List<String> categories = ["All"];
   List<Categories> category = [];
   final ImagePicker imagePicker = ImagePicker();
   final jobRoleDropdownCtrl = TextEditingController();

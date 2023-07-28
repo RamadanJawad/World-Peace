@@ -1,3 +1,5 @@
+import 'package:world_peace/model/post.dart';
+
 class ApiSetting {
   ApiSetting._();
   static const String baseUrl =
@@ -19,6 +21,10 @@ class ApiSetting {
 
   static String searchUser(String username) {
     return "${baseUrl}users/all?name_user_search=$username";
+  }
+
+  static String categoryPost(int categoryId, int pageNumber) {
+    return "${baseUrl}posts/all?category_search=$categoryId&page=$pageNumber";
   }
 
   static String readComments(int idPost) {

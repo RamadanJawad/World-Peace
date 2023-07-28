@@ -16,7 +16,7 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(NotificationController());
     return Scaffold(
-        backgroundColor: AppColor.primaryColor.withOpacity(0.1),
+        backgroundColor: AppColor.backgroundColor,
         appBar: AppBar(
           backgroundColor: AppColor.primaryColor,
           elevation: 0,
@@ -27,7 +27,7 @@ class NotificationScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Get.to(() => SearchUser());
+                Get.to(() => const SearchUser());
               },
               icon: const Icon(
                 CupertinoIcons.search,

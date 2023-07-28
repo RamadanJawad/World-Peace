@@ -38,7 +38,7 @@ class BodyHome extends StatelessWidget {
                               margin: const EdgeInsets.all(5),
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: Colors.white.withOpacity(0.2),
                                 borderRadius: BorderRadius.circular(10).r,
                                 border: Border.all(
                                     color: const Color(0xffe9e9e9), width: 1.w),
@@ -58,6 +58,7 @@ class BodyHome extends StatelessWidget {
                                         controller.post[index].description!,
                                     title: controller.post[index].title!,
                                     image: controller.post[index].user!.image!,
+                                    category: controller.post[index].category!.name!,
                                   ),
                                   const Divider(),
                                   IntrinsicHeight(

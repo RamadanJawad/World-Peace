@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:http/http.dart';
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
 import 'package:world_peace/model/search_user.dart';
 import 'package:http/http.dart' as http;
+
+import '../../model/post.dart';
 
 class ApiSearch with ApiHelper {
   Future<List<SearchOfUser>> searchUser(String query) async {
@@ -14,6 +17,22 @@ class ApiSearch with ApiHelper {
       return jsonArray.map((e) => SearchOfUser.fromJson(e)).toList();
     } else {
       return [];
+    }
+  }
+
+  Future<ObjectPost> searchCategory(
+      {required int pageNumber,
+      required int categoryId,
+      required List post}) async {
+    final response = await http.get(
+        Uri.parse(ApiSetting.categoryPost(categoryId, pageNumber)),
+        headers: headers);
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body);
+      post = jsonData["posts"] + post;
+      return ObjectPost.fromJson(jsonData);
+    } else {
+      throw Exception('Failed to fetch data from the API');
     }
   }
 }

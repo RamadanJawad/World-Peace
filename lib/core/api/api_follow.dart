@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:world_peace/core/api/api_setting.dart';
 import 'package:world_peace/model/follower.dart';
 
+import '../../model/following.dart';
+
 class ApiFollowController with ApiHelper {
   Future<bool> follow(String userId) async {
     var response = await http.post(Uri.parse(ApiSetting.follow(userId)),
@@ -76,13 +78,13 @@ class ApiFollowController with ApiHelper {
     }
   }
 
-  Future<List<Follower>> allFollowing() async {
+  Future<List<Following>> allFollowing() async {
     var response =
         await http.post(Uri.parse(ApiSetting.allFollowing), headers: headers);
     if (response.statusCode == 200) {
       var jsonData = jsonDecode(response.body);
       final jsonArray = jsonData["following"] as List;
-      return jsonArray.map((e) => Follower.fromJson(e)).toList();
+      return jsonArray.map((e) => Following.fromJson(e)).toList();
     } else {
       return [];
     }

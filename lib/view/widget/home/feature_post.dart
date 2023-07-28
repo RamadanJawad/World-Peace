@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
 import 'package:world_peace/core/cache/cache.dart';
+import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/function/pop_menu.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/view/screen/bottom/profile_screen.dart';
@@ -18,6 +19,7 @@ class FeaturePost extends StatelessWidget {
   final String description;
   final String image;
   final List? images;
+  final String category;
 
   const FeaturePost({
     Key? key,
@@ -30,6 +32,7 @@ class FeaturePost extends StatelessWidget {
     required this.title,
     required this.image,
     this.images,
+    required this.category,
   }) : super(key: key);
 
   @override
@@ -70,6 +73,20 @@ class FeaturePost extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10).r,
+                    border: Border.all(
+                      color: AppColor.primaryColor.withOpacity(0.7),
+                    ),
+                  ),
+                  child: Text(
+                    category,
+                    style: GoogleFonts.cairo(),
+                  ),
+                ),
                 SizedBox(
                   child: AppPreferences().userId == userId
                       ? showPopMenu(

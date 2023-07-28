@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
 import 'package:http/http.dart' as http;
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/model/edit_profile.dart';
 import 'package:world_peace/model/profile.dart';
 import 'package:world_peace/view/screen/auth/login_screen.dart';
 

@@ -16,7 +16,8 @@ class BodyNotification extends StatelessWidget {
       builder: (controller) {
         return SizedBox(
           child: FutureBuilder(
-            future: ApiNotificationController().readNotification(),
+            future: ApiNotificationController()
+                .readNotification(notifications: controller.allNotification),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.none) {
                 return const Center(
@@ -28,77 +29,103 @@ class BodyNotification extends StatelessWidget {
                   child: CupertinoActivityIndicator(),
                 );
               } else if (snapshot.hasData) {
-                return ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemCount: snapshot.data!.data!.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                        children: [
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(snapshot
-                                .data!.data![index].data!.image
-                                .toString()),
-                            radius: 26.r,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                snapshot.data!.data![index].data!.body
-                                    .toString(),
-                                style: GoogleFonts.cairo(fontSize: 16.sp),
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      controller.acceptFollow(snapshot
-                                          .data!.data![index].data!.userId
-                                          .toString());
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: AppColor.primaryColor),
-                                    child: Text(
-                                      "accept",
-                                      style: GoogleFonts.cairo(
-                                          fontSize: 15.sp, color: Colors.white),
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    controller.refreshData();
+                  },
+                  child: ListView.separated(
+                      scrollDirection: Axis.vertical,
+                      separatorBuilder: (context, index) => const Divider(),
+                      itemCount: snapshot.data!.data!.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: 115.h,
+                          margin: const EdgeInsets.only(top: 10),
+                          child: Card(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      CircleAvatar(
+                                        backgroundImage: NetworkImage(snapshot
+                                            .data!.data![index].data!.image
+                                            .toString()),
+                                        radius: 26.r,
+                                      ),
+                                      SizedBox(
+                                        width: 10.w,
+                                      ),
+                                      Text(
+                                        snapshot.data!.data![index].data!.body
+                                            .toString(),
+                                        style: GoogleFonts.cairo(
+                                            fontSize: 14.3.sp,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ]),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        controller.acceptFollow(snapshot
+                                            .data!.data![index].data!.userId
+                                            .toString());
+                                        snapshot.data!.data!.removeAt(index);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppColor.primaryColor),
+                                      child: Text(
+                                        "accept",
+                                        style: GoogleFonts.cairo(
+                                            fontSize: 16.sp,
+                                            color: Colors.white),
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      controller.rejectFollow(snapshot
-                                          .data!.data![index].data!.userId
-                                          .toString());
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            AppColor.backgroundColor),
-                                    child: Text(
-                                      "reject",
-                                      style: GoogleFonts.cairo(
-                                          fontSize: 15.sp,
-                                          color: AppColor.primaryColor),
+                                    SizedBox(
+                                      width: 20.w,
                                     ),
-                                  )
-                                ],
-                              )
-                            ],
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        controller.rejectFollow(snapshot
+                                            .data!.data![index].data!.userId
+                                            .toString());
+
+                                        // snapshot.data!.data!.removeAt(index);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              AppColor.backgroundColor),
+                                      child: Text(
+                                        "reject",
+                                        style: GoogleFonts.cairo(
+                                            fontSize: 16.sp,
+                                            color: AppColor.primaryColor),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      );
-                    });
+                        );
+                      }),
+                );
               } else {
                 return const Text("no data");
               }

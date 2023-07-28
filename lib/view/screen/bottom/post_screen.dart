@@ -15,7 +15,7 @@ class PostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(PostController());
     return Scaffold(
-      backgroundColor: AppColor.primaryColor.withOpacity(0.1),
+      backgroundColor: AppColor.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColor.primaryColor.withOpacity(0.1),
         elevation: 0,
@@ -56,8 +56,7 @@ class PostScreen extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(
-                        AppPreferences().userImage),
+                    backgroundImage: NetworkImage(AppPreferences().userImage),
                     radius: 25,
                   ),
                   SizedBox(
@@ -66,11 +65,11 @@ class PostScreen extends StatelessWidget {
                   Text(
                     AppPreferences().name,
                     style: GoogleFonts.cairo(
-                        fontSize: 18.sp, fontWeight: FontWeight.bold),
+                        fontSize: 16.5.sp, fontWeight: FontWeight.w700),
                   ),
                   const Spacer(),
                   SizedBox(
-                    width: 150.w,
+                    width: 140.w,
                     child: CustomDropdown(
                       hintText: 'Category Type',
                       listItemStyle:
@@ -94,7 +93,6 @@ class PostScreen extends StatelessWidget {
               TextFormField(
                 controller: controller.titleController,
                 style: GoogleFonts.cairo(fontSize: 18.sp),
-                
                 cursorColor: AppColor.primaryColor,
                 decoration: InputDecoration.collapsed(
                     hintText: "Title of the Post ?",
@@ -112,12 +110,11 @@ class PostScreen extends StatelessWidget {
                     hintText: "What's on your mind?",
                     hintStyle: GoogleFonts.cairo(fontSize: 18.sp)),
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              // SizedBox(
+              //   height: 10.h,
+              // ),
               Row(
                 children: [
-                  
                   InkWell(
                     onTap: () {
                       controller.getImage();

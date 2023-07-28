@@ -8,6 +8,8 @@ import 'package:world_peace/model/follower.dart';
 import 'package:world_peace/model/profile.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
 
+import '../../model/following.dart';
+
 class MyProfileController extends GetxController {
   Profile profile = Profile();
   List<Posts> posts = [];
@@ -16,7 +18,7 @@ class MyProfileController extends GetxController {
   bool isLoading = false;
   HomeController homeController = Get.find();
   List<Follower> allFollower = [];
-  List<Follower> allFollowing = [];
+  List<Following> allFollowing = [];
 
   getAllFollower() async {
     allFollower = await ApiFollowController().allFollower();

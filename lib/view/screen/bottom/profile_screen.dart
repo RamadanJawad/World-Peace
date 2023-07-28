@@ -117,6 +117,7 @@ class ProfilePage extends StatelessWidget {
                                         index: index,
                                         userId: controller.profile.user!.id!,
                                         name: controller.profile.user!.name!,
+                                        category: controller.posts[index].category!.name!,
                                         createdAtFormatted: controller
                                             .posts[index].createdAtFormatted!,
                                         postId: controller.posts[index].id!,
