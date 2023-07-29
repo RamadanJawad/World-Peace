@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:world_peace/controller/util/chat_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -8,6 +10,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ChatController());
     return Scaffold(
       backgroundColor: AppColor.primaryColor.withOpacity(0.1),
       appBar: AppBar(

@@ -20,6 +20,20 @@ class MyProfileController extends GetxController {
   List<Follower> allFollower = [];
   List<Following> allFollowing = [];
 
+  refreshData() async {
+    posts.clear();
+    profile = await ApiProfileController()
+        .profilePage(idUser: AppPreferences().userId!);
+    posts = profile.posts!;
+    isLoading = true;
+    allFollowing.clear();
+    allFollowing = await ApiFollowController().allFollowing();
+    allFollower.clear();
+    allFollower = await ApiFollowController().allFollower();
+
+    update();
+  }
+
   getAllFollower() async {
     allFollower = await ApiFollowController().allFollower();
     update();
@@ -27,11 +41,6 @@ class MyProfileController extends GetxController {
 
   getAllFollowing() async {
     allFollowing = await ApiFollowController().allFollowing();
-    update();
-  }
-
-  refreshData() async {
-    await ApiProfileController().profilePage(idUser: AppPreferences().userId!);
     update();
   }
 
