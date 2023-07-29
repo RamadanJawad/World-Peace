@@ -5,12 +5,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/my_profile_controller.dart';
 import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/constant/color.dart';
+import 'package:world_peace/core/constant/image.dart';
 import 'package:world_peace/model/edit_profile.dart';
 import 'package:world_peace/view/screen/auth/edit_profile_screen.dart';
+import 'package:world_peace/view/screen/utils/comment_screen.dart';
 import 'package:world_peace/view/widget/bottom/custom_dialog.dart';
 import 'package:world_peace/view/widget/bottom/shimmer_home.dart';
 import '../../../core/api/api_profile.dart';
-import '../../widget/home/feature_comment.dart';
 import '../../widget/home/feature_like.dart';
 import '../../widget/home/feature_post.dart';
 
@@ -144,7 +145,8 @@ class MyProfileScreen extends StatelessWidget {
                                     children: [
                                       FeaturePost(
                                         images: controller.posts[index].images!,
-                                        category: controller.posts[index].category!.name!,
+                                        category: controller
+                                            .posts[index].category!.name!,
                                         index: index,
                                         userId: controller.profile.user!.id!,
                                         name: controller.profile.user!.name!,
@@ -174,11 +176,38 @@ class MyProfileScreen extends StatelessWidget {
                                             },
                                           ),
                                           const Spacer(),
-                                          FeatureComment(
-                                              index: index,
-                                              postId: controller
-                                                  .posts[index].id!
-                                                  .toInt()),
+                                          Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  Get.to(
+                                                      () => CommentsScreen(
+                                                            postId: controller
+                                                                .posts[index]
+                                                                .id!,
+                                                            index: index,
+                                                          ),
+                                                      transition:
+                                                          Transition.fade);
+                                                },
+                                                child: const ImageIcon(
+                                                  AssetImage(ImageUrl.comment),
+                                                  color: Color(0xffb5b5c4),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 5.w,
+                                              ),
+                                              Text(
+                                                controller
+                                                    .posts[index].commentsCount!
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                  color: Color(0xffb5b5c4),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ],

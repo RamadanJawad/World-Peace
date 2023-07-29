@@ -18,7 +18,7 @@ class AddComment extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: Column(
           children: [
-            Divider(),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -36,7 +36,7 @@ class AddComment extends StatelessWidget {
                     controller: controller.comment,
                     maxLines: 2,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(0),
+                      contentPadding: const EdgeInsets.all(10),
                       labelText: " write...",
                       floatingLabelStyle:
                           GoogleFonts.ubuntu(color: AppColor.primaryColor),

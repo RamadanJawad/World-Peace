@@ -14,6 +14,7 @@ class ApiSetting {
   static const String editProfile = "${baseUrl}profile/update";
   static const String allFollowing = "${baseUrl}follows/all/following";
   static const String allFollower = "${baseUrl}follows/all/follower";
+  static const String userChat="${baseUrl}chat/users";
 
   static String readPostByPage(int id) {
     return "${baseUrl}posts/all?page=$id";

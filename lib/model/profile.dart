@@ -16,11 +16,11 @@ class Profile {
     friend = json['friend'];
     followingCount = json['following_count'];
     followerCount = json['follower_count'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     if (json['posts'] != null) {
       posts = <Posts>[];
       json['posts'].forEach((v) {
-        posts!.add(new Posts.fromJson(v));
+        posts!.add(Posts.fromJson(v));
       });
     }
   }
@@ -85,7 +85,6 @@ class Posts {
         : null;
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
-
 }
 
 class Category {
