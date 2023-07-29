@@ -39,3 +39,4 @@ class NotificationScreen extends StatelessWidget {
         body: const BodyNotification());
   }
 }
+

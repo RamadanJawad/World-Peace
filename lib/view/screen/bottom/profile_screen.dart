@@ -8,7 +8,6 @@ import 'package:world_peace/core/constant/image.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/view/screen/utils/comment_screen.dart';
 import 'package:world_peace/view/widget/bottom/shimmer_home.dart';
-import '../../widget/home/feature_comment.dart';
 import '../../widget/home/feature_like.dart';
 import '../../widget/home/feature_post.dart';
 

@@ -16,8 +16,7 @@ class BodyNotification extends StatelessWidget {
       builder: (controller) {
         return SizedBox(
           child: FutureBuilder(
-            future: ApiNotificationController()
-                .readNotification(notifications: controller.allNotification),
+            future: ApiNotificationController().readNotification(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.none) {
                 return const Center(
@@ -82,7 +81,6 @@ class BodyNotification extends StatelessWidget {
                                         controller.acceptFollow(snapshot
                                             .data!.data![index].data!.userId
                                             .toString());
-                                        snapshot.data!.data!.removeAt(index);
                                       },
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor:
