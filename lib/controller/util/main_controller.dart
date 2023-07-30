@@ -6,7 +6,6 @@ import 'package:world_peace/view/screen/bottom/home_screen.dart';
 import 'package:world_peace/view/screen/bottom/myProfile_screen.dart';
 import 'package:world_peace/view/screen/bottom/notification_screen.dart';
 import 'package:world_peace/view/screen/bottom/post_screen.dart';
-import 'package:world_peace/view/screen/bottom/profile_screen.dart';
 
 class MainController extends GetxController {
   PersistentTabController persistentTabController=PersistentTabController(initialIndex: 0) ;

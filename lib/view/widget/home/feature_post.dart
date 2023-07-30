@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/home_controller.dart';
+import 'package:world_peace/controller/util/profile_controller.dart';
 import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/function/pop_menu.dart';
 import 'package:world_peace/core/shared/save_data.dart';
+import 'package:world_peace/view/screen/bottom/myProfile_screen.dart';
 import 'package:world_peace/view/screen/bottom/profile_screen.dart';
 
 class FeaturePost extends StatelessWidget {
@@ -53,29 +55,60 @@ class FeaturePost extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    InkWell(
-                      onTap: () {
-                        CacheData cacheData = CacheData();
-                        cacheData.setUserId(userId);
-                        Get.to(
-                          () => const ProfilePage(),
-                        );
-                      },
-                      child: Text(
-                        name.toString(),
-                        style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
-                      ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            if (userId == AppPreferences().userId!) {
+                              Get.to(
+                                () => const MyProfileScreen(),
+                              );
+                            } else {
+                              CacheData cacheData = CacheData();
+                              cacheData.setUserId(userId);
+                              Get.to(
+                                () => const ProfilePage(),
+                              );
+                            }
+                          },
+                          child: Text(
+                            name.toString(),
+                            style:
+                                GoogleFonts.cairo(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        // InkWell(
+                        //   onTap: () {},
+                        //   child: Visibility(
+                        //       visible: userId == AppPreferences().userId
+                        //           ? false
+                        //           : true,
+                        //       child: GetBuilder<ProfileController>(
+                        //         builder: (controller) => Text(
+                        //           controller.profile.friend == 2
+                        //               ? "You Send Request"
+                        //               : controller.profile.friend == 1
+                        //                   ? "Unfollow"
+                        //                   : "follow",
+                        //           style: GoogleFonts.montserrat(
+                        //               color: AppColor.primaryColor,
+                        //               fontSize: 13),
+                        //         ),
+                        //       )),
+                        // )
+                      ],
                     ),
                     Text(
                       createdAtFormatted.toString(),
-                      style: GoogleFonts.montserrat(color: Colors.grey),
+                      style: GoogleFonts.montserrat(
+                          color: Colors.grey, fontSize: 13),
                     ),
                   ],
                 ),
                 const Spacer(),
                 Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10).r,
                     border: Border.all(
@@ -88,6 +121,10 @@ class FeaturePost extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
+                  width: AppPreferences().userId == userId ? 5 : null,
+                ),
+                SizedBox(
+                  width: AppPreferences().userId == userId ? 15 : null,
                   child: AppPreferences().userId == userId
                       ? showPopMenu(
                           onSelected: (select) =>

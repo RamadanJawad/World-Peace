@@ -7,6 +7,8 @@ import 'package:world_peace/controller/util/notification_controller.dart';
 import 'package:world_peace/core/api/api_notification.dart';
 import 'package:world_peace/core/constant/color.dart';
 
+import '../../../core/constant/image.dart';
+
 class BodyNotification extends StatelessWidget {
   const BodyNotification({super.key});
 
@@ -14,7 +16,11 @@ class BodyNotification extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<NotificationController>(
       builder: (controller) {
-        return SizedBox(
+        return Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(ImageUrl.backgroundImage), fit: BoxFit.fill),
+          ),
           child: FutureBuilder(
             future: ApiNotificationController().readNotification(),
             builder: (context, snapshot) {
@@ -41,10 +47,13 @@ class BodyNotification extends StatelessWidget {
                           height: 115.h,
                           margin: const EdgeInsets.only(top: 10),
                           child: Card(
+                            color: Color.fromARGB(255, 255, 255, 255),
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
+                            shadowColor: Color.fromARGB(255, 218, 217, 217),
+                            elevation: 5,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -68,7 +77,7 @@ class BodyNotification extends StatelessWidget {
                                         snapshot.data!.data![index].data!.body
                                             .toString(),
                                         style: GoogleFonts.cairo(
-                                            fontSize: 14.3.sp,
+                                            fontSize: 14.sp,
                                             fontWeight: FontWeight.w600),
                                       ),
                                     ]),

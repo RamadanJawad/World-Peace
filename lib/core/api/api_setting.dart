@@ -15,6 +15,7 @@ class ApiSetting {
   static const String allFollowing = "${baseUrl}follows/all/following";
   static const String allFollower = "${baseUrl}follows/all/follower";
   static const String userChat="${baseUrl}chat/users";
+  static const String sendMessage="${baseUrl}chat/send";
 
   static String readPostByPage(int id) {
     return "${baseUrl}posts/all?page=$id";
@@ -54,6 +55,10 @@ class ApiSetting {
 
   static String follow(String userId) {
     return "${baseUrl}follows/follow";
+  }
+
+  static String singleUser(String id){
+    return "${baseUrl}chat/single/$id";
   }
 
   static String unFollow(String userId) {

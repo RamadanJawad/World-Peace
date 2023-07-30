@@ -17,4 +17,5 @@ class ImageUrl {
   static const String face = "assets/images/face.png";
   static const String ios = "assets/images/ios.png";
   static const String cam = "assets/images/cam.png";
+  static const String backgroundImage = "assets/images/background.jpg";
 }

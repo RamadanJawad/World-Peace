@@ -44,6 +44,14 @@ class MyProfileController extends GetxController {
     update();
   }
 
+  Future unFollow(String id) async {
+    bool response = await ApiFollowController().unFollow(id);
+    if (response) {
+      refreshData();
+      update();
+    }
+  }
+
   Future readData() async {
     profile = await ApiProfileController()
         .profilePage(idUser: AppPreferences().userId!);

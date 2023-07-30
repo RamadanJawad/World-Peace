@@ -17,11 +17,11 @@ class NotificationScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppColor.primaryColor.withOpacity(0.1),
         appBar: AppBar(
-          backgroundColor: AppColor.primaryColor.withOpacity(0.1),
+          backgroundColor: AppColor.primaryColor,
           elevation: 0,
           title: Text(
             "Notifications",
-            style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.black),
+            style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.white),
           ),
           actions: [
             IconButton(
@@ -30,7 +30,7 @@ class NotificationScreen extends StatelessWidget {
               },
               icon: const Icon(
                 CupertinoIcons.search,
-                color: Colors.black,
+                color: Colors.white,
               ),
             )
           ],

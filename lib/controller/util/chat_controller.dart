@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:world_peace/core/api/apr_chat.dart';
+import 'package:world_peace/core/api/api_chat.dart';
 import 'package:world_peace/model/user_chat.dart';
 
 class ChatController extends GetxController {
@@ -7,6 +7,7 @@ class ChatController extends GetxController {
 
   Future<void> readData() async {
     userChat = await ApiChatController().readUserChat();
+    print(userChat.length);
     update();
   }
 

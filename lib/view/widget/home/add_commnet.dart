@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/controller/util/comment_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/shared/save_data.dart';
+import 'package:world_peace/view/screen/bottom/myProfile_screen.dart';
 
 class AddComment extends StatelessWidget {
   final int postId;
@@ -22,9 +23,15 @@ class AddComment extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(AppPreferences().userImage),
-                  maxRadius: 25,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const MyProfileScreen(),
+                        transition: Transition.fade);
+                  },
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(AppPreferences().userImage),
+                    maxRadius: 25,
+                  ),
                 ),
                 SizedBox(
                   width: 3.w,

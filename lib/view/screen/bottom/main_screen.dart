@@ -16,7 +16,7 @@ class MainScreen extends StatelessWidget {
     return PersistentTabView(
       context,
       controller: controller.persistentTabController,
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 245, 245, 245),
       navBarStyle: NavBarStyle.style18,
       confineInSafeArea: true,
       screens: controller.screens,

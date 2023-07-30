@@ -6,6 +6,7 @@ import 'package:world_peace/controller/util/search_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/view/widget/utils/custom_field.dart';
 import '../../../core/cache/cache.dart';
+import '../../../core/constant/image.dart';
 import '../bottom/profile_screen.dart';
 
 class SearchUser extends StatelessWidget {
@@ -27,66 +28,74 @@ class SearchUser extends StatelessWidget {
         body: GetBuilder<SearchCategoryController>(
           init: SearchCategoryController(),
           builder: (controller) {
-            return Column(
-              children: [
-                customField(controller.searchController, "search of user",
-                    (value) {
-                  controller.onChange(value);
-                }),
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: controller.searchUser.isNotEmpty
-                        ? ListView.separated(
-                            itemCount: controller.searchUser.length,
-                            separatorBuilder: (context, index) =>
-                                const Divider(),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundImage: NetworkImage(controller
-                                            .searchUser[index].image!
-                                            .toString()),
-                                        radius: 26.r,
-                                      ),
-                                      SizedBox(
-                                        width: 10.w,
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          CacheData cacheData = CacheData();
-                                          cacheData.setUserId(
-                                              controller.searchUser[index].id!);
-                                          Get.to(() => const ProfilePage(),
-                                              transition: Transition.fade);
-                                        },
-                                        child: Text(
-                                          controller.searchUser[index].name!,
-                                          style: GoogleFonts.cairo(
-                                              fontSize: 20.sp,
-                                              color: Colors.black),
+            return Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(ImageUrl.backgroundImage),
+                    fit: BoxFit.fill),
+              ),
+              child: Column(
+                children: [
+                  customField(controller.searchController, "search of user",
+                      (value) {
+                    controller.onChange(value);
+                  }),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: controller.searchUser.isNotEmpty
+                          ? ListView.separated(
+                              itemCount: controller.searchUser.length,
+                              separatorBuilder: (context, index) =>
+                                  const Divider(),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          backgroundImage: NetworkImage(
+                                              controller
+                                                  .searchUser[index].image!
+                                                  .toString()),
+                                          radius: 26.r,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            })
-                        : Center(
-                            child: Text(
-                              "No User Found!",
-                              style: GoogleFonts.cairo(
-                                  fontSize: 20.sp, color: Colors.black),
+                                        SizedBox(
+                                          width: 10.w,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            CacheData cacheData = CacheData();
+                                            cacheData.setUserId(controller
+                                                .searchUser[index].id!);
+                                            Get.to(() => const ProfilePage(),
+                                                transition: Transition.fade);
+                                          },
+                                          child: Text(
+                                            controller.searchUser[index].name!,
+                                            style: GoogleFonts.cairo(
+                                                fontSize: 20.sp,
+                                                color: Colors.black),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                );
+                              })
+                          : Center(
+                              child: Text(
+                                "No User Found!",
+                                style: GoogleFonts.cairo(
+                                    fontSize: 20.sp, color: Colors.black),
+                              ),
                             ),
-                          ),
-                  ),
-                )
-              ],
+                    ),
+                  )
+                ],
+              ),
             );
           },
         ),

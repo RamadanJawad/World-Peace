@@ -6,12 +6,12 @@ Shimmer getShimmerLoading() {
   return Shimmer.fromColors(
     baseColor: Colors.grey.withOpacity(0.1),
     highlightColor: Colors.grey.withOpacity(0.2),
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6),
+    child: const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 6),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             ShimmerWidget(),
             ShimmerWidget(),
             ShimmerWidget(),

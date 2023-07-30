@@ -13,8 +13,12 @@ class ProfileController extends GetxController {
   bool response = false;
   bool isLoading = false;
   HomeController homeController = Get.find();
+
   refreshData(int userId) async {
-    await ApiProfileController().profilePage(idUser: userId);
+    posts.clear();
+    profile = await ApiProfileController().profilePage(idUser: userId);
+    posts = profile.posts!;
+    isLoading = true;
     update();
   }
 
@@ -43,6 +47,14 @@ class ProfileController extends GetxController {
 
   Future removeFollow(String id) async {
     bool response = await ApiFollowController().removeFollow(id);
+    if (response) {
+      readData();
+      update();
+    }
+  }
+
+  Future unFollow(String id) async {
+    bool response = await ApiFollowController().unFollow(id);
     if (response) {
       readData();
       update();

@@ -8,6 +8,9 @@ import 'package:world_peace/core/function/update_dialog.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/model/commentes.dart';
 
+import '../../../core/cache/cache.dart';
+import '../../screen/bottom/profile_screen.dart';
+
 class DetailsComment extends StatelessWidget {
   final AsyncSnapshot<Comments> snapshot;
   final int postId;
@@ -48,11 +51,22 @@ class DetailsComment extends StatelessWidget {
                           SizedBox(
                             width: 10.w,
                           ),
-                          Text(
-                            snapshot.data!.data!.data![index].user!.name
-                                .toString(),
-                            style:
-                                GoogleFonts.cairo(fontWeight: FontWeight.bold),
+                          InkWell(
+                            onTap: () {
+                              CacheData cacheData = CacheData();
+                              cacheData.setUserId(
+                                  snapshot.data!.data!.data![index].user!.id!);
+                              Get.to(
+                                () => const ProfilePage(),
+                                transition: Transition.fade,
+                              );
+                            },
+                            child: Text(
+                              snapshot.data!.data!.data![index].user!.name
+                                  .toString(),
+                              style: GoogleFonts.cairo(
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                           const Spacer(),
                           SizedBox(

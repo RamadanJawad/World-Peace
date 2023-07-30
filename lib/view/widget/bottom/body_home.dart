@@ -19,7 +19,14 @@ class BodyHome extends StatelessWidget {
     return GetBuilder<HomeController>(
       builder: (controller) {
         return Container(
+            height: double.infinity,
+            width: double.infinity,
             margin: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImageUrl.backgroundImage),
+                  fit: BoxFit.fill),
+            ),
             child: RefreshIndicator(
                 backgroundColor: Colors.white,
                 color: AppColor.primaryColor,
@@ -35,13 +42,23 @@ class BodyHome extends StatelessWidget {
                         itemBuilder: (context, index) {
                           if (index < controller.post.length) {
                             return Container(
-                              margin: const EdgeInsets.all(5),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 3, vertical: 6),
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(10).r,
                                 border: Border.all(
-                                    color: const Color(0xffe9e9e9), width: 1.w),
+                                    color: const Color.fromARGB(
+                                        255, 218, 217, 217),
+                                    width: 1.w),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Color.fromARGB(255, 218, 217, 217),
+                                    offset: Offset(1, 2),
+                                    blurRadius: 3,
+                                  ),
+                                ],
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,65 +75,59 @@ class BodyHome extends StatelessWidget {
                                         controller.post[index].description!,
                                     title: controller.post[index].title!,
                                     image: controller.post[index].user!.image!,
-                                    category: controller.post[index].category!.name!,
+                                    category:
+                                        controller.post[index].category!.name!,
                                   ),
                                   const Divider(),
-                                  IntrinsicHeight(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        FeatureLike(
-                                          postId: controller.post[index].id!,
-                                          likeCount: controller
-                                              .post[index].likesCount!,
-                                          likePost:
-                                              controller.post[index].likesPost!,
-                                          index: controller.post[index].id!,
-                                          onTap: () {
-                                            controller.addLike(controller
-                                                .post[index].id
-                                                .toString());
-                                          },
-                                        ),
-                                        const VerticalDivider(
-                                          color: Colors.grey,
-                                          width: 1,
-                                          thickness: 1,
-                                        ),
-                                        Row(
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                Get.to(
-                                                    () => CommentsScreen(
-                                                          postId: controller
-                                                              .post[index].id!,
-                                                          index: index,
-                                                        ),
-                                                    transition:
-                                                        Transition.fade);
-                                              },
-                                              child: const ImageIcon(
-                                                AssetImage(ImageUrl.comment),
-                                                color: Color(0xffb5b5c4),
-                                              ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      FeatureLike(
+                                        postId: controller.post[index].id!,
+                                        likeCount: controller
+                                            .post[index].likesCount!,
+                                        likePost:
+                                            controller.post[index].likesPost!,
+                                        index: controller.post[index].id!,
+                                        onTap: () {
+                                          controller.addLike(controller
+                                              .post[index].id
+                                              .toString());
+                                        },
+                                      ),
+                                      Row(
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              Get.to(
+                                                  () => CommentsScreen(
+                                                        postId: controller
+                                                            .post[index].id!,
+                                                        index: index,
+                                                      ),
+                                                  transition:
+                                                      Transition.fade);
+                                            },
+                                            child: const ImageIcon(
+                                              AssetImage(ImageUrl.comment),
+                                              color: Color(0xffb5b5c4),
                                             ),
-                                            SizedBox(
-                                              width: 5.w,
+                                          ),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Text(
+                                            controller
+                                                .post[index].commentsCount!
+                                                .toString(),
+                                            style: const TextStyle(
+                                              color: Color(0xffb5b5c4),
                                             ),
-                                            Text(
-                                              controller
-                                                  .post[index].commentsCount!
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                color: Color(0xffb5b5c4),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
