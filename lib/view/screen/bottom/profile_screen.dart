@@ -40,70 +40,150 @@ class ProfilePage extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
+                          Stack(
+                            alignment: Alignment.topLeft,
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                alignment: Alignment.topCenter,
+                                height: 70.h,
+                                width: double.infinity,
+                                decoration: const BoxDecoration(
+                                  color: AppColor.primaryColor,
+                                ),
+                              ),
+                              Positioned(
+                                top: 30.h,
+                                left: 10.h,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 40.r,
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(controller
+                                        .profile.user!.image!
+                                        .toString()),
+                                    radius: 35.r,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Container(
                             width: double.infinity,
-                            height: 220.h,
-                            color: AppColor.primaryColor,
+                            height: 150.h,
+                            margin: const EdgeInsets.only(
+                                left: 15, top: 5, right: 15),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(controller
-                                      .profile.user!.image!
-                                      .toString()),
-                                  radius: 35.r,
-                                ),
-                                SizedBox(
-                                  height: 5.h,
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Visibility(
+                                    visible: controller.profile.user!.id ==
+                                            AppPreferences().userId
+                                        ? false
+                                        : true,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                              side: BorderSide(
+                                                  color: AppColor.primaryColor,
+                                                  width: 0.5.w),
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          backgroundColor: Colors.white,
+                                          foregroundColor:
+                                              AppColor.primaryColor),
+                                      onPressed: controller.profile.friend == 2
+                                          ? () async {
+                                              await controller.removeFollow(
+                                                  controller.cacheData
+                                                      .getUserId()
+                                                      .toString());
+                                            }
+                                          : controller.profile.friend == 1
+                                              ? () async {
+                                                  await controller.unFollow(
+                                                      controller.cacheData
+                                                          .getUserId()
+                                                          .toString());
+                                                }
+                                              : () async {
+                                                  await controller.sendFollow(
+                                                      controller.cacheData
+                                                          .getUserId()
+                                                          .toString());
+                                                },
+                                      child: Text(
+                                        controller.profile.friend == 2
+                                            ? "You Send Request"
+                                            : controller.profile.friend == 1
+                                                ? "Unfollow"
+                                                : "follow",
+                                        style:
+                                            GoogleFonts.cairo(fontSize: 17.sp),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 Text(
                                   controller.profile.user!.name!.toString(),
                                   style: GoogleFonts.cairo(
-                                      fontSize: 18.sp, color: Colors.white),
+                                      fontSize: 20.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   controller.profile.user!.email!.toString(),
                                   style: GoogleFonts.cairo(
-                                      fontSize: 17.sp, color: Colors.white),
-                                ),
-                                Visibility(
-                                  visible: controller.profile.user!.id ==
-                                          AppPreferences().userId
-                                      ? false
-                                      : true,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        elevation: 0,
-                                        backgroundColor: Colors.white,
-                                        foregroundColor: AppColor.primaryColor),
-                                    onPressed: controller.profile.friend == 2
-                                        ? () async {
-                                            await controller.removeFollow(
-                                                controller.cacheData
-                                                    .getUserId()
-                                                    .toString());
-                                          }
-                                        : controller.profile.friend == 1
-                                            ? () async {
-                                                await controller.unFollow(
-                                                    controller.cacheData
-                                                        .getUserId()
-                                                        .toString());
-                                              }
-                                            : () async {
-                                                await controller.sendFollow(
-                                                    controller.cacheData
-                                                        .getUserId()
-                                                        .toString());
-                                              },
-                                    child: Text(
-                                      controller.profile.friend == 2
-                                          ? "You Send Request"
-                                          : controller.profile.friend == 1
-                                              ? "Unfollow"
-                                              : "follow",
-                                      style: GoogleFonts.cairo(fontSize: 17.sp),
-                                    ),
+                                    fontSize: 18.sp,
+                                    color: Colors.grey,
                                   ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          controller.profile.followingCount
+                                              .toString(),
+                                          style: GoogleFonts.cairo(
+                                              fontSize: 17.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          " Following",
+                                          style: GoogleFonts.cairo(
+                                              fontSize: 17.sp,
+                                              color: Colors.black),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 15.w,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          controller.profile.followerCount
+                                              .toString(),
+                                          style: GoogleFonts.cairo(
+                                              fontSize: 17.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
+                                        Text(
+                                          " Followers",
+                                          style: GoogleFonts.cairo(
+                                              fontSize: 17.sp,
+                                              color: Colors.black),
+                                        )
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

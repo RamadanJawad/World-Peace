@@ -10,8 +10,8 @@ import 'package:world_peace/model/edit_profile.dart';
 import 'package:world_peace/view/screen/auth/edit_profile_screen.dart';
 import 'package:world_peace/view/screen/utils/comment_screen.dart';
 import 'package:world_peace/view/widget/bottom/custom_dialog.dart';
+import 'package:world_peace/view/widget/bottom/custom_setting.dart';
 import 'package:world_peace/view/widget/bottom/shimmer_home.dart';
-import '../../../core/api/api_profile.dart';
 import '../../widget/home/feature_like.dart';
 import '../../widget/home/feature_post.dart';
 
@@ -30,12 +30,11 @@ class MyProfileScreen extends StatelessWidget {
             centerTitle: true,
             actions: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: InkWell(
-                  child: const Icon(Icons.logout),
-                  onTap: () {
-                    ApiProfileController().logout();
-                  },
+                padding: const EdgeInsets.all(5.0),
+                child: SizedBox(
+                  child: showCustomPopMenu(
+                    onSelected: (select) => controller.onSelected(select),
+                  ),
                 ),
               )
             ],
@@ -53,39 +52,115 @@ class MyProfileScreen extends StatelessWidget {
                 child: controller.isLoading
                     ? Column(
                         children: [
+                          Stack(
+                            alignment: Alignment.topLeft,
+                            clipBehavior: Clip.none,
+                            children: [
+                              Container(
+                                alignment: Alignment.topCenter,
+                                height: 70.h,
+                                width: double.infinity,
+                                decoration: const BoxDecoration(
+                                  color: AppColor.primaryColor,
+                                ),
+                                
+                              ),
+                              Positioned(
+                                top: 30.h,
+                                left: 10.h,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.white,
+                                  radius: 40.r,
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(controller
+                                        .profile.user!.image!
+                                        .toString()),
+                                    radius: 35.r,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Container(
                             width: double.infinity,
-                            height: 220.h,
-                            color: AppColor.primaryColor,
+                            height: 150.h,
+                            margin: const EdgeInsets.only(
+                                left: 15, top: 5, right: 15),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(controller
-                                      .profile.user!.image!
-                                      .toString()),
-                                  radius: 35.r,
-                                ),
-                                SizedBox(
-                                  height: 5.h,
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        side: BorderSide(
+                                            color: AppColor.primaryColor,
+                                            width: 0.5.w),
+                                        backgroundColor: Colors.white,
+                                        foregroundColor: AppColor.primaryColor),
+                                    onPressed: () {
+                                      CacheData cacheData = CacheData();
+                                      cacheData.setEditProfileModel(
+                                          EditProfileModel(
+                                              mobile: controller
+                                                  .profile.user!.mobile,
+                                              email: controller
+                                                  .profile.user!.email!,
+                                              name: controller
+                                                  .profile.user!.name!,
+                                              imagePath: controller
+                                                  .profile.user!.image!));
+                                      Get.to(() => const EditProfile());
+                                    },
+                                    child: Text(
+                                      "Edit Profile",
+                                      style: GoogleFonts.cairo(fontSize: 17.sp),
+                                    ),
+                                  ),
                                 ),
                                 Text(
                                   controller.profile.user!.name!.toString(),
                                   style: GoogleFonts.cairo(
-                                      fontSize: 18.sp, color: Colors.white),
+                                      fontSize: 20.sp,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  controller.profile.user!.email!.toString(),
+                                  style: GoogleFonts.cairo(
+                                    fontSize: 18.sp,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     InkWell(
                                       onTap: () {
                                         showCustomDialog("Following",
                                             controller.allFollowing);
                                       },
-                                      child: Text(
-                                        "Following:${controller.profile.followingCount.toString()}",
-                                        style: GoogleFonts.cairo(
-                                            fontSize: 17.sp,
-                                            color: Colors.white),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            controller.profile.followingCount
+                                                .toString(),
+                                            style: GoogleFonts.cairo(
+                                                fontSize: 17.sp,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black),
+                                          ),
+                                          Text(
+                                            " Following",
+                                            style: GoogleFonts.cairo(
+                                                fontSize: 17.sp,
+                                                color: Colors.black),
+                                          )
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -96,45 +171,33 @@ class MyProfileScreen extends StatelessWidget {
                                         showCustomDialog(
                                             "Follower", controller.allFollower);
                                       },
-                                      child: Text(
-                                        "Followers:${controller.profile.followerCount.toString()}",
-                                        style: GoogleFonts.cairo(
-                                            fontSize: 17.sp,
-                                            color: Colors.white),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            controller.profile.followerCount
+                                                .toString(),
+                                            style: GoogleFonts.cairo(
+                                                fontSize: 17.sp,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black),
+                                          ),
+                                          Text(
+                                            " Followers",
+                                            style: GoogleFonts.cairo(
+                                                fontSize: 17.sp,
+                                                color: Colors.black),
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ],
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      elevation: 0,
-                                      backgroundColor: Colors.white,
-                                      foregroundColor: AppColor.primaryColor),
-                                  onPressed: () {
-                                    CacheData cacheData = CacheData();
-                                    cacheData.setEditProfileModel(
-                                        EditProfileModel(
-                                            mobile:
-                                                controller.profile.user!.mobile,
-                                            email:
-                                                controller.profile.user!.email!,
-                                            name:
-                                                controller.profile.user!.name!,
-                                            imagePath: controller
-                                                .profile.user!.image!));
-                                    Get.to(() => const EditProfile());
-                                  },
-                                  child: Text(
-                                    "Edit Profile",
-                                    style: GoogleFonts.cairo(fontSize: 17.sp),
-                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Expanded(
                             child: Container(
-                              margin: const EdgeInsets.all(5),
+                              margin: const EdgeInsets.all(3),
                               width: double.infinity,
                               child: ListView.builder(
                                 itemCount: controller.posts.length,
@@ -149,7 +212,6 @@ class MyProfileScreen extends StatelessWidget {
                                               255, 218, 217, 217),
                                           offset: Offset(1, 2),
                                           blurRadius: 3,
-// Shadow position
                                         ),
                                       ],
                                       color: Colors.white,

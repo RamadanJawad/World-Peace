@@ -23,7 +23,7 @@ void showCustomDialog(String title, List data) {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 return Container(
-                  margin: EdgeInsets.all(5),
+                  margin: const EdgeInsets.all(5),
                   child: Column(
                     children: [
                       Row(
@@ -52,7 +52,7 @@ void showCustomDialog(String title, List data) {
                                   fontWeight: FontWeight.w600),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           ElevatedButton(
                             onPressed: () {
                               controller
