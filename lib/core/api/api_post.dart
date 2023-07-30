@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/model/category.dart';
-import 'package:world_peace/model/post.dart';
+import 'package:world_peace/features/post/model/category.dart';
+import 'package:world_peace/features/home/model/post.dart';
 
 class ApiPostController with ApiHelper {
   Future<bool> createPost({

@@ -1,6 +1,6 @@
 class FieldValidator {
   String? validateEmail(String email) {
-    if (email == null || email.isEmpty) {
+    if (email.isEmpty) {
       return "Please Enter Email";
     }
     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(email)) {

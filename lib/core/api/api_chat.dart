@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
-import 'package:world_peace/model/message.dart';
-import 'package:world_peace/model/user_chat.dart';
+import 'package:world_peace/features/chat/model/message.dart';
+import 'package:world_peace/features/chat/model/user_chat.dart';
 import 'package:http/http.dart' as http;
 
 class ApiChatController with ApiHelper {

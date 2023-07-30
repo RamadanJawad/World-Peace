@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'package:http/http.dart';
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
-import 'package:world_peace/model/search_user.dart';
+import 'package:world_peace/features/search/model/search_user.dart';
 import 'package:http/http.dart' as http;
 
-import '../../model/post.dart';
+import '../../features/home/model/post.dart';
 
 class ApiSearch with ApiHelper {
   Future<List<SearchOfUser>> searchUser(String query) async {

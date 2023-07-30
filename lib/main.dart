@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/view/screen/auth/splash_screen.dart';
+import 'package:world_peace/features/splash/view/screen/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

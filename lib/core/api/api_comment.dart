@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
-import 'package:world_peace/model/commentes.dart';
+import 'package:world_peace/features/comments/model/commentes.dart';
 
 class ApiCommentController with ApiHelper {
   Future<Comments> readComments({required int postId}) async {

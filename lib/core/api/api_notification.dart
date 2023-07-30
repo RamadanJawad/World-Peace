@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:world_peace/core/api/api_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:world_peace/core/api/api_setting.dart';
-import 'package:world_peace/model/notification.dart';
+import 'package:world_peace/features/notifications/model/notification.dart';
 
 class ApiNotificationController with ApiHelper {
   Future<Notifications> readNotification() async {

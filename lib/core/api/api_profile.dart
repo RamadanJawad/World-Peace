@@ -5,8 +5,8 @@ import 'package:world_peace/core/api/api_helper.dart';
 import 'package:world_peace/core/api/api_setting.dart';
 import 'package:http/http.dart' as http;
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/model/profile.dart';
-import 'package:world_peace/view/screen/auth/login_screen.dart';
+import 'package:world_peace/features/profile/model/profile.dart';
+import 'package:world_peace/features/auth/view/screen/login_screen.dart';
 
 class ApiProfileController with ApiHelper {
   Future<Profile> profilePage({required idUser}) async {

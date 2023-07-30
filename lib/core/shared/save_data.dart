@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:world_peace/model/user.dart';
+import 'package:world_peace/features/auth/model/user.dart';
 
 class AppPreferences {
   static AppPreferences? _instance;

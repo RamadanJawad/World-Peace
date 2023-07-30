@@ -1,4 +1,4 @@
-import 'package:world_peace/model/edit_profile.dart';
+import 'package:world_peace/features/edit_profile/model/edit_profile.dart';
 
 class CacheData {
   static int userId = 0;

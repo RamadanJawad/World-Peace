@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_setting.dart';
-import 'package:world_peace/model/user.dart';
+import 'package:world_peace/features/auth/model/user.dart';
 import 'package:http/http.dart' as http;
 
 class ApiAuthController {

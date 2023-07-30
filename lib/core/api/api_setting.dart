@@ -1,5 +1,3 @@
-import 'package:world_peace/model/post.dart';
-
 class ApiSetting {
   ApiSetting._();
   static const String baseUrl =
