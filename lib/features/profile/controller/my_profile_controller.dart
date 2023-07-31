@@ -9,6 +9,7 @@ import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/shared/save_data.dart';
 import 'package:world_peace/core/widget/custom_snack_bar.dart';
+import 'package:world_peace/features/faqs/view/screen/faqs_screen.dart';
 import 'package:world_peace/features/profile/model/follower.dart';
 import 'package:world_peace/features/profile/model/profile.dart';
 import 'package:world_peace/features/home/controller/home_controller.dart';
@@ -88,6 +89,7 @@ class MyProfileController extends GetxController {
   void onSelected(select) {
     switch (select) {
       case 0:
+        Get.to(() => FAQScreen(), transition: Transition.fade);
         break;
       case 1:
         Get.defaultDialog(
@@ -117,8 +119,6 @@ class MyProfileController extends GetxController {
             ),
           ),
         );
-        break;
-      case 2:
         break;
     }
     update();
