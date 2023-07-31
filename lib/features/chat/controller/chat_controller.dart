@@ -7,7 +7,6 @@ class ChatController extends GetxController {
 
   Future<void> readData() async {
     userChat = await ApiChatController().readUserChat();
-    print(userChat.length);
     update();
   }
 

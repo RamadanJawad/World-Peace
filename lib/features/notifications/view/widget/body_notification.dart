@@ -83,9 +83,13 @@ class BodyNotification extends StatelessWidget {
                                 children: [
                                   ElevatedButton(
                                     onPressed: () {
-                                      controller.acceptFollow(snapshot
-                                          .data!.data![index].data!.userId
-                                          .toString());
+                                      controller.acceptFollow(
+                                          snapshot
+                                              .data!.data![index].data!.userId
+                                              .toString(),
+                                          snapshot.data!.data![index].id!
+                                              .toString());
+                                      controller.refreshData();
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: AppColor.primaryColor),
@@ -100,9 +104,14 @@ class BodyNotification extends StatelessWidget {
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
-                                      controller.rejectFollow(snapshot
-                                          .data!.data![index].data!.userId
-                                          .toString());
+                                      controller.rejectFollow(
+                                          snapshot
+                                              .data!.data![index].data!.userId
+                                              .toString(),
+                                          snapshot.data!.data![index].id!
+                                              .toString());
+
+                                      controller.refreshData();
                                     },
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor:
@@ -125,7 +134,11 @@ class BodyNotification extends StatelessWidget {
                       }),
                 );
               } else {
-                return const Text("no data");
+                return const Center(
+                    child: Text(
+                  "There are no notifications yet",
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                ));
               }
             },
           ),

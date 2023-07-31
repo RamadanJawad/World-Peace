@@ -1,7 +1,9 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/api/api_post.dart';
+import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/home/model/post.dart';
 
 class HomeController extends GetxController {
@@ -74,16 +76,18 @@ class HomeController extends GetxController {
     if (response) {
       Get.back();
       await refreshData();
-      Get.snackbar(
-        "Success",
-        "delete post Success",
-        backgroundColor: Colors.green,
-        margin: const EdgeInsets.all(10),
-      );
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.success,
+          title: "Success",
+          message: "The post has been successfully deleted");
       update();
     } else {
-      Get.snackbar("Error", "Failed delete post, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.failure,
+          title: "Failure",
+          message: "Failed delete post, try again");
     }
     update();
   }

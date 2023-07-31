@@ -10,10 +10,10 @@ Shimmer getShimmerChatLoading() {
       padding: const EdgeInsets.symmetric(horizontal: 6),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
+            Row(
               children: [
                 Container(
                   margin: const EdgeInsets.all(5),
@@ -39,7 +39,7 @@ Shimmer getShimmerChatLoading() {
                 ),
               ],
             ),
-            Column(
+            Row(
               children: [
                 Container(
                   margin: const EdgeInsets.all(5),
@@ -65,7 +65,7 @@ Shimmer getShimmerChatLoading() {
                 ),
               ],
             ),
-            Column(
+            Row(
               children: [
                 Container(
                   margin: const EdgeInsets.all(5),
@@ -91,7 +91,7 @@ Shimmer getShimmerChatLoading() {
                 ),
               ],
             ),
-            Column(
+            Row(
               children: [
                 Container(
                   margin: const EdgeInsets.all(5),
@@ -117,7 +117,7 @@ Shimmer getShimmerChatLoading() {
                 ),
               ],
             ),
-            Column(
+            Row(
               children: [
                 Container(
                   margin: const EdgeInsets.all(5),

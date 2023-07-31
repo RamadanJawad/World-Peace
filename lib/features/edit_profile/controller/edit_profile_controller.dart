@@ -1,7 +1,9 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/home/controller/home_controller.dart';
 import 'package:world_peace/features/profile/controller/my_profile_controller.dart';
 import 'package:world_peace/core/api/api_profile.dart';
@@ -53,13 +55,19 @@ class EditProfileController extends GetxController {
     if (profileResponse) {
       Get.back();
       update();
-      Get.snackbar("Success", "The data has been modified successfully",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.success,
+          title: "Success",
+          message: "The data has been modified successfully");
     } else {
       Get.back();
       update();
-      Get.snackbar("faild", "The data has not been modified ",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.failure,
+          title: "Failure",
+          message: "The data has not been modified,please try again");
     }
     profileController.readData();
     homeController.refreshData();

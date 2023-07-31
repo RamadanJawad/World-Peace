@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +8,7 @@ import 'package:world_peace/core/api/api_profile.dart';
 import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/shared/save_data.dart';
+import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/profile/model/follower.dart';
 import 'package:world_peace/features/profile/model/profile.dart';
 import 'package:world_peace/features/home/controller/home_controller.dart';
@@ -65,14 +67,18 @@ class MyProfileController extends GetxController {
       Get.back();
       await refreshData();
       await homeController.refreshData();
-      Get.snackbar(
-        "Success",
-        "delete post Success",
-        backgroundColor: Colors.green,
-        margin: const EdgeInsets.all(10),
-      );
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.success,
+          title: "Success",
+          message: "The post has been successfully deleted");
       update();
     } else {
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.failure,
+          title: "Failure",
+          message: "Failed delete post, try again");
       Get.snackbar("Error", "Failed delete post, try again",
           backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
     }

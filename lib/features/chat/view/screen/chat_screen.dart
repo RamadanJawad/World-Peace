@@ -8,6 +8,8 @@ import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/features/chat/view/screen/messages_screen.dart';
 import 'package:world_peace/features/chat/view/widget/shimmer_chat.dart';
 
+import '../../../../core/constant/image.dart';
+
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
@@ -15,54 +17,61 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(ChatController());
     return Scaffold(
-        backgroundColor: AppColor.primaryColor.withOpacity(0.1),
         appBar: AppBar(
-          backgroundColor: AppColor.primaryColor.withOpacity(0.1),
+          backgroundColor: AppColor.primaryColor,
           elevation: 0,
           centerTitle: true,
           title: Text(
             "Messages",
-            style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.black),
+            style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.white),
           ),
         ),
         body: GetBuilder<ChatController>(builder: (controller) {
           if (controller.userChat.isNotEmpty) {
-            return ListView.builder(
-                itemCount: controller.userChat.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      CacheData cacheData = CacheData();
-                      cacheData.setUserName(controller.userChat[index].name!);
-                      cacheData.setUserId(controller.userChat[index].id!);
-                      Get.to(() => const MessagesScreen());
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 5),
-                      padding: const EdgeInsets.all(5),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(controller.userChat[index].image!),
-                            radius: 25.r,
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          Text(
-                            controller.userChat[index].name!,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.cairo(
-                                textStyle: const TextStyle(
-                                    overflow: TextOverflow.ellipsis)),
-                          ),
-                        ],
+            return Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(ImageUrl.backgroundImage),
+                    fit: BoxFit.cover),
+              ),
+              child: ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
+                  itemCount: controller.userChat.length,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        CacheData cacheData = CacheData();
+                        cacheData.setUserName(controller.userChat[index].name!);
+                        cacheData.setUserId(controller.userChat[index].id!);
+                        Get.to(() => const MessagesScreen());
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 5),
+                        padding: const EdgeInsets.all(5),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  controller.userChat[index].image!),
+                              radius: 25.r,
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            Text(
+                              controller.userChat[index].name!,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.cairo(
+                                  textStyle: const TextStyle(
+                                      overflow: TextOverflow.ellipsis)),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                });
+                    );
+                  }),
+            );
           } else {
             return getShimmerChatLoading();
           }

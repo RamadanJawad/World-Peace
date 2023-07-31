@@ -17,7 +17,7 @@ class MessagesScreen extends StatelessWidget {
         builder: (controller) {
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: AppColor.primaryColor.withOpacity(0.1),
+              backgroundColor: AppColor.primaryColor,
               elevation: 0,
               leading: IconButton(
                 onPressed: () {
@@ -25,12 +25,12 @@ class MessagesScreen extends StatelessWidget {
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               title: Text(
                 controller.cacheData.getUserName(),
-                style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.black),
+                style: GoogleFonts.cairo(fontSize: 20.sp, color: Colors.white),
               ),
             ),
             body: Container(

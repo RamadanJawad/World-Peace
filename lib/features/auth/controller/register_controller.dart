@@ -1,6 +1,9 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_auth.dart';
+import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import '../view/screen/login_screen.dart';
 
 class SignUpController extends GetxController {
@@ -11,6 +14,12 @@ class SignUpController extends GetxController {
   GlobalKey<FormState> globalKey = GlobalKey();
 
   Future register() async {
+    Get.dialog(const Center(
+      child: CupertinoActivityIndicator(
+        radius: 20,
+        color: Colors.white,
+      ),
+    ));
     bool? response = await ApiAuthController().register(
       name: username.text,
       email: email.text,
@@ -18,13 +27,20 @@ class SignUpController extends GetxController {
       mobile: mobile.text,
     );
     if (response!) {
-      Get.snackbar("Created Account!",
-          "The account has been created successfully, login now",
-          backgroundColor: Colors.green);
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.success,
+          title: "Created Account!",
+          message: "The account has been created successfully, login now");
       Get.off(() => const LoginScreen());
     } else {
-      Get.snackbar("Error of Login", "login failed , please try again",
-          backgroundColor: Colors.red);
+      showCustomSnackBar(
+          context: Get.context!,
+          contentType: ContentType.failure,
+          title: "Error of Create Account",
+          message: "Create Account failed , please try again");
+      Get.back();
+      update();
     }
   }
 

@@ -20,11 +20,9 @@ class ApiFollowController with ApiHelper {
     }
   }
 
-  Future<bool> acceptFollow(String userId) async {
+  Future<bool> acceptFollow(String userId, String notificationId) async {
     var response = await http.post(Uri.parse(ApiSetting.acceptFollow(userId)),
-        body: {
-          "user_id": userId,
-        },
+        body: {"user_id": userId, "notification_id": notificationId},
         headers: headers);
     if (response.statusCode == 200) {
       return true;
@@ -33,11 +31,9 @@ class ApiFollowController with ApiHelper {
     }
   }
 
-  Future<bool> rejectFollow(String userId) async {
+  Future<bool> rejectFollow(String userId, String notificationId) async {
     var response = await http.post(Uri.parse(ApiSetting.rejectFollow(userId)),
-        body: {
-          "user_id": userId,
-        },
+        body: {"user_id": userId, "notification_id": notificationId},
         headers: headers);
     if (response.statusCode == 200) {
       return true;

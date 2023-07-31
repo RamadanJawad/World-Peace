@@ -11,6 +11,7 @@ class PostController extends GetxController {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   XFile? file;
+  String categoryId = "";
   String selectedItem = '';
   List<String> categories = ["All"];
   List<Categories> category = [];
@@ -19,7 +20,8 @@ class PostController extends GetxController {
   HomeController homeController = Get.find();
   MainController mainController = Get.find();
   getImage() async {
-    file = await imagePicker.pickImage(source: ImageSource.gallery);
+    file = await imagePicker.pickImage(
+        source: ImageSource.gallery, imageQuality: 1);
     update();
   }
 
@@ -28,12 +30,16 @@ class PostController extends GetxController {
     for (int i = 0; i < category.length; i++) {
       categories.add(category[i].name!.toString());
     }
-    print(categories);
     update();
   }
 
   onChange(select) {
     selectedItem = select;
+    for (int i = 0; i < category.length; i++) {
+      if (category[i].name.toString() == selectedItem.toString()) {
+        categoryId = category[i].id!.toString();
+      }
+    }
     update();
   }
 
@@ -49,14 +55,14 @@ class PostController extends GetxController {
       response = await ApiPostController().createPost(
           title: titleController.text,
           description: descriptionController.text,
-          category: "1",
+          category: categoryId,
           imageFile: file!.path.toString());
       update();
     } else {
       response = await ApiPostController().createPost(
         title: titleController.text,
         description: descriptionController.text,
-        category: "1",
+        category: categoryId,
         imageFile: "",
       );
     }

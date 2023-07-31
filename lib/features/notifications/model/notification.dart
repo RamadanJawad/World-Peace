@@ -22,17 +22,20 @@ class Notifications {
 }
 
 class ObjectData {
+  String? id;
   int? notifiableId;
   Data? data;
-  bool? readAt;
+  String? readAt;
 
   ObjectData({
+    this.id,
     this.notifiableId,
     this.data,
     this.readAt,
   });
 
   ObjectData.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     notifiableId = json['notifiable_id'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
     readAt = json['read_at'];

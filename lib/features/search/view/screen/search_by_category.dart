@@ -1,9 +1,11 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/search/controller/search_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/features/comments/view/screen/comment_screen.dart';
@@ -70,18 +72,22 @@ class SearchByCategory extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 7),
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (controller.selectedItem.isEmpty) {
                             Get.snackbar(
                                 "Error", "You must choose Category Type",
                                 backgroundColor: Colors.red,
                                 margin: const EdgeInsets.all(10));
-                          } else if (controller.post.isEmpty) {
-                            Get.snackbar("No data found", "",
-                                backgroundColor: Colors.red,
-                                margin: const EdgeInsets.all(10));
                           } else {
-                            controller.onTap();
+                            await controller.getCategoryPost();
+                            if (controller.post.isEmpty) {
+                              return showCustomSnackBar(
+                                  context: context,
+                                  contentType: ContentType.warning,
+                                  title: "Attention",
+                                  message:
+                                      "There are no current posts in this category");
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -99,7 +105,7 @@ class SearchByCategory extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: controller.isPressed
+                  child: controller.post.isNotEmpty
                       ? Container(
                           margin: const EdgeInsets.all(5),
                           width: double.infinity,
@@ -213,8 +219,6 @@ class SearchByCategory extends StatelessWidget {
                           ),
                         )
                       : const Center(child: Text("")))
-
-              // )
             ]),
           );
         },

@@ -59,7 +59,7 @@ class BodyProfile extends StatelessWidget {
                       ),
                       Container(
                         width: double.infinity,
-                        height: 150.h,
+                        height: 175.h,
                         margin:
                             const EdgeInsets.only(left: 15, top: 5, right: 15),
                         child: Column(

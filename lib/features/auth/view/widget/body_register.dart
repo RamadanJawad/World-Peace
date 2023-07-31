@@ -83,12 +83,7 @@ class BodySignUp extends StatelessWidget {
                             function: () {
                               if (controller.globalKey.currentState!
                                   .validate()) {
-                                Get.dialog(const Center(
-                                  child: CupertinoActivityIndicator(
-                                    radius: 20,
-                                    color: Colors.white,
-                                  ),
-                                ));
+                               
                                 controller.register();
                               }
                             }),

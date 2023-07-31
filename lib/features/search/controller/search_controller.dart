@@ -23,10 +23,10 @@ class SearchCategoryController extends GetxController {
   String selectedItem = '';
   int categoryId = 1;
 
-  onTap() {
-    isPressed = true;
-    update();
-  }
+  // onTap() {
+  //   isPressed = true;
+  //   update();
+  // }
 
   onChangeItem(select) {
     selectedItem = select;
@@ -35,7 +35,8 @@ class SearchCategoryController extends GetxController {
         categoryId = category[i].id!;
       }
     }
-    isPressed = false;
+    post.clear();
+
     update();
   }
 
