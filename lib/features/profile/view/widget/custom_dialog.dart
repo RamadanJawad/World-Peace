@@ -10,7 +10,6 @@ import '../../../../core/constant/color.dart';
 
 void showCustomDialog(String title, List data) {
   final MyProfileController controller = Get.put(MyProfileController());
-
   Get.defaultDialog(
     title: title,
     titleStyle: TextStyle(fontSize: 17.sp),

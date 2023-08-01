@@ -33,6 +33,9 @@ class SearchByCategory extends StatelessWidget {
       body: GetBuilder<SearchCategoryController>(
         init: SearchCategoryController(),
         builder: (controller) {
+          if (controller.selectedItem.isEmpty) {
+            controller.post.clear();
+          }
           return Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -81,12 +84,12 @@ class SearchByCategory extends StatelessWidget {
                           } else {
                             await controller.getCategoryPost();
                             if (controller.post.isEmpty) {
-                              return showCustomSnackBar(
+                              showCustomSnackBar(
                                   context: context,
                                   contentType: ContentType.warning,
                                   title: "Attention",
                                   message:
-                                      "There are no current posts in this category");
+                                      "There are no posts under this category!");
                             }
                           }
                         },

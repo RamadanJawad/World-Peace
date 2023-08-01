@@ -8,8 +8,8 @@ showCustomSnackBar(
     required String message}) {
   var snackBar = SnackBar(
     elevation: 0,
-    margin: const EdgeInsets.all(5),
     behavior: SnackBarBehavior.floating,
+    width: double.infinity,
     backgroundColor: Colors.transparent,
     content: AwesomeSnackbarContent(
       title: title,

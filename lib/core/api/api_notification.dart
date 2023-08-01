@@ -10,7 +10,7 @@ class ApiNotificationController with ApiHelper {
         await http.get(Uri.parse(ApiSetting.notification), headers: headers);
     if (response.statusCode == 200) {
       var jsonObject = jsonDecode(response.body);
-      var jsonArray = jsonObject['notifications'];
+      var jsonArray = jsonObject['notifications_unread'];
       Notifications notification = Notifications.fromJson(jsonArray);
       return notification;
     } else {

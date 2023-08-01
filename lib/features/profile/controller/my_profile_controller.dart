@@ -140,6 +140,7 @@ class MyProfileController extends GetxController {
 
   getAllFollower() async {
     allFollower = await ApiFollowController().allFollower();
+
     update();
   }
 
