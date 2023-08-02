@@ -28,7 +28,12 @@ class PostScreen extends StatelessWidget {
                 } else {
                   Get.snackbar("Error", "Please enter the data",
                       backgroundColor: Colors.red,
-                      margin: const EdgeInsets.all(10));
+                      colorText: Colors.white,
+                      margin: const EdgeInsets.all(10),
+                      icon: const Icon(
+                        Icons.error,
+                        color: Colors.white,
+                      ));
                 }
               },
               style: ElevatedButton.styleFrom(

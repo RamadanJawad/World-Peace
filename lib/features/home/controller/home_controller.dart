@@ -1,9 +1,7 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/api/api_post.dart';
-import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/home/model/post.dart';
 
 class HomeController extends GetxController {
@@ -29,7 +27,6 @@ class HomeController extends GetxController {
     objectPost =
         await ApiPostController().readPost(pageNumber: page, post: post);
     post.addAll(objectPost.posts!);
-
     isLoading = true;
     update();
   }
@@ -76,18 +73,24 @@ class HomeController extends GetxController {
     if (response) {
       Get.back();
       await refreshData();
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.success,
-          title: "Success",
-          message: "The post has been successfully deleted");
+      Get.snackbar("Success", "The post has been successfully deleted",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_alt_rounded,
+            color: Colors.white,
+          ));
       update();
     } else {
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.failure,
-          title: "Failure",
-          message: "Failed delete post, try again");
+      Get.snackbar("Failure", "Failed delete post, try again",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.error,
+            color: Colors.white,
+          ));
     }
     update();
   }
@@ -104,8 +107,10 @@ class HomeController extends GetxController {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       isLoadingMore = true;
+      await readPost();
+      
       page = page + 1;
-      readPost();
+      
       isLoadingMore = false;
       update();
     }

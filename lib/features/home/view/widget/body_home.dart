@@ -36,9 +36,7 @@ class BodyHome extends StatelessWidget {
                 child: controller.isLoading
                     ? ListView.builder(
                         controller: controller.scrollController,
-                        itemCount: controller.isLoadingMore
-                            ? controller.post.length + 1
-                            : controller.post.length,
+                        itemCount: controller.post.length,
                         itemBuilder: (context, index) {
                           if (index < controller.post.length) {
                             return Container(

@@ -1,9 +1,7 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_auth.dart';
-import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import '../view/screen/login_screen.dart';
 
 class SignUpController extends GetxController {
@@ -27,18 +25,26 @@ class SignUpController extends GetxController {
       mobile: mobile.text,
     );
     if (response!) {
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.success,
-          title: "Created Account!",
-          message: "The account has been created successfully, login now");
+      Get.snackbar("Created Account!",
+          "The account has been created successfully, login now",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_alt_rounded,
+            color: Colors.white,
+          ));
       Get.off(() => const LoginScreen());
     } else {
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.failure,
-          title: "Error of Create Account",
-          message: "Create Account failed , please try again");
+      Get.snackbar(
+          "Error of Create Account", "Create Account failed , please try again",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.error,
+            color: Colors.white,
+          ));
       Get.back();
       update();
     }

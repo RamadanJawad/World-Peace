@@ -1,15 +1,12 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/search/controller/search_controller.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/features/comments/view/screen/comment_screen.dart';
-
 import '../../../../core/constant/image.dart';
 import '../../../home/view/widget/feature_like.dart';
 import '../../../home/view/widget/feature_post.dart';
@@ -80,16 +77,24 @@ class SearchByCategory extends StatelessWidget {
                             Get.snackbar(
                                 "Error", "You must choose Category Type",
                                 backgroundColor: Colors.red,
-                                margin: const EdgeInsets.all(10));
+                                colorText: Colors.white,
+                                margin: const EdgeInsets.all(10),
+                                icon: const Icon(
+                                  Icons.error,
+                                  color: Colors.white,
+                                ));
                           } else {
                             await controller.getCategoryPost();
                             if (controller.post.isEmpty) {
-                              showCustomSnackBar(
-                                  context: context,
-                                  contentType: ContentType.warning,
-                                  title: "Attention",
-                                  message:
-                                      "There are no posts under this category!");
+                              Get.snackbar("Attention",
+                                  "There are no posts under this category!",
+                                  backgroundColor: Colors.amber,
+                                  colorText: Colors.black,
+                                  margin: const EdgeInsets.all(10),
+                                  icon: const Icon(
+                                    Icons.error,
+                                    color: Colors.black,
+                                  ));
                             }
                           }
                         },

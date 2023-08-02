@@ -22,11 +22,23 @@ class CommentController extends GetxController {
     if (response) {
       homeController.refreshData();
       Get.snackbar("Success", "delete comment Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_alt,
+            color: Colors.white,
+          ));
       update();
     } else {
       Get.snackbar("Error", "Failed delete comment, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.error,
+            color: Colors.white,
+          ));
     }
     update();
   }
@@ -44,11 +56,23 @@ class CommentController extends GetxController {
       homeController.refreshData();
       Get.back();
       update();
-      Get.snackbar("Success", "update commnet Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+      Get.snackbar("Success", "update comment Success",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_alt,
+            color: Colors.white,
+          ));
     } else {
-      Get.snackbar("Error", "Failed to update commnet, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+      Get.snackbar("Error", "Failed to update comment, try again",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.error,
+            color: Colors.white,
+          ));
     }
     update();
   }
@@ -59,11 +83,23 @@ class CommentController extends GetxController {
     if (response) {
       homeController.refreshData();
       Get.snackbar("Success", "Create comment Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_alt_rounded,
+            color: Colors.white,
+          ));
       update();
     } else {
       Get.snackbar("Error", "Failed to comment, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.error,
+            color: Colors.white,
+          ));
     }
     comment.text = "";
     update();

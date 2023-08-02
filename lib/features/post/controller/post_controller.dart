@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:world_peace/features/home/controller/home_controller.dart';
 import 'package:world_peace/features/main/controller/main_controller.dart';
@@ -20,8 +22,7 @@ class PostController extends GetxController {
   HomeController homeController = Get.find();
   MainController mainController = Get.find();
   getImage() async {
-    file = await imagePicker.pickImage(
-        source: ImageSource.gallery, imageQuality: 1);
+    file = await imagePicker.pickImage(source: ImageSource.gallery);
     update();
   }
 
@@ -68,15 +69,29 @@ class PostController extends GetxController {
     }
     if (response) {
       homeController.refreshData();
-      Get.back(closeOverlays: true);
+      update();
       mainController.persistentTabController.jumpToTab(0);
+      Get.back();
       update();
       Get.snackbar("Success", "Create Post Success",
-          backgroundColor: Colors.green, margin: const EdgeInsets.all(10));
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_off_alt_rounded,
+            color: Colors.white,
+          ));
     } else {
-      Get.back(closeOverlays: true);
+      Get.back();
+      update();
       Get.snackbar("Error", "Failed to create post, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.error,
+            color: Colors.white,
+          ));
     }
     descriptionController.text = "";
     titleController.text = "";

@@ -1,10 +1,8 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_auth.dart';
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/auth/model/user.dart';
 import 'package:world_peace/features/main/view/main_screen.dart';
 import '../view/screen/register_screen.dart';
@@ -29,11 +27,14 @@ class SignInController extends GetxController {
         Get.off(() => const MainScreen());
       });
     } else {
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.failure,
-          title: "Error of Login",
-          message: "login failed , please try again");
+      Get.snackbar("Error of Login", "login failed , please try again",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_off_alt_rounded,
+            color: Colors.white,
+          ));
       Get.back();
       update();
     }

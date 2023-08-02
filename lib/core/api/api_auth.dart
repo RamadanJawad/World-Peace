@@ -1,10 +1,5 @@
 import 'dart:convert';
-
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_setting.dart';
-import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/auth/model/user.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,11 +17,7 @@ class ApiAuthController {
         return user;
       }
     } else {
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.failure,
-          title: "Login failed!",
-          message: "Login failed,please try again");
+      throw Exception('Failed to login ');
     }
     return null;
   }

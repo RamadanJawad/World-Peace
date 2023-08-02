@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +7,6 @@ import 'package:world_peace/core/api/api_profile.dart';
 import 'package:world_peace/core/cache/cache.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/shared/save_data.dart';
-import 'package:world_peace/core/widget/custom_snack_bar.dart';
 import 'package:world_peace/features/faqs/view/screen/faqs_screen.dart';
 import 'package:world_peace/features/profile/model/follower.dart';
 import 'package:world_peace/features/profile/model/profile.dart';
@@ -68,20 +66,24 @@ class MyProfileController extends GetxController {
       Get.back();
       await refreshData();
       await homeController.refreshData();
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.success,
-          title: "Success",
-          message: "The post has been successfully deleted");
+      Get.snackbar("Success", "The post has been successfully deleted",
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_alt_rounded,
+            color: Colors.white,
+          ));
       update();
     } else {
-      showCustomSnackBar(
-          context: Get.context!,
-          contentType: ContentType.failure,
-          title: "Failure",
-          message: "Failed delete post, try again");
-      Get.snackbar("Error", "Failed delete post, try again",
-          backgroundColor: Colors.red, margin: const EdgeInsets.all(10));
+      Get.snackbar("Failure", "Failed delete post, try again",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.error,
+            color: Colors.white,
+          ));
     }
     update();
   }
