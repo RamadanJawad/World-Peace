@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:world_peace/core/api/api_setting.dart';
 import 'package:world_peace/features/auth/model/user.dart';
 import 'package:http/http.dart' as http;
@@ -15,9 +17,26 @@ class ApiAuthController {
         var jsonData = jsonResponse["data"];
         User user = User.fromJson(jsonData);
         return user;
+      } else {
+        Get.snackbar("Error of Login", "login failed , please try again",
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            margin: const EdgeInsets.all(10),
+            icon: const Icon(
+              Icons.thumb_up_off_alt_rounded,
+              color: Colors.white,
+            ));
+        Navigator.pop(Get.context!);
       }
     } else {
-      throw Exception('Failed to login ');
+      Get.snackbar("Error of Login", "login failed , please try again",
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.thumb_up_off_alt_rounded,
+            color: Colors.white,
+          ));
     }
     return null;
   }

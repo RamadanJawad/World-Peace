@@ -82,7 +82,7 @@ class DetailsComment extends StatelessWidget {
                                                       .data![index].postId!,
                                                   commentId: snapshot.data!
                                                       .data!.data![index].id!);
-                                              Get.back();
+                                              Navigator.pop(context);
                                             });
                                           },
                                           icon: const Icon(

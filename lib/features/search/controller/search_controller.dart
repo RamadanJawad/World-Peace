@@ -61,16 +61,6 @@ class SearchCategoryController extends GetxController {
     update();
   }
 
-  scrollListener() async {
-    if (scrollController.position.pixels ==
-        scrollController.position.maxScrollExtent) {
-      isLoadingMore = true;
-      page = page + 1;
-      getCategoryPost();
-      isLoadingMore = false;
-      update();
-    }
-  }
 
   Future<void> getUser() async {
     searchUser = await ApiSearch().searchUser(searchController.text);
@@ -91,6 +81,5 @@ class SearchCategoryController extends GetxController {
     super.onInit();
     getCategoryPost();
     getCategory();
-    scrollController.addListener(scrollListener);
   }
 }
