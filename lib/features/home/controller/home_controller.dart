@@ -104,13 +104,12 @@ class HomeController extends GetxController {
   }
 
   scrollListener() async {
+    if (isLoadingMore) return;
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       isLoadingMore = true;
-      await readPost();
-      
       page = page + 1;
-      
+      await readPost();
       isLoadingMore = false;
       update();
     }
