@@ -57,6 +57,16 @@ class ApiAuthController {
       var jsonData = jsonDecode(response.body);
       if (jsonData["status"] != false) {
         return true;
+      } else {
+        Get.snackbar("Error of Create Account",
+            "Create Account failed , please try again",
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            margin: const EdgeInsets.all(10),
+            icon: const Icon(
+              Icons.error,
+              color: Colors.white,
+            ));
       }
     }
     return false;

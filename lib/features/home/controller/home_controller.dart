@@ -15,6 +15,22 @@ class HomeController extends GetxController {
   bool isLoading = false;
   bool isLoadingMore = false;
   int item = 0;
+  bool? status;
+
+  checkInternet() async {
+    status = await checkInternet();
+    if (!status!) {
+      Get.snackbar(
+          "Error of Network", "You seem to be offline, please try again",
+          backgroundColor: Colors.amber,
+          colorText: Colors.black,
+          margin: const EdgeInsets.all(10),
+          icon: const Icon(
+            Icons.network_wifi_1_bar_rounded,
+            color: Colors.black,
+          ));
+    }
+  }
 
   refreshData() async {
     post.clear();
@@ -117,6 +133,7 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    checkInternet();
     super.onInit();
     readPost();
     scrollController.addListener(scrollListener);

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
+import 'package:world_peace/core/function/check_internet.dart';
 import 'package:world_peace/core/validator/validator.dart';
 import 'package:world_peace/features/auth/controller/register_controller.dart';
 import 'package:world_peace/features/auth/view/widget/custom_button.dart';
@@ -80,11 +81,22 @@ class BodySignUp extends StatelessWidget {
                         ),
                         CustomButton(
                             name: "Sign Up",
-                            function: () {
+                            function: () async {
                               if (controller.globalKey.currentState!
                                   .validate()) {
-                               
-                                controller.register();
+                                if (await checkInternet()) {
+                                  await controller.register();
+                                } else {
+                                  Get.snackbar("Error of Network",
+                                      "You seem to be offline, please try again",
+                                      backgroundColor: Colors.amber,
+                                      colorText: Colors.black,
+                                      margin: const EdgeInsets.all(10),
+                                      icon: const Icon(
+                                        Icons.network_wifi_1_bar_rounded,
+                                        color: Colors.black,
+                                      ));
+                                }
                               }
                             }),
                         SizedBox(

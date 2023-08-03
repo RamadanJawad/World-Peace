@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:world_peace/core/constant/color.dart';
 import 'package:world_peace/core/constant/image.dart';
+import 'package:world_peace/core/function/check_internet.dart';
 import 'package:world_peace/core/validator/validator.dart';
 import 'package:world_peace/features/auth/controller/login_controller.dart';
 import 'package:world_peace/features/auth/view/widget/custom_button.dart';
@@ -85,7 +86,19 @@ class BodySignIn extends StatelessWidget {
                             function: () async {
                               if (controller.globalKey.currentState!
                                   .validate()) {
-                                await controller.login();
+                                if (await checkInternet()) {
+                                  await controller.login();
+                                } else {
+                                  Get.snackbar("Error of Network",
+                                      "You seem to be offline, please try again",
+                                      backgroundColor: Colors.amber,
+                                      colorText: Colors.black,
+                                      margin: const EdgeInsets.all(10),
+                                      icon: const Icon(
+                                        Icons.network_wifi_1_bar_rounded,
+                                        color: Colors.black,
+                                      ));
+                                }
                               }
                             }),
                         SizedBox(
